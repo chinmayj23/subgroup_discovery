@@ -11,8 +11,7 @@ class TreeClusterForestConfig:
         # ------------------------------------------------------------------
         # DATA
         # ------------------------------------------------------------------
-        # Using datasets that are already supported by utils.load_data
-        # (and hence by your existing data_loaders.py). :contentReference[oaicite:3]{index=3}
+
         # self.datasets = ["california", "diabetes", "bike", "wine"]
         self.datasets = ['california']
 
