@@ -1,0 +1,85 @@
+{
+  "datasets": [
+    {
+      "name": "california_housing",
+      "path": "california_housing.csv",
+      "target": "MedHouseVal"
+    },
+    {
+      "name": "insurance",
+      "path": "data/insurance/insurance.csv",
+      "target": "charges"
+    },
+    {
+      "name": "diabetes",
+      "path": "outputs_subgroups/diabetes_with_subgroups.csv",
+      "target": "target",
+      "drop_columns": [
+        "subgroup_id"
+      ]
+    },
+    {
+      "name": "heart",
+      "path": "syflow_env/Lib/site-packages/statsmodels/datasets/heart/heart.csv",
+      "target": "survival"
+    },
+    {
+      "name": "engel",
+      "path": "syflow_env/Lib/site-packages/statsmodels/datasets/engel/engel.csv",
+      "target": "foodexp"
+    },
+    {
+      "name": "sklearn_diabetes",
+      "source": "sklearn",
+      "dataset": "diabetes",
+      "target": "target",
+      "enabled": false
+    },
+    {
+      "name": "sklearn_california_housing",
+      "source": "sklearn",
+      "dataset": "california_housing",
+      "target": "MedHouseVal",
+      "enabled": false
+    },
+    {
+      "name": "sklearn_wine",
+      "source": "sklearn",
+      "dataset": "wine",
+      "target": "target",
+      "enabled": false
+    },
+    {
+      "name": "statsmodels_longley",
+      "source": "statsmodels",
+      "dataset": "longley",
+      "target": "TOTEMP",
+      "enabled": false
+    },
+    {
+      "name": "openml_abalone",
+      "source": "openml",
+      "dataset": "abalone",
+      "target": "Rings",
+      "enabled": false
+    }
+  ],
+  "pipelines": {
+    "original": {
+      "high_value_quantile": 0.94
+    },
+    "syflow": {
+      "n_seeds": 10,
+      "beta": 0.5,
+      "lambd_div": 2.0,
+      "top_percentile": 0.01,
+      "max_overlap": 0.95,
+      "min_subgroup_size": 50,
+      "max_subgroup_frac": 0.9
+    }
+  },
+  "forest": {
+    "n_seeds": 10,
+    "accuracy_quantile": 0.99
+  }
+}
