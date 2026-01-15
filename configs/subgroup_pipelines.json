@@ -69,17 +69,17 @@
       "high_value_quantile": 0.94
     },
     "syflow": {
-      "n_seeds": 10,
+      "n_seeds": 1000,
       "beta": 0.5,
       "lambd_div": 2.0,
       "top_percentile": 0.01,
-      "max_overlap": 0.95,
-      "min_subgroup_size": 50,
-      "max_subgroup_frac": 0.9
+      "max_overlap": 1,
+      "min_subgroup_size": 3,
+      "max_subgroup_frac": 0.5
     }
   },
   "forest": {
-    "n_seeds": 10,
+    "n_seeds": 1000,
     "accuracy_quantile": 0.99
   }
 }

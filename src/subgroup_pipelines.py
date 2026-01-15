@@ -232,13 +232,23 @@ def save_kde_plot(df, target, label_column, output_path):
     non_interesting = df[df[label_column] == False]
 
     plt.figure(figsize=(12, 7))
-    sns.kdeplot(target_series, color="blue", fill=True, alpha=0.25, label="Original")
+    sns.kdeplot(
+        target_series,
+        color="blue",
+        fill=True,
+        alpha=0.25,
+        label="Original",
+        bw_adjust=1.1,
+        common_norm=False,
+    )
     sns.kdeplot(
         pd.to_numeric(non_interesting[target], errors="coerce"),
         color="green",
         fill=True,
         alpha=0.25,
         label="Non-Interesting",
+        bw_adjust=1.1,
+        common_norm=False,
     )
     sns.kdeplot(
         pd.to_numeric(interesting[target], errors="coerce"),
@@ -246,33 +256,26 @@ def save_kde_plot(df, target, label_column, output_path):
         fill=True,
         alpha=0.25,
         label="Interesting",
+        bw_adjust=1.1,
+        common_norm=False,
     )
 
-    y_noninteresting = np.full(len(non_interesting), 2.0)
-    y_interesting = np.full(len(interesting), 1.0)
-
-    plt.scatter(
+    sns.rugplot(
         pd.to_numeric(non_interesting[target], errors="coerce"),
-        y_noninteresting,
         color="green",
-        alpha=0.1,
-        s=2,
-        label="Non-Interesting Points",
+        height=0.02,
+        alpha=0.15,
     )
-    plt.scatter(
+    sns.rugplot(
         pd.to_numeric(interesting[target], errors="coerce"),
-        y_interesting,
         color="red",
-        alpha=0.2,
-        s=10,
-        label="Interesting Points",
+        height=0.03,
+        alpha=0.25,
     )
 
     plt.title(f"KDE Plots of {target} with Point Distributions")
     plt.xlabel(target)
     plt.ylabel("Density")
-    plt.ylim(-0.01, None)
-
     handles, labels = plt.gca().get_legend_handles_labels()
     unique = dict(zip(labels, handles))
     plt.legend(unique.values(), unique.keys())
@@ -281,38 +284,32 @@ def save_kde_plot(df, target, label_column, output_path):
     plt.close()
 
 
-def save_best_tree_artifacts(trees, X, y, feature_names, out_dir):
+def save_forest_tree_artifacts(trees, X, y, feature_names, out_dir):
     if not trees:
         return
 
-    best_idx = None
-    best_acc = -np.inf
-    for idx, tree in enumerate(trees):
-        acc = float((tree.predict(X) == y).mean())
-        if acc > best_acc:
-            best_acc = acc
-            best_idx = idx
-
-    best_tree = trees[best_idx]
-    tree_dict = tree_to_dict(best_tree, feature_names=feature_names)
-    tree_path = Path(out_dir) / "best_tree.json"
-    tree_path.write_text(json.dumps(tree_dict, indent=2), encoding="utf-8")
-
     from sklearn.tree import plot_tree
 
-    plt.figure(figsize=(12, 6))
-    plot_tree(
-        best_tree,
-        feature_names=feature_names,
-        class_names=["not interesting", "interesting"],
-        filled=True,
-        rounded=True,
-        impurity=False,
-    )
-    plt.title(f"Best Tree (acc={best_acc:.4f})")
-    plt.tight_layout()
-    plt.savefig(Path(out_dir) / "best_tree.png", dpi=300)
-    plt.close()
+    out_dir = Path(out_dir)
+    for idx, tree in enumerate(trees):
+        acc = float((tree.predict(X) == y).mean())
+        tree_dict = tree_to_dict(tree, feature_names=feature_names)
+        tree_json = out_dir / f"tree_{idx:02d}_acc_{acc:.4f}.json"
+        tree_json.write_text(json.dumps(tree_dict, indent=2), encoding="utf-8")
+
+        plt.figure(figsize=(12, 6))
+        plot_tree(
+            tree,
+            feature_names=feature_names,
+            class_names=["not interesting", "interesting"],
+            filled=True,
+            rounded=True,
+            impurity=False,
+        )
+        plt.title(f"Tree {idx} (acc={acc:.4f})")
+        plt.tight_layout()
+        plt.savefig(out_dir / f"tree_{idx:02d}_acc_{acc:.4f}.png", dpi=300)
+        plt.close()
 
 
 def load_dataset(path, target, drop_columns=None, sep=","):
@@ -602,6 +599,23 @@ def save_outputs(base_dir, dataset_name, pipeline_name, labeled_df, forest_resul
     return out_dir
 
 
+def save_forest_accuracy_plot(results_df, output_path):
+    plt.figure(figsize=(10, 6))
+    plt.scatter(
+        results_df["total_questions"],
+        results_df["forest_accuracy"],
+        s=40,
+        alpha=0.7,
+    )
+    plt.xlabel("Total Number of Questions in Forest", fontsize=12)
+    plt.ylabel("Forest Accuracy", fontsize=12)
+    plt.title("Forest Accuracy vs Total Questions Across Seeds", fontsize=14)
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=300, bbox_inches="tight")
+    plt.close()
+
+
 def run_pipelines_for_dataset(
     dataset_cfg,
     pipeline_cfg,
@@ -658,8 +672,13 @@ def run_pipelines_for_dataset(
             LABEL_COLUMN,
             Path(out_dir) / "kde_plot.png",
         )
+        if forest_result is not None:
+            save_forest_accuracy_plot(
+                forest_result.results_df,
+                Path(out_dir) / "accuracy_vs_questions.png",
+            )
         if run_forest and trees is not None and feature_names is not None:
-            save_best_tree_artifacts(trees, X, y, feature_names, out_dir)
+            save_forest_tree_artifacts(trees, X, y, feature_names, out_dir)
         results[pipeline_name] = out_dir
 
     return results
