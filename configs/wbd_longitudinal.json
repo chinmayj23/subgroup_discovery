@@ -1,8 +1,14 @@
 {
   "path": "wbd/world_bank_development_indicators.csv",
+  "dataset_name": "wbd_longitudinal",
   "id_col": "country",
   "date_col": "date",
   "target": "life_expectancy_at_birth",
+  "target_mode": "trend",
+  "target_thresholds": [
+    50,
+    70
+  ],
   "mode": "panel",
   "panel_stride": 1,
   "window_size": 5,
