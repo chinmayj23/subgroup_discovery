@@ -44,8 +44,8 @@ class TreeClusterForestConfig:
         # ------------------------------------------------------------------
         self.rf_n_seeds = 50                # number of candidate forests
         self.rf_n_estimators = 20
-        self.rf_max_depth = 4
-        self.rf_min_samples_leaf = 20
+        self.rf_max_depth = 5
+        self.rf_min_samples_leaf = 5
         self.rf_max_features = "sqrt"
 
         self.rf_test_size = 0.3             # validation split

@@ -53,8 +53,8 @@ def main():
         mode=cfg.get("mode", "snapshot"),
         panel_stride=cfg.get("panel_stride", 1),
         target_mode=cfg.get("target_mode", "value"),
-        target_thresholds=cfg.get("target_thresholds"),
         dataset_name=cfg.get("dataset_name", "longitudinal"),
+        impute_missing=cfg.get("impute_missing", True),
     )
 
 

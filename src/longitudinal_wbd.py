@@ -123,18 +123,6 @@ def _series_trend(values):
     return float(slope)
 
 
-def _series_cagr(values):
-    values = np.asarray(values, dtype=float)
-    if len(values) < 2:
-        return np.nan
-    start = values[0]
-    end = values[-1]
-    if start <= 0 or end <= 0:
-        return np.nan
-    periods = len(values) - 1
-    return float((end / start) ** (1 / periods) - 1)
-
-
 def _summarize_series(values, window_size):
     values = pd.Series(values).dropna()
     if values.empty:
@@ -142,61 +130,42 @@ def _summarize_series(values, window_size):
             "latest": np.nan,
             "lag1": np.nan,
             "lag3": np.nan,
-            "lag5": np.nan,
             "roll_mean": np.nan,
             "roll_std": np.nan,
             "trend": np.nan,
             "delta1": np.nan,
-            "delta5": np.nan,
-            "cagr5": np.nan,
-            "cagr10": np.nan,
-            "trend_last5": np.nan,
-            "trend_prev5": np.nan,
-            "regime_shift": np.nan,
+            "delta3": np.nan,
+            "cagr_w": np.nan,
+            "min_w": np.nan,
+            "recovery_w": np.nan,
         }
     latest = float(values.iloc[-1])
     lag1 = float(values.iloc[-2]) if len(values) > 1 else np.nan
     lag3 = float(values.iloc[-4]) if len(values) > 3 else np.nan
-    lag5 = float(values.iloc[-6]) if len(values) > 5 else np.nan
     window = values.tail(window_size)
-    trend_last5 = _series_trend(values.tail(5)) if len(values) >= 5 else np.nan
-    trend_prev5 = _series_trend(values.iloc[-10:-5]) if len(values) >= 10 else np.nan
-    regime_shift = (
-        float(trend_last5 * trend_prev5 < 0)
-        if not np.isnan(trend_last5) and not np.isnan(trend_prev5)
-        else np.nan
-    )
     delta1 = latest - lag1 if not np.isnan(lag1) else np.nan
-    delta5 = latest - lag5 if not np.isnan(lag5) else np.nan
-    cagr5 = _series_cagr(values.tail(5)) if len(values) >= 5 else np.nan
-    cagr10 = _series_cagr(values.tail(10)) if len(values) >= 10 else np.nan
+    delta3 = latest - lag3 if not np.isnan(lag3) else np.nan
+    min_w = float(window.min()) if len(window) > 0 else np.nan
+    recovery_w = latest - min_w if not np.isnan(min_w) else np.nan
+    cagr_w = np.nan
+    if len(window) >= 2:
+        start = window.iloc[0]
+        end = window.iloc[-1]
+        if start > 0 and end > 0:
+            cagr_w = float((end / start) ** (1 / (len(window) - 1)) - 1)
     return {
         "latest": latest,
         "lag1": lag1,
         "lag3": lag3,
-        "lag5": lag5,
         "roll_mean": float(window.mean()) if not window.empty else np.nan,
         "roll_std": float(window.std()) if len(window) > 1 else np.nan,
         "trend": _series_trend(window.values),
         "delta1": delta1,
-        "delta5": delta5,
-        "cagr5": cagr5,
-        "cagr10": cagr10,
-        "trend_last5": trend_last5,
-        "trend_prev5": trend_prev5,
-        "regime_shift": regime_shift,
+        "delta3": delta3,
+        "cagr_w": cagr_w,
+        "min_w": min_w,
+        "recovery_w": recovery_w,
     }
-
-
-def _first_crossing_year(dates, values, threshold, direction="above"):
-    for dt, val in zip(dates, values):
-        if pd.isna(val):
-            continue
-        if direction == "above" and val > threshold:
-            return pd.to_datetime(dt).year
-        if direction == "below" and val < threshold:
-            return pd.to_datetime(dt).year
-    return np.nan
 
 
 def build_country_snapshot(
@@ -208,7 +177,7 @@ def build_country_snapshot(
     min_history=3,
     max_missing_frac=0.5,
     target_mode="value",
-    target_thresholds=None,
+    impute_missing=True,
 ):
     df = df.copy()
     df[date_col] = pd.to_datetime(df[date_col], errors="coerce")
@@ -244,45 +213,32 @@ def build_country_snapshot(
         target_stats = _summarize_series(target_series.values, window_size)
         if target_mode == "trend":
             row[target_col] = target_stats["trend"]
+        elif target_mode == "recovery":
+            row[target_col] = target_stats["recovery_w"]
         row[f"{target_col}_lag1"] = target_stats["lag1"]
         row[f"{target_col}_lag3"] = target_stats["lag3"]
-        row[f"{target_col}_lag5"] = target_stats["lag5"]
         row[f"{target_col}_roll_mean"] = target_stats["roll_mean"]
         row[f"{target_col}_roll_std"] = target_stats["roll_std"]
         row[f"{target_col}_trend"] = target_stats["trend"]
         row[f"{target_col}_delta1"] = target_stats["delta1"]
-        row[f"{target_col}_delta5"] = target_stats["delta5"]
-        row[f"{target_col}_cagr5"] = target_stats["cagr5"]
-        row[f"{target_col}_cagr10"] = target_stats["cagr10"]
-        row[f"{target_col}_trend_last5"] = target_stats["trend_last5"]
-        row[f"{target_col}_trend_prev5"] = target_stats["trend_prev5"]
-        row[f"{target_col}_regime_shift"] = target_stats["regime_shift"]
+        row[f"{target_col}_delta3"] = target_stats["delta3"]
+        row[f"{target_col}_cagr{window_size}"] = target_stats["cagr_w"]
+        row[f"{target_col}_min{window_size}"] = target_stats["min_w"]
+        row[f"{target_col}_recovery{window_size}"] = target_stats["recovery_w"]
 
         for col in indicator_cols:
             stats = _summarize_series(group[col].values, window_size)
             row[f"{col}_latest"] = stats["latest"]
             row[f"{col}_lag1"] = stats["lag1"]
             row[f"{col}_lag3"] = stats["lag3"]
-            row[f"{col}_lag5"] = stats["lag5"]
             row[f"{col}_roll_mean"] = stats["roll_mean"]
             row[f"{col}_roll_std"] = stats["roll_std"]
             row[f"{col}_trend"] = stats["trend"]
             row[f"{col}_delta1"] = stats["delta1"]
-            row[f"{col}_delta5"] = stats["delta5"]
-            row[f"{col}_cagr5"] = stats["cagr5"]
-            row[f"{col}_cagr10"] = stats["cagr10"]
-            row[f"{col}_trend_last5"] = stats["trend_last5"]
-            row[f"{col}_trend_prev5"] = stats["trend_prev5"]
-            row[f"{col}_regime_shift"] = stats["regime_shift"]
-
-        if target_thresholds:
-            for thr in target_thresholds:
-                row[f"{target_col}_first_above_{thr}"] = _first_crossing_year(
-                    group[date_col].values, group[target_col].values, thr, "above"
-                )
-                row[f"{target_col}_first_below_{thr}"] = _first_crossing_year(
-                    group[date_col].values, group[target_col].values, thr, "below"
-                )
+            row[f"{col}_delta3"] = stats["delta3"]
+            row[f"{col}_cagr{window_size}"] = stats["cagr_w"]
+            row[f"{col}_min{window_size}"] = stats["min_w"]
+            row[f"{col}_recovery{window_size}"] = stats["recovery_w"]
 
         rows.append(row)
 
@@ -293,7 +249,10 @@ def build_country_snapshot(
     missing_frac = snapshot.isna().mean()
     keep_cols = missing_frac[missing_frac <= max_missing_frac].index.tolist()
     snapshot = snapshot[keep_cols]
-    snapshot = snapshot.dropna(axis=0)
+    if impute_missing:
+        numeric_cols = snapshot.select_dtypes(include=[np.number]).columns
+        snapshot[numeric_cols] = snapshot[numeric_cols].fillna(snapshot[numeric_cols].median())
+    snapshot = snapshot.dropna(subset=[target_col])
     return snapshot
 
 
@@ -307,7 +266,7 @@ def build_country_panel(
     max_missing_frac=0.5,
     stride=1,
     target_mode="value",
-    target_thresholds=None,
+    impute_missing=True,
 ):
     df = df.copy()
     df[date_col] = pd.to_datetime(df[date_col], errors="coerce")
@@ -344,51 +303,34 @@ def build_country_panel(
             )
             if target_mode == "trend":
                 row[target_col] = target_stats["trend"]
+            elif target_mode == "recovery":
+                row[target_col] = target_stats["recovery_w"]
             row[f"{target_col}_lag1"] = target_stats["lag1"]
             row[f"{target_col}_lag3"] = target_stats["lag3"]
-            row[f"{target_col}_lag5"] = target_stats["lag5"]
             row[f"{target_col}_roll_mean"] = target_stats["roll_mean"]
             row[f"{target_col}_roll_std"] = target_stats["roll_std"]
             row[f"{target_col}_trend"] = target_stats["trend"]
             row[f"{target_col}_delta1"] = target_stats["delta1"]
-            row[f"{target_col}_delta5"] = target_stats["delta5"]
-            row[f"{target_col}_cagr5"] = target_stats["cagr5"]
-            row[f"{target_col}_cagr10"] = target_stats["cagr10"]
-            row[f"{target_col}_trend_last5"] = target_stats["trend_last5"]
-            row[f"{target_col}_trend_prev5"] = target_stats["trend_prev5"]
-            row[f"{target_col}_regime_shift"] = target_stats["regime_shift"]
+            row[f"{target_col}_delta3"] = target_stats["delta3"]
+            row[f"{target_col}_cagr{window_size}"] = target_stats["cagr_w"]
+            row[f"{target_col}_min{window_size}"] = target_stats["min_w"]
+            row[f"{target_col}_recovery{window_size}"] = target_stats["recovery_w"]
 
             for col in indicator_cols:
-                stats = _summarize_series(group[col].iloc[: i + 1].values, window_size)
+                stats = _summarize_series(
+                    group[col].iloc[: i + 1].values, window_size
+                )
                 row[f"{col}_latest"] = stats["latest"]
                 row[f"{col}_lag1"] = stats["lag1"]
                 row[f"{col}_lag3"] = stats["lag3"]
-                row[f"{col}_lag5"] = stats["lag5"]
                 row[f"{col}_roll_mean"] = stats["roll_mean"]
                 row[f"{col}_roll_std"] = stats["roll_std"]
                 row[f"{col}_trend"] = stats["trend"]
                 row[f"{col}_delta1"] = stats["delta1"]
-                row[f"{col}_delta5"] = stats["delta5"]
-                row[f"{col}_cagr5"] = stats["cagr5"]
-                row[f"{col}_cagr10"] = stats["cagr10"]
-                row[f"{col}_trend_last5"] = stats["trend_last5"]
-                row[f"{col}_trend_prev5"] = stats["trend_prev5"]
-                row[f"{col}_regime_shift"] = stats["regime_shift"]
-
-            if target_thresholds:
-                for thr in target_thresholds:
-                    row[f"{target_col}_first_above_{thr}"] = _first_crossing_year(
-                        group[date_col].iloc[: i + 1].values,
-                        group[target_col].iloc[: i + 1].values,
-                        thr,
-                        "above",
-                    )
-                    row[f"{target_col}_first_below_{thr}"] = _first_crossing_year(
-                        group[date_col].iloc[: i + 1].values,
-                        group[target_col].iloc[: i + 1].values,
-                        thr,
-                        "below",
-                    )
+                row[f"{col}_delta3"] = stats["delta3"]
+                row[f"{col}_cagr{window_size}"] = stats["cagr_w"]
+                row[f"{col}_min{window_size}"] = stats["min_w"]
+                row[f"{col}_recovery{window_size}"] = stats["recovery_w"]
 
             rows.append(row)
 
@@ -399,7 +341,10 @@ def build_country_panel(
     missing_frac = panel.isna().mean()
     keep_cols = missing_frac[missing_frac <= max_missing_frac].index.tolist()
     panel = panel[keep_cols]
-    panel = panel.dropna(axis=0)
+    if impute_missing:
+        numeric_cols = panel.select_dtypes(include=[np.number]).columns
+        panel[numeric_cols] = panel[numeric_cols].fillna(panel[numeric_cols].median())
+    panel = panel.dropna(subset=[target_col])
     return panel
 
 
@@ -418,10 +363,18 @@ def run_wbd_longitudinal_pipeline(
     mode="snapshot",
     panel_stride=1,
     target_mode="value",
-    target_thresholds=None,
     dataset_name="longitudinal",
+    impute_missing=True,
 ):
     df = pd.read_csv(csv_path)
+    target_label = target_col
+    display_name = target_col
+    if target_mode == "trend":
+        target_label = f"{target_col}_trend{window_size}"
+        display_name = f"{target_col} trend (last {window_size})"
+    elif target_mode == "recovery":
+        target_label = f"{target_col}_recovery{window_size}"
+        display_name = f"{target_col} recovery (last {window_size})"
     if mode == "panel":
         snapshot = build_country_panel(
             df,
@@ -433,7 +386,7 @@ def run_wbd_longitudinal_pipeline(
             max_missing_frac=max_missing_frac,
             stride=panel_stride,
             target_mode=target_mode,
-            target_thresholds=target_thresholds,
+            impute_missing=impute_missing,
         )
     else:
         snapshot = build_country_snapshot(
@@ -445,8 +398,12 @@ def run_wbd_longitudinal_pipeline(
             min_history=min_history,
             max_missing_frac=max_missing_frac,
             target_mode=target_mode,
-            target_thresholds=target_thresholds,
+            impute_missing=impute_missing,
         )
+
+    if target_mode in {"trend", "recovery"}:
+        snapshot = snapshot.rename(columns={target_col: target_label})
+        target_col = target_label
 
     dataset_name = dataset_name or "longitudinal"
     run_xgboost_baseline(
@@ -480,6 +437,11 @@ def run_wbd_longitudinal_pipeline(
             raise ValueError(f"Unknown pipeline '{pipeline_name}'")
 
         X, y, feature_names = prepare_xy(labeled_df, target_col)
+        if X.size == 0 or len(y) == 0:
+            raise ValueError(
+                f"No usable samples after preprocessing for target '{target_col}'. "
+                "Check missingness thresholds or target_mode."
+            )
         forest_result = run_forest_search(
             X,
             y,
@@ -489,7 +451,13 @@ def run_wbd_longitudinal_pipeline(
         trees, _ = rebuild_forest_for_seed(X, y, forest_result.best_seed)
 
         out_dir = save_outputs(output_dir, dataset_name, pipeline_name, labeled_df, forest_result)
-        save_kde_plot(labeled_df, target_col, LABEL_COLUMN, Path(out_dir) / "kde_plot.png")
+        save_kde_plot(
+            labeled_df,
+            target_col,
+            LABEL_COLUMN,
+            Path(out_dir) / "kde_plot.png",
+            title_override=f"KDE Plot of {display_name}",
+        )
         save_forest_accuracy_plot(
             forest_result.results_df, Path(out_dir) / "accuracy_vs_questions.png"
         )

@@ -9,7 +9,7 @@ import seaborn as sns
 from scipy.cluster.hierarchy import linkage, fcluster
 from scipy.stats import entropy
 from sklearn.tree import DecisionTreeClassifier, _tree
-
+import kwargs
 
 LABEL_COLUMN = "is_interesting_subgroup"
 
@@ -221,7 +221,7 @@ def tree_to_dict(tree: DecisionTreeClassifier, feature_names):
     return recurse(0)
 
 
-def save_kde_plot(df, target, label_column, output_path):
+def save_kde_plot(df, target, label_column, output_path, title_override=None):
     if label_column not in df.columns:
         return
     if target not in df.columns:
@@ -273,7 +273,8 @@ def save_kde_plot(df, target, label_column, output_path):
         alpha=0.25,
     )
 
-    plt.title(f"KDE Plots of {target} with Point Distributions")
+    plot_title = title_override or f"KDE Plots of {target} with Point Distributions"
+    plt.title(plot_title)
     plt.xlabel(target)
     plt.ylabel("Density")
     handles, labels = plt.gca().get_legend_handles_labels()

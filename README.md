@@ -19,7 +19,7 @@ This repo includes two subgroup discovery pipelines extracted from `clust1.ipynb
 3) Forest Explanation (shared)
 - Trains many small constrained decision trees (randomized per seed).
 - Selects the best forest based on high accuracy and minimal questions.
-- Exports a best-tree JSON (readable questions) and a PNG.
+- Exports all trees in the best forest as JSON + PNG for interpretation.
 
 ## Datasets used
 
@@ -54,6 +54,41 @@ Optional datasets (disabled by default in config):
 - statsmodels_longley (statsmodels package)
 - openml_abalone (OpenML; requires network)
 
+## Longitudinal pipeline (panel data)
+
+Configured in `configs/wbd_longitudinal.json` and run via `scripts/run_wbd_longitudinal.py`.
+It accepts any CSV with an entity column, a date column, and a target column.
+
+Temporal feature engineering (per entity/time):
+- Lags: 1 and 3
+- Rolling mean and standard deviation (window size configurable)
+- Local trend slope over the window
+- Deltas: 1-step and 3-step
+- Recovery: current value minus window minimum
+- CAGR over the window (positive-valued series only)
+
+Target options:
+- `target_mode = "value"` uses the raw target value.
+- `target_mode = "trend"` uses the recent trend slope as the target (extreme trends).
+- `target_mode = "recovery"` uses recovery over the window (current minus window minimum).
+
+## Running longitudinal
+
+Run with the config:
+```bash
+python scripts/run_wbd_longitudinal.py
+```
+
+To use another CSV, update:
+`path`, `dataset_name`, `id_col`, `date_col`, and `target` in `configs/wbd_longitudinal.json`.
+
+## Run static + longitudinal together
+
+Use `configs/run_all.json` to run multiple static and longitudinal datasets in one run:
+```bash
+python scripts/run_all_pipelines.py
+```
+
 ## Outputs
 
 For each dataset and pipeline, results are written to:
@@ -63,7 +98,7 @@ Typical files:
 - `labeled.csv` with `is_interesting_subgroup`
 - `forest_results.csv` and `best_forest.json`
 - `kde_plot.png`
-- `best_tree.json` and `best_tree.png`
+- `tree_XX_acc_*.json` and `tree_XX_acc_*.png`
 
 ## Running
 
