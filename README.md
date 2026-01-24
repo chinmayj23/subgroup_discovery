@@ -1,6 +1,6 @@
 # Subgroup Discovery Pipelines
 
-This repo includes two subgroup discovery pipelines extracted from `clust1.ipynb` and a runner that applies them across multiple tabular datasets. The goal is to label "interesting" subgroups on a target column and then train a compact decision-forest explanation.
+This repo implements an independent, plug-and-play pipeline for interpretable subgroup discovery, with a focus on longitudinal data. The goal is to label "interesting" subgroups on a target column and then train a compact decision-forest explanation.
 
 ## What the methods do
 
@@ -10,10 +10,11 @@ This repo includes two subgroup discovery pipelines extracted from `clust1.ipynb
 - Forces all target values above a specified quantile (default 0.94) to be interesting.
 - Output: a boolean `is_interesting_subgroup` label for each row.
 
-2) Syflow-Style Method (bootstrap + cluster ranges + KL + diversity)
+2) KL-Based Method (bootstrap + cluster ranges + KL + diversity)
 - Bootstraps the target values, clusters each bootstrap sample, and turns each cluster into a target range.
 - Applies those ranges to the full dataset to create candidate subgroup masks.
 - Scores candidates by size-adjusted KL divergence vs the population and selects a diverse set via a greedy objective.
+- This objective is inspired by Syflow (KL-regularized subgroup discovery).
 - Output: a boolean `is_interesting_subgroup` label for each row.
 
 3) Forest Explanation (shared)
@@ -71,6 +72,8 @@ Target options:
 - `target_mode = "value"` uses the raw target value.
 - `target_mode = "trend"` uses the recent trend slope as the target (extreme trends).
 - `target_mode = "recovery"` uses recovery over the window (current minus window minimum).
+
+This project emphasizes interpretable subgroup discovery for longitudinal data: target-only subgroup labels are explained via compact decision-forest rules over temporal features (lags, rolling stats, trend, deltas, recovery, CAGR).
 
 ## Running longitudinal
 
