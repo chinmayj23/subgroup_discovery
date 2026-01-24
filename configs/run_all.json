@@ -1,7 +1,10 @@
 {
   "output_dir": "outputs_subgroups/run_all",
   "static_config": "configs/subgroup_pipelines.json",
-  "static_datasets": null,
+  "static_datasets": [
+    "insurance",
+    "sklearn_california_housing"
+  ],
   "longitudinal_datasets": [
     {
       "name": "wbd",
@@ -13,9 +16,13 @@
       "panel_stride": 1,
       "window_size": 3,
       "min_history": 2,
-      "max_missing_frac": 0.5,
+      "max_missing_frac": 1.0,
       "impute_missing": true,
-      "target_modes": ["recovery"],
+      "target_modes": [
+        "value",
+        "trend",
+        "recovery"
+      ],
       "xgboost": {
         "enabled": true,
         "n_splits": 5,

@@ -24,34 +24,12 @@ This repo implements an independent, plug-and-play pipeline for interpretable su
 
 ## Datasets used (configured via run_all)
 
-Enabled by default:
-- california_housing
-  - Source: local CSV `california_housing.csv` (California Housing from sklearn).
-  - Target: `MedHouseVal`
-  - Expected subgroups: very high values in coastal/urban areas; very low values in rural areas.
-- insurance
-  - Source: `data/insurance/insurance.csv` (Kaggle "Medical Cost Personal Datasets").
-  - Target: `charges`
-  - Expected subgroups: high charges for smokers; higher charges for older age and higher BMI.
-- diabetes
-  - Source: `outputs_subgroups/diabetes_with_subgroups.csv` (local derived file).
-  - Target: `target`
-  - Expected subgroups: high target values aligned with BMI and serum markers.
-- heart
-  - Source: `syflow_env/Lib/site-packages/statsmodels/datasets/heart/heart.csv` (statsmodels).
-  - Target: `survival`
-  - Expected subgroups: low survival at older ages.
-- engel
-  - Source: `syflow_env/Lib/site-packages/statsmodels/datasets/engel/engel.csv` (statsmodels).
-  - Target: `foodexp`
-  - Expected subgroups: unusually high or low food expenditure relative to income.
-
-Optional datasets (disabled by default in config):
-- sklearn_diabetes (sklearn package)
-- sklearn_wine (sklearn package)
+Static (configured in `configs/run_all.json`):
+- insurance (Kaggle Medical Cost Personal)
 - sklearn_california_housing (sklearn package)
-- statsmodels_longley (statsmodels package)
-- openml_abalone (OpenML; requires network)
+
+Longitudinal:
+- World Bank World Development Indicators (country × year panel), with target `life_expectancy_at_birth`.
 
 ## Longitudinal pipeline (panel data)
 
@@ -103,7 +81,7 @@ Typical files:
 
 ## Running (recommended)
 
-Use the unified runner to execute longitudinal and (optionally) static datasets in one run:
+Use the unified runner to execute longitudinal and static datasets in one run:
 ```bash
 python scripts/run_all_pipelines.py
 ```
