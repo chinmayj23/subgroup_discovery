@@ -22,9 +22,7 @@ This repo implements an independent, plug-and-play pipeline for interpretable su
 - Selects the best forest based on high accuracy and minimal questions.
 - Exports all trees in the best forest as JSON + PNG for interpretation.
 
-## Datasets used (static support is optional)
-
-Configured in `configs/subgroup_pipelines.json`.
+## Datasets used (configured via run_all)
 
 Enabled by default:
 - california_housing
@@ -57,8 +55,8 @@ Optional datasets (disabled by default in config):
 
 ## Longitudinal pipeline (panel data)
 
-Configured in `configs/wbd_longitudinal.json` and run via `scripts/run_wbd_longitudinal.py`.
-It accepts any CSV with an entity column, a date column, and a target column.
+Configured in `configs/run_all.json`. It accepts any CSV with an entity column,
+a date column, and a target column.
 
 Temporal feature engineering (per entity/time):
 - Lags: 1 and 3
@@ -77,14 +75,12 @@ This project emphasizes interpretable subgroup discovery for longitudinal data: 
 
 ## Running longitudinal
 
-Run with the config:
+Run with the unified config:
 ```bash
-python scripts/run_wbd_longitudinal.py
+python scripts/run_all_pipelines.py
 ```
-
-To use another CSV, update:
-`path`, `dataset_name`, `id_col`, `date_col`, and `target` in `configs/wbd_longitudinal.json`.
-You can also set `impute_missing` to keep more rows and `max_missing_frac` to control column filtering.
+If you only want longitudinal data, set `static_datasets` to `null` in `configs/run_all.json`.
+To use another CSV, update the dataset entry in `configs/run_all.json`.
 
 ## Run static + longitudinal together
 
