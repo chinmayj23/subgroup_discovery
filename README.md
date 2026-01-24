@@ -1,6 +1,6 @@
 # Subgroup Discovery Pipelines
 
-This repo implements an independent, plug-and-play pipeline for interpretable subgroup discovery, with a focus on longitudinal data. The goal is to label "interesting" subgroups on a target column and then train a compact decision-forest explanation.
+This repo implements an independent, plug-and-play pipeline for interpretable subgroup discovery with a primary focus on longitudinal data. The goal is to label "interesting" subgroups on a target column and then train a compact decision-forest explanation.
 
 ## What the methods do
 
@@ -22,7 +22,7 @@ This repo implements an independent, plug-and-play pipeline for interpretable su
 - Selects the best forest based on high accuracy and minimal questions.
 - Exports all trees in the best forest as JSON + PNG for interpretation.
 
-## Datasets used
+## Datasets used (static support is optional)
 
 Configured in `configs/subgroup_pipelines.json`.
 
@@ -105,19 +105,17 @@ Typical files:
 - `kde_plot.png`
 - `tree_XX_acc_*.json` and `tree_XX_acc_*.png`
 
-## Running
+## Running (recommended)
 
-Run all enabled datasets:
+Use the unified runner to execute longitudinal and (optionally) static datasets in one run:
+```bash
+python scripts/run_all_pipelines.py
+```
+Configure datasets in `configs/run_all.json`. Set `static_datasets` to `null` if you only want longitudinal data.
+
+## Static-only runner (optional)
+
+If you only need static datasets, you can still use:
 ```bash
 python scripts/run_subgroup_pipelines.py
-```
-
-Run a specific dataset:
-```bash
-python scripts/run_subgroup_pipelines.py --datasets sklearn_california_housing
-```
-
-Run only one pipeline:
-```bash
-python scripts/run_subgroup_pipelines.py --pipelines original
 ```
