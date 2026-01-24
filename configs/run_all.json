@@ -15,7 +15,7 @@
       "min_history": 2,
       "max_missing_frac": 0.5,
       "impute_missing": true,
-      "target_modes": ["value", "trend", "recovery"],
+      "target_modes": ["recovery"],
       "xgboost": {
         "enabled": true,
         "n_splits": 5,

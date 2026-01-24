@@ -81,6 +81,7 @@ python scripts/run_wbd_longitudinal.py
 
 To use another CSV, update:
 `path`, `dataset_name`, `id_col`, `date_col`, and `target` in `configs/wbd_longitudinal.json`.
+You can also set `impute_missing` to keep more rows and `max_missing_frac` to control column filtering.
 
 ## Run static + longitudinal together
 
@@ -88,6 +89,7 @@ Use `configs/run_all.json` to run multiple static and longitudinal datasets in o
 ```bash
 python scripts/run_all_pipelines.py
 ```
+Set `static_datasets` or `longitudinal_datasets` to `null` to skip that section.
 
 ## Outputs
 

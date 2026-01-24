@@ -39,7 +39,12 @@ def run_xgboost_baseline(snapshot, target_col, date_col, output_dir, cfg):
 
     feature_df = df.select_dtypes(include=[np.number]).copy()
     feature_df = feature_df.drop(columns=[target_col], errors="ignore")
-    y = pd.to_numeric(df[target_col], errors="coerce")
+    if target_col not in df.columns:
+        raise ValueError(f"Target column '{target_col}' not found in snapshot")
+    y = df[target_col]
+    if isinstance(y, pd.DataFrame):
+        y = y.iloc[:, 0]
+    y = pd.to_numeric(y, errors="coerce")
 
     valid_mask = ~(feature_df.isna().any(axis=1) | y.isna())
     X = feature_df.loc[valid_mask]

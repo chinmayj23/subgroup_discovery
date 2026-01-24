@@ -227,7 +227,10 @@ def save_kde_plot(df, target, label_column, output_path, title_override=None):
     if target not in df.columns:
         return
 
-    target_series = pd.to_numeric(df[target], errors="coerce")
+    target_series = df[target]
+    if isinstance(target_series, pd.DataFrame):
+        target_series = target_series.iloc[:, 0]
+    target_series = pd.to_numeric(target_series, errors="coerce")
     interesting = df[df[label_column] == True]
     non_interesting = df[df[label_column] == False]
 
@@ -241,8 +244,18 @@ def save_kde_plot(df, target, label_column, output_path, title_override=None):
         bw_adjust=1.1,
         common_norm=False,
     )
+    non_interesting_target = non_interesting[target]
+    if isinstance(non_interesting_target, pd.DataFrame):
+        non_interesting_target = non_interesting_target.iloc[:, 0]
+    non_interesting_target = pd.to_numeric(non_interesting_target, errors="coerce")
+
+    interesting_target = interesting[target]
+    if isinstance(interesting_target, pd.DataFrame):
+        interesting_target = interesting_target.iloc[:, 0]
+    interesting_target = pd.to_numeric(interesting_target, errors="coerce")
+
     sns.kdeplot(
-        pd.to_numeric(non_interesting[target], errors="coerce"),
+        non_interesting_target,
         color="green",
         fill=True,
         alpha=0.25,
@@ -251,7 +264,7 @@ def save_kde_plot(df, target, label_column, output_path, title_override=None):
         common_norm=False,
     )
     sns.kdeplot(
-        pd.to_numeric(interesting[target], errors="coerce"),
+        interesting_target,
         color="red",
         fill=True,
         alpha=0.25,
@@ -261,13 +274,13 @@ def save_kde_plot(df, target, label_column, output_path, title_override=None):
     )
 
     sns.rugplot(
-        pd.to_numeric(non_interesting[target], errors="coerce"),
+        non_interesting_target,
         color="green",
         height=0.02,
         alpha=0.15,
     )
     sns.rugplot(
-        pd.to_numeric(interesting[target], errors="coerce"),
+        interesting_target,
         color="red",
         height=0.03,
         alpha=0.25,
@@ -448,7 +461,11 @@ def prepare_xy(df, target, label_column=LABEL_COLUMN):
 
 
 def label_original_method(df, target, high_value_quantile=0.94):
-    y = df[target].values.reshape(-1, 1)
+    y_col = df[target]
+    if isinstance(y_col, pd.DataFrame):
+        y_col = y_col.iloc[:, 0]
+    y_col = pd.to_numeric(y_col, errors="coerce")
+    y = y_col.values.reshape(-1, 1)
     Z = linkage(y, method="single")
     heights = Z[:, 2]
     diffs = np.diff(heights)
@@ -462,8 +479,8 @@ def label_original_method(df, target, high_value_quantile=0.94):
     largest_cluster_label = unique_clusters[np.argmax(counts)]
 
     interesting_mask = clusters != largest_cluster_label
-    high_value_cutoff = df[target].quantile(high_value_quantile)
-    interesting_mask |= df[target] >= high_value_cutoff
+    high_value_cutoff = y_col.quantile(high_value_quantile)
+    interesting_mask |= y_col >= high_value_cutoff
 
     labeled_df = df.copy()
     labeled_df[LABEL_COLUMN] = interesting_mask
@@ -481,7 +498,11 @@ def label_syflow_method(
     min_subgroup_size=50,
     max_subgroup_frac=0.90,
 ):
-    y_full = df[target].values
+    y_col = df[target]
+    if isinstance(y_col, pd.DataFrame):
+        y_col = y_col.iloc[:, 0]
+    y_col = pd.to_numeric(y_col, errors="coerce")
+    y_full = y_col.values
     n_total = len(y_full)
 
     global_bins = freedman_diaconis_bins(y_full)
