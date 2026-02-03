@@ -1,10 +1,7 @@
 {
   "output_dir": "outputs_subgroups/run_all",
   "static_config": "configs/subgroup_pipelines.json",
-  "static_datasets": [
-    "insurance",
-    "sklearn_california_housing"
-  ],
+  "static_datasets": [ "insurance", "sklearn_california_housing" ],
   "longitudinal_datasets": [
     {
       "name": "wbd",
@@ -12,31 +9,14 @@
       "id_col": "country",
       "date_col": "date",
       "target": "life_expectancy_at_birth",
-      "mode": "panel",
+      "mode": "snapshot",
       "panel_stride": 1,
-      "window_size": 3,
-      "min_history": 2,
-      "max_missing_frac": 1.0,
+      "window_size": 5,          
+      "min_history": 3,          
+      "max_missing_frac": 0.5,
       "impute_missing": true,
-      "target_modes": [
-        "value",
-        "trend",
-        "recovery"
-      ],
-      "xgboost": {
-        "enabled": true,
-        "n_splits": 5,
-        "min_samples": 10,
-        "params": {
-          "n_estimators": 300,
-          "max_depth": 5,
-          "learning_rate": 0.05,
-          "subsample": 0.9,
-          "colsample_bytree": 0.9,
-          "objective": "reg:squarederror",
-          "random_state": 42
-        }
-      }
+      "target_modes": ["value", "trend"],
+      "xgboost": { "enabled": true }
     }
   ]
 }

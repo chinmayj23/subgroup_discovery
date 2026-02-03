@@ -79,6 +79,14 @@ Typical files:
 - `kde_plot.png`
 - `tree_XX_acc_*.json` and `tree_XX_acc_*.png`
 
+## Example outputs (longitudinal WBD)
+
+KDE plot:
+`outputs_subgroups/run_all/longitudinal/wbd_value/original/kde_plot.png`
+
+Tree plots:
+`outputs_subgroups/run_all/longitudinal/wbd_value/original/tree_00_acc_*.png`
+
 ## Running (recommended)
 
 Use the unified runner to execute longitudinal and static datasets in one run:

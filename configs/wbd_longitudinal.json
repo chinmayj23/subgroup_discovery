@@ -1,28 +1,17 @@
 {
   "path": "wbd/world_bank_development_indicators.csv",
-  "dataset_name": "wbd_longitudinal_value",
+  "dataset_name": "wbd_low_life_expectancy",
   "id_col": "country",
   "date_col": "date",
   "target": "life_expectancy_at_birth",
   "target_mode": "value",
-  "mode": "panel",
+  "mode": "snapshot",
   "panel_stride": 1,
-  "window_size": 3,
-  "min_history": 2,
+  "window_size": 5,
+  "min_history": 3,
   "max_missing_frac": 0.5,
   "impute_missing": true,
   "xgboost": {
-    "enabled": true,
-    "n_splits": 5,
-    "min_samples": 10,
-    "params": {
-      "n_estimators": 300,
-      "max_depth": 5,
-      "learning_rate": 0.05,
-      "subsample": 0.9,
-      "colsample_bytree": 0.9,
-      "objective": "reg:squarederror",
-      "random_state": 42
-    }
+    "enabled": true
   }
 }
