@@ -1,0 +1,98 @@
+{
+  "question": "latest_death_rate <= 24.300500869750977",
+  "question_text": "Current Death Rate <= 24.3005",
+  "feature": "latest_death_rate",
+  "threshold": 24.300500869750977,
+  "left": {
+    "question": "lag1y_birth_rate <= 8.550000190734863",
+    "question_text": "Birth Rate 1 years ago <= 8.5500",
+    "feature": "lag1y_birth_rate",
+    "threshold": 8.550000190734863,
+    "left": {
+      "question": "latest_GDP_current_US <= 281673031680.0",
+      "question_text": "Current Gdp Current Us <= 281673031680.0000",
+      "feature": "latest_GDP_current_US",
+      "threshold": 281673031680.0,
+      "left": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          0.9344262295081968,
+          0.06557377049180328
+        ]
+      },
+      "right": {
+        "question": "lag5y_rural_population <= 18900012.0",
+        "question_text": "Rural Population 5 years ago <= 18900012.0000",
+        "feature": "lag5y_rural_population",
+        "threshold": 18900012.0,
+        "left": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.06818181818181818,
+            0.9318181818181818
+          ]
+        },
+        "right": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            1.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "right": {
+      "question": "lag10y_individuals_using_internet% <= 91.75",
+      "question_text": "Individuals Using Internet Percent 10 years ago <= 91.7500",
+      "feature": "lag10y_individuals_using_internet%",
+      "threshold": 91.75,
+      "left": {
+        "question": "lag10y_population_density <= 16878.0546875",
+        "question_text": "Population Density 10 years ago <= 16878.0547",
+        "feature": "lag10y_population_density",
+        "threshold": 16878.0546875,
+        "left": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            0.9954601415820252,
+            0.0045398584179747615
+          ]
+        },
+        "right": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.14285714285714285,
+            0.8571428571428571
+          ]
+        }
+      },
+      "right": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.0,
+          1.0
+        ]
+      }
+    }
+  },
+  "right": {
+    "question": "lag3y_birth_rate <= 56.342498779296875",
+    "question_text": "Birth Rate 3 years ago <= 56.3425",
+    "feature": "lag3y_birth_rate",
+    "threshold": 56.342498779296875,
+    "left": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.08391608391608392,
+        0.916083916083916
+      ]
+    },
+    "right": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ]
+    }
+  }
+}

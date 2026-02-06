@@ -1,0 +1,33 @@
+[
+  {
+    "leaf_id": 13,
+    "prediction": 1,
+    "n_samples": 37,
+    "rule": [
+      "Current Death Rate <= 24.8120",
+      "Population Density 10 years ago <= 6119.3223",
+      "Individuals Using Internet Percent 10 years ago > 74.9450",
+      "Percent change in Death Rate over last 1 years <= -0.0127",
+      "Current Death Rate <= 8.9000"
+    ]
+  },
+  {
+    "leaf_id": 6,
+    "prediction": 1,
+    "n_samples": 44,
+    "rule": [
+      "Current Death Rate <= 24.8120",
+      "Population Density 10 years ago > 6119.3223",
+      "Trade In Services Percent 5 years ago > 50.8616"
+    ]
+  },
+  {
+    "leaf_id": 12,
+    "prediction": 1,
+    "n_samples": 126,
+    "rule": [
+      "Current Death Rate > 24.8120",
+      "Volatility of Trade In Services Percent over last 7 years > 1.2164"
+    ]
+  }
+]

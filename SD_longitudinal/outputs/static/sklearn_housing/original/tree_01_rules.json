@@ -1,0 +1,11 @@
+[
+  {
+    "leaf_id": 4,
+    "prediction": 1,
+    "n_samples": 393,
+    "rule": [
+      "MedInc > 7.8152",
+      "MedInc > 9.0398"
+    ]
+  }
+]

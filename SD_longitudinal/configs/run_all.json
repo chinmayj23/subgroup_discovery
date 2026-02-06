@@ -1,0 +1,5 @@
+﻿{
+  "output_dir": "SD_longitudinal/outputs",
+  "static_config": "SD_longitudinal/configs/static.json",
+  "longitudinal_config": "SD_longitudinal/configs/longitudinal.json"
+}

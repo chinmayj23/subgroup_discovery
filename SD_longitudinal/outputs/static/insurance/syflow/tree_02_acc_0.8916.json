@@ -1,0 +1,85 @@
+{
+  "question": "bmi <= 33.46999931335449",
+  "question_text": "bmi <= 33.4700",
+  "feature": "bmi",
+  "threshold": 33.46999931335449,
+  "left": {
+    "leaf_prediction": 0,
+    "class_counts": [
+      0.9567147613762487,
+      0.04328523862375139
+    ]
+  },
+  "right": {
+    "question": "bmi <= 37.084999084472656",
+    "question_text": "bmi <= 37.0850",
+    "feature": "bmi",
+    "threshold": 37.084999084472656,
+    "left": {
+      "question": "age <= 47.5",
+      "question_text": "age <= 47.5000",
+      "feature": "age",
+      "threshold": 47.5,
+      "left": {
+        "question": "age <= 45.5",
+        "question_text": "age <= 45.5000",
+        "feature": "age",
+        "threshold": 45.5,
+        "left": {
+          "question": "bmi <= 33.54249954223633",
+          "question_text": "bmi <= 33.5425",
+          "feature": "bmi",
+          "threshold": 33.54249954223633,
+          "left": {
+            "leaf_prediction": 1,
+            "class_counts": [
+              0.0,
+              1.0
+            ]
+          },
+          "right": {
+            "leaf_prediction": 0,
+            "class_counts": [
+              0.6461538461538462,
+              0.35384615384615387
+            ]
+          }
+        },
+        "right": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "right": {
+        "question": "bmi <= 36.85499954223633",
+        "question_text": "bmi <= 36.8550",
+        "feature": "bmi",
+        "threshold": 36.85499954223633,
+        "left": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            0.8481012658227848,
+            0.1518987341772152
+          ]
+        },
+        "right": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.25,
+            0.75
+          ]
+        }
+      }
+    },
+    "right": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        0.821256038647343,
+        0.178743961352657
+      ]
+    }
+  }
+}

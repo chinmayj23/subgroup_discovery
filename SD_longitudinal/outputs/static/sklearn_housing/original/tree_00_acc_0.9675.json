@@ -1,0 +1,98 @@
+{
+  "question": "MedInc <= 7.814100027084351",
+  "question_text": "MedInc <= 7.8141",
+  "feature": "MedInc",
+  "threshold": 7.814100027084351,
+  "left": {
+    "question": "AveOccup <= 2.100381016731262",
+    "question_text": "AveOccup <= 2.1004",
+    "feature": "AveOccup",
+    "threshold": 2.100381016731262,
+    "left": {
+      "question": "MedInc <= 5.00789999961853",
+      "question_text": "MedInc <= 5.0079",
+      "feature": "MedInc",
+      "threshold": 5.00789999961853,
+      "left": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          0.9198289684660609,
+          0.08017103153393906
+        ]
+      },
+      "right": {
+        "question": "HouseAge <= 19.5",
+        "question_text": "HouseAge <= 19.5000",
+        "feature": "HouseAge",
+        "threshold": 19.5,
+        "left": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            0.875,
+            0.125
+          ]
+        },
+        "right": {
+          "question": "AveBedrms <= 0.9794745445251465",
+          "question_text": "AveBedrms <= 0.9795",
+          "feature": "AveBedrms",
+          "threshold": 0.9794745445251465,
+          "left": {
+            "leaf_prediction": 0,
+            "class_counts": [
+              0.9166666666666666,
+              0.08333333333333333
+            ]
+          },
+          "right": {
+            "leaf_prediction": 1,
+            "class_counts": [
+              0.25170068027210885,
+              0.7482993197278912
+            ]
+          }
+        }
+      }
+    },
+    "right": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        0.9828410689170183,
+        0.017158931082981718
+      ]
+    }
+  },
+  "right": {
+    "question": "HouseAge <= 27.5",
+    "question_text": "HouseAge <= 27.5000",
+    "feature": "HouseAge",
+    "threshold": 27.5,
+    "left": {
+      "question": "MedInc <= 9.724299907684326",
+      "question_text": "MedInc <= 9.7243",
+      "feature": "MedInc",
+      "threshold": 9.724299907684326,
+      "left": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          0.8144796380090498,
+          0.18552036199095023
+        ]
+      },
+      "right": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.22627737226277372,
+          0.7737226277372263
+        ]
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.16445623342175067,
+        0.8355437665782494
+      ]
+    }
+  }
+}

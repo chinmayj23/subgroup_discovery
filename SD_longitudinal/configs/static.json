@@ -1,0 +1,44 @@
+﻿{
+  "datasets": [
+    {
+      "name": "insurance",
+      "path": "data/insurance/insurance.csv",
+      "target": "charges",
+      "enabled": true
+    },
+    {
+      "name": "sklearn_housing",
+      "source": "sklearn",
+      "dataset": "california_housing",
+      "target": "MedHouseVal",
+      "enabled": true
+    }
+  ],
+  "pipelines": {
+    "tail_cluster": {
+      "high_value_quantile": 0.95,
+      "two_tailed": false
+    },
+    "timetribes": {
+      "n_seeds": 1000,
+      "beta": 0.5,
+      "lambd_div": 2.0,
+      "top_percentile": 0.01,
+      "max_overlap": 0.95,
+      "min_subgroup_size": 25,
+      "max_subgroup_frac": 0.9
+    }
+  },
+  "forest": {
+    "n_seeds": 1000,
+    "accuracy_quantile": 0.99,
+    "min_trees": 1,
+    "max_trees": 10,
+    "min_questions": 2,
+    "max_questions": 10,
+    "test_size": 0.2,
+    "vote_rule": "any",
+    "eval_mode": "train",
+    "n_jobs": -1
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "question": "bmi <= 30.170000076293945",
+  "question_text": "bmi <= 30.1700",
+  "feature": "bmi",
+  "threshold": 30.170000076293945,
+  "left": {
+    "leaf_prediction": 0,
+    "class_counts": [
+      0.9908952959028832,
+      0.009104704097116844
+    ]
+  },
+  "right": {
+    "question": "bmi <= 40.334999084472656",
+    "question_text": "bmi <= 40.3350",
+    "feature": "bmi",
+    "threshold": 40.334999084472656,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        0.7976782752902156,
+        0.2023217247097844
+      ]
+    },
+    "right": {
+      "question": "age <= 41.0",
+      "question_text": "age <= 41.0000",
+      "feature": "age",
+      "threshold": 41.0,
+      "left": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          0.8125,
+          0.1875
+        ]
+      },
+      "right": {
+        "question": "age <= 44.5",
+        "question_text": "age <= 44.5000",
+        "feature": "age",
+        "threshold": 44.5,
+        "left": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.0,
+            1.0
+          ]
+        },
+        "right": {
+          "question": "bmi <= 43.39500045776367",
+          "question_text": "bmi <= 43.3950",
+          "feature": "bmi",
+          "threshold": 43.39500045776367,
+          "left": {
+            "question": "bmi <= 42.02000045776367",
+            "question_text": "bmi <= 42.0200",
+            "feature": "bmi",
+            "threshold": 42.02000045776367,
+            "left": {
+              "question": "children <= 2.5",
+              "question_text": "children <= 2.5000",
+              "feature": "children",
+              "threshold": 2.5,
+              "left": {
+                "question": "children <= 0.5",
+                "question_text": "children <= 0.5000",
+                "feature": "children",
+                "threshold": 0.5,
+                "left": {
+                  "leaf_prediction": 0,
+                  "class_counts": [
+                    0.8571428571428571,
+                    0.14285714285714285
+                  ]
+                },
+                "right": {
+                  "leaf_prediction": 1,
+                  "class_counts": [
+                    0.0,
+                    1.0
+                  ]
+                }
+              },
+              "right": {
+                "leaf_prediction": 0,
+                "class_counts": [
+                  1.0,
+                  0.0
+                ]
+              }
+            },
+            "right": {
+              "leaf_prediction": 1,
+              "class_counts": [
+                0.0,
+                1.0
+              ]
+            }
+          },
+          "right": {
+            "leaf_prediction": 0,
+            "class_counts": [
+              1.0,
+              0.0
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "leaf_id": 15,
+    "prediction": 1,
+    "n_samples": 4,
+    "rule": [
+      "bmi > 33.4700",
+      "bmi <= 37.0850",
+      "age <= 47.5000",
+      "age <= 45.5000",
+      "bmi <= 33.5425"
+    ]
+  },
+  {
+    "leaf_id": 10,
+    "prediction": 1,
+    "n_samples": 9,
+    "rule": [
+      "bmi > 33.4700",
+      "bmi <= 37.0850",
+      "age <= 47.5000",
+      "age > 45.5000"
+    ]
+  },
+  {
+    "leaf_id": 12,
+    "prediction": 1,
+    "n_samples": 8,
+    "rule": [
+      "bmi > 33.4700",
+      "bmi <= 37.0850",
+      "age > 47.5000",
+      "bmi > 36.8550"
+    ]
+  }
+]

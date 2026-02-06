@@ -7,7 +7,7 @@
   "target_mode": "value",
   "mode": "panel",
   "panel_stride": 1,
-  "window_size": 3,
+  "window_size": 5,
   "min_history": 2,
   "max_missing_frac": 0.5,
   "impute_missing": true,

@@ -1,0 +1,52 @@
+﻿{
+  "datasets": [
+    {
+      "name": "wbd",
+      "path": "wbd/world_bank_development_indicators.csv",
+      "id_col": "country",
+      "date_col": "date",
+      "target": "life_expectancy_at_birth",
+      "target_modes": ["value", "trend", "delta"],
+      "label_window": 5,
+      "min_history": 10,
+      "mode": "panel",
+      "panel_stride": 1,
+      "max_missing_frac": 0.6,
+      "impute_missing": true,
+      "include_target_features": false,
+      "question_pack": {
+        "lags": [1, 2, 3, 5, 7, 10],
+        "windows": [2, 3, 5, 7, 10],
+        "include_pct_change": true,
+        "include_volatility": true
+      }
+    }
+  ],
+  "pipelines": {
+    "tail_cluster": {
+      "high_value_quantile": 0.99,
+      "two_tailed": true
+    },
+    "timetribes": {
+      "n_seeds": 1000,
+      "beta": 0.5,
+      "lambd_div": 2.0,
+      "top_percentile": 0.005,
+      "max_overlap": 0.9,
+      "min_subgroup_size": 20,
+      "max_subgroup_frac": 0.3
+    }
+  },
+  "forest": {
+    "n_seeds": 1000,
+    "accuracy_quantile": 0.99,
+    "min_trees": 1,
+    "max_trees": 10,
+    "min_questions": 2,
+    "max_questions": 10,
+    "test_size": 0.2,
+    "vote_rule": "any",
+    "eval_mode": "train",
+    "n_jobs": -1
+  }
+}
