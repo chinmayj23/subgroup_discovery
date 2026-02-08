@@ -1,0 +1,124 @@
+{
+  "question": "latest_death_rate <= 28.399499893188477",
+  "question_text": "Current Death Rate <= 28.3995",
+  "feature": "latest_death_rate",
+  "threshold": 28.399499893188477,
+  "left": {
+    "leaf_prediction": 0,
+    "class_counts": [
+      1.0,
+      0.0
+    ],
+    "target_summary": {
+      "n_samples": 13232,
+      "target_median": 68.36010975609756,
+      "target_mean": 65.98173204633913,
+      "target_min": 34.344,
+      "target_max": 85.4975609756098,
+      "target_position": "high"
+    },
+    "global_target_summary": {
+      "target_name": "label_target_value",
+      "target_median": 68.2975609756098,
+      "target_mean": 65.84289326384757
+    }
+  },
+  "right": {
+    "question": "latest_death_rate <= 41.64799880981445",
+    "question_text": "Current Death Rate <= 41.6480",
+    "feature": "latest_death_rate",
+    "threshold": 41.64799880981445,
+    "left": {
+      "question": "vol5y_death_rate <= 1.5114111304283142",
+      "question_text": "Volatility of Death Rate over last 5 years <= 1.5114",
+      "feature": "vol5y_death_rate",
+      "threshold": 1.5114111304283142,
+      "left": {
+        "question": "pct_change7y_rural_population <= 0.07611050456762314",
+        "question_text": "Percent change in Rural Population over last 7 years <= 0.0761",
+        "feature": "pct_change7y_rural_population",
+        "threshold": 0.07611050456762314,
+        "left": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.0,
+            1.0
+          ],
+          "target_summary": {
+            "n_samples": 2,
+            "target_median": 32.7345,
+            "target_mean": 32.7345,
+            "target_min": 32.532,
+            "target_max": 32.937,
+            "target_position": "low"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_value",
+            "target_median": 68.2975609756098,
+            "target_mean": 65.84289326384757
+          }
+        },
+        "right": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            1.0,
+            0.0
+          ],
+          "target_summary": {
+            "n_samples": 7,
+            "target_median": 35.293,
+            "target_mean": 34.071285714285715,
+            "target_min": 26.399,
+            "target_max": 36.731,
+            "target_position": "low"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_value",
+            "target_median": 68.2975609756098,
+            "target_mean": 65.84289326384757
+          }
+        }
+      },
+      "right": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.0,
+          1.0
+        ],
+        "target_summary": {
+          "n_samples": 30,
+          "target_median": 30.536,
+          "target_mean": 30.15383333333333,
+          "target_min": 24.427,
+          "target_max": 33.795,
+          "target_position": "low"
+        },
+        "global_target_summary": {
+          "target_name": "label_target_value",
+          "target_median": 68.2975609756098,
+          "target_mean": 65.84289326384757
+        }
+      }
+    },
+    "right": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 10,
+        "target_median": 20.111,
+        "target_mean": 18.060399999999998,
+        "target_min": 11.995,
+        "target_max": 22.724,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "label_target_value",
+        "target_median": 68.2975609756098,
+        "target_mean": 65.84289326384757
+      }
+    }
+  }
+}

@@ -1,0 +1,96 @@
+[
+  {
+    "leaf_id": 11,
+    "prediction": 1,
+    "n_samples": 9,
+    "rule": [
+      "Current Death Rate <= 24.5050",
+      "Individuals Using Internet Percent 10 years ago <= 53.9190",
+      "Birth Rate 7 years ago <= 7.4115"
+    ],
+    "target_summary": {
+      "n_samples": 8,
+      "target_median": 83.169,
+      "target_mean": 83.06140243902439,
+      "target_min": 82.3756097560976,
+      "target_max": 83.4219512195122,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 17,
+    "prediction": 1,
+    "n_samples": 16,
+    "rule": [
+      "Current Death Rate <= 24.5050",
+      "Individuals Using Internet Percent 10 years ago > 53.9190",
+      "Percent change in Rural Population over last 7 years <= 0.0529",
+      "Population Density 10 years ago <= 6119.3223",
+      "Change in Gdp Current Us over last 10 years <= -60745070592.0000",
+      "Percent change in Rural Population over last 5 years <= -0.0421"
+    ],
+    "target_summary": {
+      "n_samples": 12,
+      "target_median": 83.61280487804879,
+      "target_mean": 83.59743902439025,
+      "target_min": 82.5756097560976,
+      "target_max": 84.56,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 8,
+    "prediction": 1,
+    "n_samples": 19,
+    "rule": [
+      "Current Death Rate <= 24.5050",
+      "Individuals Using Internet Percent 10 years ago > 53.9190",
+      "Percent change in Rural Population over last 7 years <= 0.0529",
+      "Population Density 10 years ago > 6119.3223"
+    ],
+    "target_summary": {
+      "n_samples": 18,
+      "target_median": 84.3719512195122,
+      "target_mean": 84.29539430894312,
+      "target_min": 82.7439024390244,
+      "target_max": 85.4975609756098,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 16,
+    "prediction": 1,
+    "n_samples": 33,
+    "rule": [
+      "Current Death Rate <= 24.5050",
+      "Individuals Using Internet Percent 10 years ago > 53.9190",
+      "Percent change in Rural Population over last 7 years > 0.0529",
+      "Percent change in Birth Rate over last 5 years > -0.0814"
+    ],
+    "target_summary": {
+      "n_samples": 28,
+      "target_median": 82.8036585365854,
+      "target_mean": 82.91358885017425,
+      "target_min": 81.8439024390244,
+      "target_max": 84.1609756097561,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 14,
+    "prediction": 1,
+    "n_samples": 131,
+    "rule": [
+      "Current Death Rate > 24.5050",
+      "Volatility of Trade In Services Percent over last 7 years > 1.2484"
+    ],
+    "target_summary": {
+      "n_samples": 126,
+      "target_median": 36.551,
+      "target_mean": 34.32213781560243,
+      "target_min": 11.995,
+      "target_max": 42.46,
+      "target_position": "low"
+    }
+  }
+]

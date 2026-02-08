@@ -1,0 +1,76 @@
+[
+  {
+    "leaf_id": 16,
+    "prediction": 1,
+    "n_samples": 17,
+    "rule": [
+      "Current Death Rate <= 24.5080",
+      "Individuals Using Internet Percent 10 years ago <= 65.0907",
+      "Population Density 10 years ago > 16122.3301",
+      "Average yearly change in Death Rate over last 10 years > -0.0123"
+    ],
+    "target_summary": {
+      "n_samples": 15,
+      "target_median": 83.883,
+      "target_mean": 83.88226666666667,
+      "target_min": 82.257,
+      "target_max": 85.399,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 10,
+    "prediction": 1,
+    "n_samples": 25,
+    "rule": [
+      "Current Death Rate <= 24.5080",
+      "Individuals Using Internet Percent 10 years ago > 65.0907",
+      "Avg Precipitation 7 years ago <= 1247.0000",
+      "Percent change in Population over last 5 years > 0.0585"
+    ],
+    "target_summary": {
+      "n_samples": 28,
+      "target_median": 82.61781707317076,
+      "target_mean": 82.51427700348434,
+      "target_min": 79.099,
+      "target_max": 83.4975609756098,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 12,
+    "prediction": 1,
+    "n_samples": 41,
+    "rule": [
+      "Current Death Rate <= 24.5080",
+      "Individuals Using Internet Percent 10 years ago > 65.0907",
+      "Avg Precipitation 7 years ago > 1247.0000",
+      "Volatility of Land Area over last 10 years > 0.0001"
+    ],
+    "target_summary": {
+      "n_samples": 43,
+      "target_median": 83.1634146341463,
+      "target_mean": 83.16506522972209,
+      "target_min": 81.2707317073171,
+      "target_max": 84.56,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 14,
+    "prediction": 1,
+    "n_samples": 143,
+    "rule": [
+      "Current Death Rate > 24.5080",
+      "Volatility of Trade In Services Percent over last 7 years > 1.3337"
+    ],
+    "target_summary": {
+      "n_samples": 126,
+      "target_median": 36.551,
+      "target_mean": 34.32213781560243,
+      "target_min": 11.995,
+      "target_max": 42.46,
+      "target_position": "low"
+    }
+  }
+]

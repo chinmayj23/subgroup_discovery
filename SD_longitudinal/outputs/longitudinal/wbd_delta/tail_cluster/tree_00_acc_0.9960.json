@@ -1,0 +1,254 @@
+{
+  "question": "vol7y_death_rate <= 1.8285187482833862",
+  "question_text": "Volatility of Death Rate over last 7 years <= 1.8285",
+  "feature": "vol7y_death_rate",
+  "threshold": 1.8285187482833862,
+  "left": {
+    "question": "delta5y_death_rate <= 2.7324999570846558",
+    "question_text": "Change in Death Rate over last 5 years <= 2.7325",
+    "feature": "delta5y_death_rate",
+    "threshold": 2.7324999570846558,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        0.9969564538785703,
+        0.0030435461214296865
+      ],
+      "target_summary": {
+        "n_samples": 12824,
+        "target_median": 1.383451219512203,
+        "target_mean": 1.4640052703544517,
+        "target_min": -6.9239999999999995,
+        "target_max": 10.210999999999999,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "label_target_delta5",
+        "target_median": 1.384999999999998,
+        "target_mean": 1.4622797089111688
+      }
+    },
+    "right": {
+      "question": "pct_change10y_population <= 0.11702047660946846",
+      "question_text": "Percent change in Population over last 10 years <= 0.1170",
+      "feature": "pct_change10y_population",
+      "threshold": 0.11702047660946846,
+      "left": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          0.9565217391304348,
+          0.043478260869565216
+        ],
+        "target_summary": {
+          "n_samples": 43,
+          "target_median": -2.3970000000000056,
+          "target_mean": -2.775367051753184,
+          "target_min": -7.312000000000012,
+          "target_max": -0.9909999999999997,
+          "target_position": "low"
+        },
+        "global_target_summary": {
+          "target_name": "label_target_delta5",
+          "target_median": 1.384999999999998,
+          "target_mean": 1.4622797089111688
+        }
+      },
+      "right": {
+        "question": "lag10y_death_rate <= 21.11050033569336",
+        "question_text": "Death Rate 10 years ago <= 21.1105",
+        "feature": "lag10y_death_rate",
+        "threshold": 21.11050033569336,
+        "left": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.05263157894736842,
+            0.9473684210526315
+          ],
+          "target_summary": {
+            "n_samples": 34,
+            "target_median": -6.337,
+            "target_mean": -6.567411764705883,
+            "target_min": -9.724000000000004,
+            "target_max": -2.8770000000000095,
+            "target_position": "low"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_delta5",
+            "target_median": 1.384999999999998,
+            "target_mean": 1.4622797089111688
+          }
+        },
+        "right": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            1.0,
+            0.0
+          ],
+          "target_summary": {
+            "n_samples": 7,
+            "target_median": -3.458999999999996,
+            "target_mean": -3.65279060071447,
+            "target_min": -4.363999999999997,
+            "target_max": -2.6496117037725,
+            "target_position": "low"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_delta5",
+            "target_median": 1.384999999999998,
+            "target_mean": 1.4622797089111688
+          }
+        }
+      }
+    }
+  },
+  "right": {
+    "question": "pct_change5y_death_rate <= -0.30744175612926483",
+    "question_text": "Percent change in Death Rate over last 5 years <= -0.3074",
+    "feature": "pct_change5y_death_rate",
+    "threshold": -0.30744175612926483,
+    "left": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 82,
+        "target_median": 10.6935,
+        "target_mean": 13.294743902439025,
+        "target_min": 7.461000000000006,
+        "target_max": 36.167,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "label_target_delta5",
+        "target_median": 1.384999999999998,
+        "target_mean": 1.4622797089111688
+      }
+    },
+    "right": {
+      "question": "pct_change5y_death_rate <= 0.15791858732700348",
+      "question_text": "Percent change in Death Rate over last 5 years <= 0.1579",
+      "feature": "pct_change5y_death_rate",
+      "threshold": 0.15791858732700348,
+      "left": {
+        "question": "pct_change5y_death_rate <= -0.24428483843803406",
+        "question_text": "Percent change in Death Rate over last 5 years <= -0.2443",
+        "feature": "pct_change5y_death_rate",
+        "threshold": -0.24428483843803406,
+        "left": {
+          "question": "lag5y_avg_precipitation <= 267.0",
+          "question_text": "Avg Precipitation 5 years ago <= 267.0000",
+          "feature": "lag5y_avg_precipitation",
+          "threshold": 267.0,
+          "left": {
+            "leaf_prediction": 0,
+            "class_counts": [
+              1.0,
+              0.0
+            ],
+            "target_summary": {
+              "n_samples": 15,
+              "target_median": 6.2890000000000015,
+              "target_mean": 6.301200000000002,
+              "target_min": 5.508000000000003,
+              "target_max": 7.291000000000004,
+              "target_position": "high"
+            },
+            "global_target_summary": {
+              "target_name": "label_target_delta5",
+              "target_median": 1.384999999999998,
+              "target_mean": 1.4622797089111688
+            }
+          },
+          "right": {
+            "leaf_prediction": 1,
+            "class_counts": [
+              0.08108108108108109,
+              0.918918918918919
+            ],
+            "target_summary": {
+              "n_samples": 40,
+              "target_median": 7.854999999999997,
+              "target_mean": 7.87415,
+              "target_min": 4.869,
+              "target_max": 12.503,
+              "target_position": "high"
+            },
+            "global_target_summary": {
+              "target_name": "label_target_delta5",
+              "target_median": 1.384999999999998,
+              "target_mean": 1.4622797089111688
+            }
+          }
+        },
+        "right": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            0.9932432432432432,
+            0.006756756756756757
+          ],
+          "target_summary": {
+            "n_samples": 148,
+            "target_median": 2.2482968275146504,
+            "target_mean": 2.6790574032002734,
+            "target_min": -3.679000000000002,
+            "target_max": 7.955999999999996,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_delta5",
+            "target_median": 1.384999999999998,
+            "target_mean": 1.4622797089111688
+          }
+        }
+      },
+      "right": {
+        "question": "lag7y_birth_rate <= 16.09500026702881",
+        "question_text": "Birth Rate 7 years ago <= 16.0950",
+        "feature": "lag7y_birth_rate",
+        "threshold": 16.09500026702881,
+        "left": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            1.0,
+            0.0
+          ],
+          "target_summary": {
+            "n_samples": 7,
+            "target_median": -2.9570731707316895,
+            "target_mean": -2.6849024390243676,
+            "target_min": -4.195365853658501,
+            "target_max": -0.8631707317072994,
+            "target_position": "low"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_delta5",
+            "target_median": 1.384999999999998,
+            "target_mean": 1.4622797089111688
+          }
+        },
+        "right": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.0,
+            1.0
+          ],
+          "target_summary": {
+            "n_samples": 81,
+            "target_median": -8.296,
+            "target_mean": -10.654612767238783,
+            "target_min": -36.122,
+            "target_max": -4.318999999999999,
+            "target_position": "low"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_delta5",
+            "target_median": 1.384999999999998,
+            "target_mean": 1.4622797089111688
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@ from typing import Dict
 
 import pandas as pd
 
-from .common import LABEL_COLUMN, ensure_dir, load_json, prepare_xy, save_json
+from .common import LABEL_COLUMN, ensure_dir, load_json, prepare_xy_with_target, save_json
 from .datasets import load_dataset_from_config
 from .forest import rebuild_forest, run_forest_search
 from .labeling import label_original_method, label_syflow_method
@@ -75,7 +75,7 @@ def run_static_pipeline(config_path: str, output_dir: str) -> None:
             else:
                 continue
 
-            X, y, feature_names = prepare_xy(
+            X, y, feature_names, target_values = prepare_xy_with_target(
                 labeled_df,
                 target,
                 exclude_columns=dataset_cfg.get("drop_columns", []),
@@ -117,7 +117,19 @@ def run_static_pipeline(config_path: str, output_dir: str) -> None:
                 out_dir / "kde_plot",
                 title=f"{dataset_name}: {pipeline_name} target distribution",
             )
-            save_forest_accuracy_plot(forest_result.results_df, out_dir / "accuracy_vs_questions")
-            save_forest_tree_artifacts(trees, X, y, feature_names, out_dir)
+            save_forest_accuracy_plot(
+                forest_result.results_df,
+                out_dir / "accuracy_vs_questions",
+                best_row=forest_result.best_row,
+            )
+            save_forest_tree_artifacts(
+                trees,
+                X,
+                y,
+                feature_names,
+                out_dir,
+                target_values=target_values,
+                target_name=target,
+            )
 
     print(f"Static pipeline complete. Outputs in {output_base}")

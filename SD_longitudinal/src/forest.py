@@ -235,6 +235,8 @@ def tree_to_dict(
     tree: DecisionTreeClassifier,
     feature_names: List[str],
     question_map: Optional[Dict[str, str]] = None,
+    leaf_stats: Optional[Dict[int, dict]] = None,
+    global_stats: Optional[Dict[str, float]] = None,
 ) -> dict:
     tree_ = tree.tree_
     feature = tree_.feature
@@ -251,10 +253,15 @@ def tree_to_dict(
             value = tree_.value[node_id][0]
             class_index = int(np.argmax(value))
             class_label = int(tree.classes_[class_index])
-            return {
+            leaf_payload = {
                 "leaf_prediction": class_label,
                 "class_counts": value.tolist(),
             }
+            if leaf_stats and node_id in leaf_stats:
+                leaf_payload["target_summary"] = leaf_stats[node_id]
+            if global_stats:
+                leaf_payload["global_target_summary"] = global_stats
+            return leaf_payload
 
         feat_name = feature_names[feature[node_id]]
         thresh = float(threshold[node_id])
@@ -275,6 +282,7 @@ def extract_rules(
     tree: DecisionTreeClassifier,
     feature_names: List[str],
     question_map: Optional[Dict[str, str]] = None,
+    leaf_stats: Optional[Dict[int, dict]] = None,
 ) -> List[dict]:
     tree_ = tree.tree_
 
@@ -293,14 +301,15 @@ def extract_rules(
             class_index = int(np.argmax(value))
             class_label = int(tree.classes_[class_index])
             if class_label == 1:
-                rules.append(
-                    {
-                        "leaf_id": int(node_id),
-                        "prediction": int(class_label),
-                        "n_samples": int(tree_.n_node_samples[node_id]),
-                        "rule": list(path),
-                    }
-                )
+                payload = {
+                    "leaf_id": int(node_id),
+                    "prediction": int(class_label),
+                    "n_samples": int(tree_.n_node_samples[node_id]),
+                    "rule": list(path),
+                }
+                if leaf_stats and node_id in leaf_stats:
+                    payload["target_summary"] = leaf_stats[node_id]
+                rules.append(payload)
             return
 
         feat_name = feature_names[tree_.feature[node_id]]

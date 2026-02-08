@@ -1,0 +1,228 @@
+{
+  "question": "latest_death_rate <= 24.508000373840332",
+  "question_text": "Current Death Rate <= 24.5080",
+  "feature": "latest_death_rate",
+  "threshold": 24.508000373840332,
+  "left": {
+    "question": "lag10y_individuals_using_internet% <= 65.09066390991211",
+    "question_text": "Individuals Using Internet Percent 10 years ago <= 65.0907",
+    "feature": "lag10y_individuals_using_internet%",
+    "threshold": 65.09066390991211,
+    "left": {
+      "question": "lag10y_population_density <= 16122.330078125",
+      "question_text": "Population Density 10 years ago <= 16122.3301",
+      "feature": "lag10y_population_density",
+      "threshold": 16122.330078125,
+      "left": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          0.9960419091967404,
+          0.003958090803259604
+        ],
+        "target_summary": {
+          "n_samples": 12889,
+          "target_median": 68.169,
+          "target_mean": 65.85594485457125,
+          "target_min": 36.982,
+          "target_max": 84.6804878048781,
+          "target_position": "low"
+        },
+        "global_target_summary": {
+          "target_name": "label_target_value",
+          "target_median": 68.2975609756098,
+          "target_mean": 65.84289326384757
+        }
+      },
+      "right": {
+        "question": "trend10y_death_rate <= -0.012349999975413084",
+        "question_text": "Average yearly change in Death Rate over last 10 years <= -0.0123",
+        "feature": "trend10y_death_rate",
+        "threshold": -0.012349999975413084,
+        "left": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            1.0,
+            0.0
+          ],
+          "target_summary": {
+            "n_samples": 9,
+            "target_median": 81.293,
+            "target_mean": 81.43733333333334,
+            "target_min": 80.352,
+            "target_max": 83.276,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_value",
+            "target_median": 68.2975609756098,
+            "target_mean": 65.84289326384757
+          }
+        },
+        "right": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.0,
+            1.0
+          ],
+          "target_summary": {
+            "n_samples": 15,
+            "target_median": 83.883,
+            "target_mean": 83.88226666666667,
+            "target_min": 82.257,
+            "target_max": 85.399,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_value",
+            "target_median": 68.2975609756098,
+            "target_mean": 65.84289326384757
+          }
+        }
+      }
+    },
+    "right": {
+      "question": "lag7y_avg_precipitation <= 1247.0",
+      "question_text": "Avg Precipitation 7 years ago <= 1247.0000",
+      "feature": "lag7y_avg_precipitation",
+      "threshold": 1247.0,
+      "left": {
+        "question": "pct_change5y_population <= 0.05852612666785717",
+        "question_text": "Percent change in Population over last 5 years <= 0.0585",
+        "feature": "pct_change5y_population",
+        "threshold": 0.05852612666785717,
+        "left": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            0.8794326241134752,
+            0.12056737588652482
+          ],
+          "target_summary": {
+            "n_samples": 147,
+            "target_median": 81.136,
+            "target_mean": 80.6334352936476,
+            "target_min": 73.2829268292683,
+            "target_max": 85.4975609756098,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_value",
+            "target_median": 68.2975609756098,
+            "target_mean": 65.84289326384757
+          }
+        },
+        "right": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.24,
+            0.76
+          ],
+          "target_summary": {
+            "n_samples": 28,
+            "target_median": 82.61781707317076,
+            "target_mean": 82.51427700348434,
+            "target_min": 79.099,
+            "target_max": 83.4975609756098,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_value",
+            "target_median": 68.2975609756098,
+            "target_mean": 65.84289326384757
+          }
+        }
+      },
+      "right": {
+        "question": "vol10y_land_area <= 6.275920895859599e-05",
+        "question_text": "Volatility of Land Area over last 10 years <= 0.0001",
+        "feature": "vol10y_land_area",
+        "threshold": 6.275920895859599e-05,
+        "left": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            0.8461538461538461,
+            0.15384615384615385
+          ],
+          "target_summary": {
+            "n_samples": 15,
+            "target_median": 82.0609756097561,
+            "target_mean": 81.5554861788618,
+            "target_min": 77.393,
+            "target_max": 82.9170731707317,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_value",
+            "target_median": 68.2975609756098,
+            "target_mean": 65.84289326384757
+          }
+        },
+        "right": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.024390243902439025,
+            0.975609756097561
+          ],
+          "target_summary": {
+            "n_samples": 43,
+            "target_median": 83.1634146341463,
+            "target_mean": 83.16506522972209,
+            "target_min": 81.2707317073171,
+            "target_max": 84.56,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_value",
+            "target_median": 68.2975609756098,
+            "target_mean": 65.84289326384757
+          }
+        }
+      }
+    }
+  },
+  "right": {
+    "question": "vol7y_trade_in_services% <= 1.333720326423645",
+    "question_text": "Volatility of Trade In Services Percent over last 7 years <= 1.3337",
+    "feature": "vol7y_trade_in_services%",
+    "threshold": 1.333720326423645,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 9,
+        "target_median": 40.301,
+        "target_mean": 40.38755555555556,
+        "target_min": 40.031,
+        "target_max": 41.221,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "label_target_value",
+        "target_median": 68.2975609756098,
+        "target_mean": 65.84289326384757
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.055944055944055944,
+        0.9440559440559441
+      ],
+      "target_summary": {
+        "n_samples": 126,
+        "target_median": 36.551,
+        "target_mean": 34.32213781560243,
+        "target_min": 11.995,
+        "target_max": 42.46,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "label_target_value",
+        "target_median": 68.2975609756098,
+        "target_mean": 65.84289326384757
+      }
+    }
+  }
+}

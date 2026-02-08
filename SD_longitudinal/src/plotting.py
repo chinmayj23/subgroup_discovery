@@ -76,18 +76,34 @@ def save_kde_plot(df: pd.DataFrame, target: str, label_column: str, output_base:
     plt.close(fig)
 
 
-def save_forest_accuracy_plot(results_df: pd.DataFrame, output_base: Path) -> None:
+def save_forest_accuracy_plot(
+    results_df: pd.DataFrame,
+    output_base: Path,
+    best_row: Optional[pd.Series] = None,
+) -> None:
     fig = plt.figure(figsize=(10, 6))
     plt.scatter(
         results_df["total_questions"],
         results_df["forest_accuracy"],
         s=40,
         alpha=0.7,
+        color="blue",
+        label="All forests",
     )
+    if best_row is not None:
+        plt.scatter(
+            [best_row["total_questions"]],
+            [best_row["forest_accuracy"]],
+            s=70,
+            color="red",
+            label="Selected forest",
+            zorder=3,
+        )
     plt.xlabel("Total Number of Questions in Forest", fontsize=12)
     plt.ylabel("Forest Accuracy", fontsize=12)
     plt.title("Forest Accuracy vs Total Questions", fontsize=14)
     plt.grid(True, alpha=0.3)
+    plt.legend()
     plt.tight_layout()
 
     _save_multi(fig, output_base)
@@ -101,6 +117,8 @@ def save_forest_tree_artifacts(
     feature_names: List[str],
     out_dir: Path,
     question_map: Optional[Dict[str, str]] = None,
+    target_values: Optional[np.ndarray] = None,
+    target_name: Optional[str] = None,
 ) -> None:
     if not trees:
         return
@@ -109,11 +127,52 @@ def save_forest_tree_artifacts(
 
     for idx, tree in enumerate(trees):
         acc = float((tree.predict(X) == y).mean())
-        tree_dict = tree_to_dict(tree, feature_names=feature_names, question_map=question_map)
+        leaf_stats = None
+        global_stats = None
+        if target_values is not None and len(target_values) == len(X):
+            leaf_ids = tree.apply(X)
+            target_arr = np.asarray(target_values, dtype=float)
+            global_median = float(np.nanmedian(target_arr))
+            global_mean = float(np.nanmean(target_arr))
+            global_stats = {
+                "target_name": target_name,
+                "target_median": global_median,
+                "target_mean": global_mean,
+            }
+            leaf_stats = {}
+            for leaf_id in np.unique(leaf_ids):
+                mask = leaf_ids == leaf_id
+                vals = target_arr[mask]
+                vals = vals[~np.isnan(vals)]
+                if vals.size == 0:
+                    continue
+                leaf_median = float(np.median(vals))
+                leaf_mean = float(np.mean(vals))
+                leaf_stats[int(leaf_id)] = {
+                    "n_samples": int(vals.size),
+                    "target_median": leaf_median,
+                    "target_mean": leaf_mean,
+                    "target_min": float(np.min(vals)),
+                    "target_max": float(np.max(vals)),
+                    "target_position": "high" if leaf_median > global_median else "low",
+                }
+
+        tree_dict = tree_to_dict(
+            tree,
+            feature_names=feature_names,
+            question_map=question_map,
+            leaf_stats=leaf_stats,
+            global_stats=global_stats,
+        )
         tree_json = out_dir / f"tree_{idx:02d}_acc_{acc:.4f}.json"
         tree_json.write_text(json.dumps(tree_dict, indent=2), encoding="utf-8")
 
-        rules = extract_rules(tree, feature_names=feature_names, question_map=question_map)
+        rules = extract_rules(
+            tree,
+            feature_names=feature_names,
+            question_map=question_map,
+            leaf_stats=leaf_stats,
+        )
         rules_path = out_dir / f"tree_{idx:02d}_rules.json"
         rules_path.write_text(json.dumps(rules, indent=2), encoding="utf-8")
 
@@ -126,7 +185,7 @@ def save_forest_tree_artifacts(
             rounded=True,
             impurity=False,
         )
-        plt.title(f"Tree {idx} (acc={acc:.4f})")
+        plt.title(f"Tree {idx}")
         plt.tight_layout()
         _save_multi(fig, out_dir / f"tree_{idx:02d}_acc_{acc:.4f}")
         plt.close(fig)
