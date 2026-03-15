@@ -1,0 +1,38 @@
+[
+  {
+    "leaf_id": 9,
+    "prediction": 1,
+    "n_samples": 8,
+    "rule": [
+      "Birth Rate 5 years ago <= 36.3545",
+      "Current Access To Electricity Percent <= 89.6000",
+      "Current Death Rate > 9.0215",
+      "Volatility of Goverment Effectiveness Estimate over last 10 years <= 0.1311"
+    ],
+    "target_summary": {
+      "n_samples": 9,
+      "target_median": 60.6802512013328,
+      "target_mean": 60.76647759648592,
+      "target_min": 59.253,
+      "target_max": 62.341,
+      "target_position": "low"
+    }
+  },
+  {
+    "leaf_id": 3,
+    "prediction": 1,
+    "n_samples": 20,
+    "rule": [
+      "Birth Rate 5 years ago > 36.3545",
+      "Death Rate 10 years ago <= 11.8460"
+    ],
+    "target_summary": {
+      "n_samples": 20,
+      "target_median": 60.2873717315932,
+      "target_mean": 60.88752453956603,
+      "target_min": 58.892,
+      "target_max": 66.201,
+      "target_position": "low"
+    }
+  }
+]

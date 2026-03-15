@@ -1,0 +1,36 @@
+[
+  {
+    "leaf_id": 5,
+    "prediction": 1,
+    "n_samples": 1,
+    "rule": [
+      "Death Rate 7 years ago <= 11.4600",
+      "Average yearly change in Individuals Using Internet Percent over last 3 years <= -1.2730"
+    ],
+    "target_summary": {
+      "n_samples": 1,
+      "target_median": 84.4456097560976,
+      "target_mean": 84.4456097560976,
+      "target_min": 84.4456097560976,
+      "target_max": 84.4456097560976,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 4,
+    "prediction": 1,
+    "n_samples": 7,
+    "rule": [
+      "Death Rate 7 years ago > 11.4600",
+      "Volatility of Access To Electricity Percent over last 3 years > 0.4209"
+    ],
+    "target_summary": {
+      "n_samples": 7,
+      "target_median": 53.895,
+      "target_mean": 54.4553795402877,
+      "target_min": 52.525,
+      "target_max": 57.066,
+      "target_position": "low"
+    }
+  }
+]

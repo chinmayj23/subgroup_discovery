@@ -83,13 +83,24 @@ def _split_data(
         return train_test_split(X, y, test_size=test_size, random_state=seed)
 
 
-def _vote(pred_matrix: np.ndarray, vote_rule: str) -> np.ndarray:
+def vote_predictions(pred_matrix: np.ndarray, vote_rule: str) -> np.ndarray:
     if pred_matrix.size == 0:
         return np.array([], dtype=int)
 
     if vote_rule == "majority":
         return (pred_matrix.mean(axis=0) >= 0.5).astype(int)
     return np.any(pred_matrix, axis=0).astype(int)
+
+
+def forest_predict(
+    trees: List[DecisionTreeClassifier],
+    X: np.ndarray,
+    vote_rule: str = "any",
+) -> np.ndarray:
+    if len(trees) == 0:
+        return np.zeros(X.shape[0], dtype=int)
+    pred_matrix = np.vstack([clf.predict(X).astype(bool) for clf in trees])
+    return vote_predictions(pred_matrix, vote_rule)
 
 
 def build_forest_metrics(
@@ -103,6 +114,7 @@ def build_forest_metrics(
     test_size: float,
     vote_rule: str,
     eval_mode: str,
+    max_depth: Optional[int] = None,
 ) -> dict:
     X_train, X_val, y_train, y_val = _split_data(X, y, seed, test_size, eval_mode)
 
@@ -121,6 +133,7 @@ def build_forest_metrics(
 
         clf = DecisionTreeClassifier(
             max_leaf_nodes=max_questions + 1,
+            max_depth=max_depth,
             random_state=int(rng.randint(0, 1_000_000)),
         )
         clf.fit(X_boot, y_boot)
@@ -139,7 +152,7 @@ def build_forest_metrics(
         }
 
     pred_matrix = np.vstack([clf.predict(X_val).astype(bool) for clf in trees])
-    forest_pred = _vote(pred_matrix, vote_rule)
+    forest_pred = vote_predictions(pred_matrix, vote_rule)
 
     forest_accuracy = float((forest_pred == y_val).mean())
     total_questions = int(np.sum(tree_question_counts))
@@ -166,6 +179,7 @@ def run_forest_search(
     vote_rule: str = "any",
     eval_mode: str = "train",
     n_jobs: int = -1,
+    max_depth: Optional[int] = None,
 ) -> ForestSearchResult:
     def _runner(seed: int) -> dict:
         return build_forest_metrics(
@@ -179,6 +193,7 @@ def run_forest_search(
             test_size,
             vote_rule,
             eval_mode,
+            max_depth,
         )
 
     if JOBLIB_AVAILABLE and n_jobs != 1:
@@ -212,6 +227,7 @@ def rebuild_forest(
     max_trees: int,
     min_questions: int,
     max_questions: int,
+    max_depth: Optional[int] = None,
 ) -> Tuple[List[DecisionTreeClassifier], int]:
     rng = np.random.RandomState(seed)
     n_trees = int(rng.randint(min_trees, max_trees + 1))
@@ -222,6 +238,7 @@ def rebuild_forest(
         idx = rng.choice(len(X), size=len(X), replace=True)
         clf = DecisionTreeClassifier(
             max_leaf_nodes=max_questions + 1,
+            max_depth=max_depth,
             random_state=int(rng.randint(0, 1_000_000)),
         )
         clf.fit(X[idx], y[idx])

@@ -1,0 +1,75 @@
+[
+  {
+    "leaf_id": 8,
+    "prediction": 1,
+    "n_samples": 8,
+    "rule": [
+      "Rural Population 10 years ago <= 42898.0000",
+      "Percent change in Rural Population over last 5 years > -0.1382"
+    ],
+    "target_summary": {
+      "n_samples": 9,
+      "target_median": 10704.548651377001,
+      "target_mean": 7812.539584995441,
+      "target_min": -20705.64967419208,
+      "target_max": 20756.642008861003,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 10,
+    "prediction": 1,
+    "n_samples": 4,
+    "rule": [
+      "Rural Population 10 years ago > 42898.0000",
+      "Volatility of Expense Percent over last 7 years <= 1.0874",
+      "Current Electric Power Consumption > 479.7872"
+    ],
+    "target_summary": {
+      "n_samples": 3,
+      "target_median": 8642.038788412072,
+      "target_mean": 9565.68341422674,
+      "target_min": 5177.020279850854,
+      "target_max": 14877.991174417293,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 5,
+    "prediction": 1,
+    "n_samples": 2,
+    "rule": [
+      "Rural Population 10 years ago > 42898.0000",
+      "Volatility of Expense Percent over last 7 years > 1.0874",
+      "Average yearly change in Birth Rate over last 7 years <= -1.2628"
+    ],
+    "target_summary": {
+      "n_samples": 1,
+      "target_median": 5858.245610496122,
+      "target_mean": 5858.245610496122,
+      "target_min": 5858.245610496122,
+      "target_max": 5858.245610496122,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 13,
+    "prediction": 1,
+    "n_samples": 1,
+    "rule": [
+      "Rural Population 10 years ago > 42898.0000",
+      "Volatility of Expense Percent over last 7 years > 1.0874",
+      "Average yearly change in Birth Rate over last 7 years > -1.2628",
+      "Average yearly change in Expense Percent over last 7 years > 1.5979",
+      "Electric Power Consumption 7 years ago <= 2300.4945"
+    ],
+    "target_summary": {
+      "n_samples": 1,
+      "target_median": 37309.48804362496,
+      "target_mean": 37309.48804362496,
+      "target_min": 37309.48804362496,
+      "target_max": 37309.48804362496,
+      "target_position": "high"
+    }
+  }
+]

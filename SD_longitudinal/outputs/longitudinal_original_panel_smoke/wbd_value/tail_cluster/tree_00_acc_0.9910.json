@@ -1,0 +1,124 @@
+{
+  "question": "latest_death_rate <= 24.503000259399414",
+  "question_text": "Current Death Rate <= 24.5030",
+  "feature": "latest_death_rate",
+  "threshold": 24.503000259399414,
+  "left": {
+    "question": "lag7y_individuals_using_internet% <= 91.80829238891602",
+    "question_text": "Individuals Using Internet Percent 7 years ago <= 91.8083",
+    "feature": "lag7y_individuals_using_internet%",
+    "threshold": 91.80829238891602,
+    "left": {
+      "question": "latest_birth_rate <= 8.75",
+      "question_text": "Current Birth Rate <= 8.7500",
+      "feature": "latest_birth_rate",
+      "threshold": 8.75,
+      "left": {
+        "question": "lag10y_individuals_using_internet% <= 48.35263252258301",
+        "question_text": "Individuals Using Internet Percent 10 years ago <= 48.3526",
+        "feature": "lag10y_individuals_using_internet%",
+        "threshold": 48.35263252258301,
+        "left": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            0.9122807017543859,
+            0.08771929824561403
+          ],
+          "target_summary": {
+            "n_samples": 57,
+            "target_median": 79.258,
+            "target_mean": 76.86090329482245,
+            "target_min": 65.9821951219512,
+            "target_max": 82.9463414634147,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_value",
+            "target_median": 68.419,
+            "target_mean": 65.996544359547
+          }
+        },
+        "right": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.2413793103448276,
+            0.7586206896551724
+          ],
+          "target_summary": {
+            "n_samples": 31,
+            "target_median": 83.2268292682927,
+            "target_mean": 82.52568764752166,
+            "target_min": 74.3390243902439,
+            "target_max": 85.4926829268293,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_value",
+            "target_median": 68.419,
+            "target_mean": 65.996544359547
+          }
+        }
+      },
+      "right": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          0.9953610638626875,
+          0.00463893613731251
+        ],
+        "target_summary": {
+          "n_samples": 6489,
+          "target_median": 68.359,
+          "target_mean": 66.09140977874385,
+          "target_min": 38.994,
+          "target_max": 85.399,
+          "target_position": "low"
+        },
+        "global_target_summary": {
+          "target_name": "label_target_value",
+          "target_median": 68.419,
+          "target_mean": 65.996544359547
+        }
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.04,
+        0.96
+      ],
+      "target_summary": {
+        "n_samples": 16,
+        "target_median": 82.8536585365854,
+        "target_mean": 82.59219512195122,
+        "target_min": 79.28,
+        "target_max": 84.4024390243902,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "label_target_value",
+        "target_median": 68.419,
+        "target_mean": 65.996544359547
+      }
+    }
+  },
+  "right": {
+    "leaf_prediction": 1,
+    "class_counts": [
+      0.0625,
+      0.9375
+    ],
+    "target_summary": {
+      "n_samples": 65,
+      "target_median": 37.105,
+      "target_mean": 35.03063638101394,
+      "target_min": 11.995,
+      "target_max": 41.542,
+      "target_position": "low"
+    },
+    "global_target_summary": {
+      "target_name": "label_target_value",
+      "target_median": 68.419,
+      "target_mean": 65.996544359547
+    }
+  }
+}

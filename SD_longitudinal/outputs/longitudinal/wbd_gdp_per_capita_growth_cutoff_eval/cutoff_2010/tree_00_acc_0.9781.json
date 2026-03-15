@@ -1,0 +1,124 @@
+{
+  "question": "pct_change20y_individuals_using_internet% <= 62199998464.0",
+  "question_text": "Percent change in Individuals Using Internet Percent over last 20 years <= 62199998464.0000",
+  "feature": "pct_change20y_individuals_using_internet%",
+  "threshold": 62199998464.0,
+  "left": {
+    "question": "vol3y_government_expenditure_on_education% <= 0.072020523250103",
+    "question_text": "Volatility of Government Expenditure On Education Percent over last 3 years <= 0.0720",
+    "feature": "vol3y_government_expenditure_on_education%",
+    "threshold": 0.072020523250103,
+    "left": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 2,
+        "target_median": 9719.215944269654,
+        "target_mean": 9719.215944269654,
+        "target_min": 5858.245610496122,
+        "target_max": 13580.186278043187,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 200.7433676720625,
+        "target_mean": 914.3711887841935
+      }
+    },
+    "right": {
+      "question": "trend7y_land_area <= -2015.1279296875",
+      "question_text": "Average yearly change in Land Area over last 7 years <= -2015.1279",
+      "feature": "trend7y_land_area",
+      "threshold": -2015.1279296875,
+      "left": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.0,
+          1.0
+        ],
+        "target_summary": {
+          "n_samples": 1,
+          "target_median": 14877.991174417293,
+          "target_mean": 14877.991174417293,
+          "target_min": 14877.991174417293,
+          "target_max": 14877.991174417293,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 200.7433676720625,
+          "target_mean": 914.3711887841935
+        }
+      },
+      "right": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          1.0,
+          0.0
+        ],
+        "target_summary": {
+          "n_samples": 122,
+          "target_median": 168.43431444949198,
+          "target_mean": -112.4842909720024,
+          "target_min": -19823.19048977214,
+          "target_max": 8642.038788412072,
+          "target_position": "low"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 200.7433676720625,
+          "target_mean": 914.3711887841935
+        }
+      }
+    }
+  },
+  "right": {
+    "question": "pct_change5y_individuals_using_internet% <= 0.7658120691776276",
+    "question_text": "Percent change in Individuals Using Internet Percent over last 5 years <= 0.7658",
+    "feature": "pct_change5y_individuals_using_internet%",
+    "threshold": 0.7658120691776276,
+    "left": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 9,
+        "target_median": 14037.308574492446,
+        "target_mean": 14920.642056768282,
+        "target_min": 5916.602361673751,
+        "target_max": 37309.48804362496,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 200.7433676720625,
+        "target_mean": 914.3711887841935
+      }
+    },
+    "right": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 3,
+        "target_median": -11030.651669529725,
+        "target_mean": -9870.088403950782,
+        "target_min": -20705.64967419208,
+        "target_max": 2126.036131869456,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 200.7433676720625,
+        "target_mean": 914.3711887841935
+      }
+    }
+  }
+}

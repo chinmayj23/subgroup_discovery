@@ -6,6 +6,15 @@ import pandas as pd
 import polars as pl
 
 
+def _safe_from_pandas(df: pd.DataFrame) -> pl.DataFrame:
+    try:
+        return pl.from_pandas(df)
+    except PermissionError:
+        # Some sandboxed Windows environments block the internal Pipe used
+        # by Polars' large-frame pandas conversion path. Fallback to dict conversion.
+        return pl.DataFrame(df.to_dict(orient="list"))
+
+
 def _ensure_date(pldf: pl.DataFrame, date_col: str) -> pl.DataFrame:
     if pldf[date_col].dtype in [pl.Date, pl.Datetime]:
         return pldf
@@ -77,6 +86,7 @@ def build_longitudinal_features(
     include_volatility: bool = False,
     indicator_include: Optional[List[str]] = None,
     indicator_exclude: Optional[List[str]] = None,
+    enforce_min_history: bool = True,
 ) -> Tuple[pd.DataFrame, Dict[str, str], Dict[str, str]]:
     if indicator_include:
         indicator_include = set(indicator_include)
@@ -95,7 +105,7 @@ def build_longitudinal_features(
     if target_col not in numeric_cols and target_col in df.columns:
         numeric_cols.append(target_col)
 
-    pldf = pl.from_pandas(df[[id_col, date_col] + numeric_cols])
+    pldf = _safe_from_pandas(df[[id_col, date_col] + numeric_cols])
     pldf = _ensure_date(pldf, date_col)
     pldf = pldf.filter(pl.col(date_col).is_not_null())
 
@@ -139,10 +149,11 @@ def build_longitudinal_features(
     # Drop raw numeric columns to avoid leakage and keep questions explicit.
     pldf = pldf.drop(numeric_cols)
 
-    required_lag = max([min_history, label_window, max(lags) if lags else 1])
-    required_col = f"lag{required_lag}y_{target_col}"
-    if required_col in pldf.columns:
-        pldf = pldf.filter(pl.col(required_col).is_not_null())
+    if enforce_min_history:
+        required_lag = max([min_history, label_window, max(lags) if lags else 1])
+        required_col = f"lag{required_lag}y_{target_col}"
+        if required_col in pldf.columns:
+            pldf = pldf.filter(pl.col(required_col).is_not_null())
 
     if mode == "snapshot":
         pldf = pldf.group_by(id_col, maintain_order=True).last()

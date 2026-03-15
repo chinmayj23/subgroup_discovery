@@ -1,0 +1,35 @@
+[
+  {
+    "leaf_id": 4,
+    "prediction": 1,
+    "n_samples": 5,
+    "rule": [
+      "Percent change in Individuals Using Internet Percent over last 10 years <= 26566270976.0000",
+      "Average yearly change in Electric Power Consumption over last 5 years > 188.8777"
+    ],
+    "target_summary": {
+      "n_samples": 8,
+      "target_median": 5653.227474040454,
+      "target_mean": 5146.8531900995295,
+      "target_min": -20705.64967419208,
+      "target_max": 37309.48804362496,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 2,
+    "prediction": 1,
+    "n_samples": 8,
+    "rule": [
+      "Percent change in Individuals Using Internet Percent over last 10 years > 26566270976.0000"
+    ],
+    "target_summary": {
+      "n_samples": 7,
+      "target_median": 14037.308574492446,
+      "target_mean": 12739.652656861288,
+      "target_min": 5916.602361673751,
+      "target_max": 20756.642008861003,
+      "target_position": "high"
+    }
+  }
+]

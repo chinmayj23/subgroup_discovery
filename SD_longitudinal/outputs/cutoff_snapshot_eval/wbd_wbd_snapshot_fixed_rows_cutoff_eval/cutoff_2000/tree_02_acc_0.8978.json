@@ -1,0 +1,72 @@
+{
+  "question": "vol3y_population_density <= 6.940128564834595",
+  "question_text": "Volatility of Population Density over last 3 years <= 6.9401",
+  "feature": "vol3y_population_density",
+  "threshold": 6.940128564834595,
+  "left": {
+    "question": "vol3y_research_and_development_expenditure% <= 0.05224769376218319",
+    "question_text": "Volatility of Research And Development Expenditure Percent over last 3 years <= 0.0522",
+    "feature": "vol3y_research_and_development_expenditure%",
+    "threshold": 0.05224769376218319,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        0.991304347826087,
+        0.008695652173913044
+      ],
+      "target_summary": {
+        "n_samples": 114,
+        "target_median": 135.16939416705833,
+        "target_mean": -308.6658985013725,
+        "target_min": -20705.64967419208,
+        "target_max": 14067.301166052697,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 200.7433676720625,
+        "target_mean": 914.3711887841935
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.45454545454545453,
+        0.5454545454545454
+      ],
+      "target_summary": {
+        "n_samples": 15,
+        "target_median": 4808.4726432139505,
+        "target_mean": 6307.048667938479,
+        "target_min": -14914.868611676058,
+        "target_max": 37309.48804362496,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 200.7433676720625,
+        "target_mean": 914.3711887841935
+      }
+    }
+  },
+  "right": {
+    "leaf_prediction": 1,
+    "class_counts": [
+      0.0,
+      1.0
+    ],
+    "target_summary": {
+      "n_samples": 8,
+      "target_median": 6857.6621154671575,
+      "target_mean": 8231.379409189221,
+      "target_min": 58.75494979588257,
+      "target_max": 20756.642008861003,
+      "target_position": "high"
+    },
+    "global_target_summary": {
+      "target_name": "gdp_per_capita_growth_2010_2020",
+      "target_median": 200.7433676720625,
+      "target_mean": 914.3711887841935
+    }
+  }
+}

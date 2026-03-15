@@ -1,0 +1,254 @@
+{
+  "question": "latest_population_density <= 927.4072265625",
+  "question_text": "Current Population Density <= 927.4072",
+  "feature": "latest_population_density",
+  "threshold": 927.4072265625,
+  "left": {
+    "question": "latest_birth_rate <= 17.42899990081787",
+    "question_text": "Current Birth Rate <= 17.4290",
+    "feature": "latest_birth_rate",
+    "threshold": 17.42899990081787,
+    "left": {
+      "question": "latest_rural_population <= 786823.5",
+      "question_text": "Current Rural Population <= 786823.5000",
+      "feature": "latest_rural_population",
+      "threshold": 786823.5,
+      "left": {
+        "question": "latest_population_density <= 244.2885971069336",
+        "question_text": "Current Population Density <= 244.2886",
+        "feature": "latest_population_density",
+        "threshold": 244.2885971069336,
+        "left": {
+          "question": "lag5y_agricultural_land% <= 14.717714309692383",
+          "question_text": "Agricultural Land Percent 5 years ago <= 14.7177",
+          "feature": "lag5y_agricultural_land%",
+          "threshold": 14.717714309692383,
+          "left": {
+            "leaf_prediction": 0,
+            "class_counts": [
+              1.0,
+              0.0
+            ],
+            "target_summary": {
+              "n_samples": 47,
+              "target_median": -2617.259567931964,
+              "target_mean": -4881.164776364862,
+              "target_min": -20705.64967419208,
+              "target_max": 2236.913201831332,
+              "target_position": "low"
+            },
+            "global_target_summary": {
+              "target_name": "gdp_per_capita_growth_2010_2020",
+              "target_median": 279.30909792452803,
+              "target_mean": 802.8084030056102
+            }
+          },
+          "right": {
+            "question": "latest_CO2_emisions <= 6630.8349609375",
+            "question_text": "Current Co2 Emisions <= 6630.8350",
+            "feature": "latest_CO2_emisions",
+            "threshold": 6630.8349609375,
+            "left": {
+              "leaf_prediction": 0,
+              "class_counts": [
+                0.6716417910447762,
+                0.3283582089552239
+              ],
+              "target_summary": {
+                "n_samples": 65,
+                "target_median": 3137.90517640038,
+                "target_mean": 4878.728943347821,
+                "target_min": -11030.651669529725,
+                "target_max": 23820.359442367917,
+                "target_position": "high"
+              },
+              "global_target_summary": {
+                "target_name": "gdp_per_capita_growth_2010_2020",
+                "target_median": 279.30909792452803,
+                "target_mean": 802.8084030056102
+              }
+            },
+            "right": {
+              "leaf_prediction": 1,
+              "class_counts": [
+                0.032407407407407406,
+                0.9675925925925926
+              ],
+              "target_summary": {
+                "n_samples": 189,
+                "target_median": 8083.820660007979,
+                "target_mean": 9365.133745286787,
+                "target_min": -11030.651669529725,
+                "target_max": 23820.359442367917,
+                "target_position": "high"
+              },
+              "global_target_summary": {
+                "target_name": "gdp_per_capita_growth_2010_2020",
+                "target_median": 279.30909792452803,
+                "target_mean": 802.8084030056102
+              }
+            }
+          }
+        },
+        "right": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            1.0,
+            0.0
+          ],
+          "target_summary": {
+            "n_samples": 92,
+            "target_median": 279.30909792452803,
+            "target_mean": -921.7154280638805,
+            "target_min": -14194.834176205673,
+            "target_max": 1676.561898151671,
+            "target_position": "low"
+          },
+          "global_target_summary": {
+            "target_name": "gdp_per_capita_growth_2010_2020",
+            "target_median": 279.30909792452803,
+            "target_mean": 802.8084030056102
+          }
+        }
+      },
+      "right": {
+        "question": "latest_tax_revenue% <= 12.97178030014038",
+        "question_text": "Current Tax Revenue Percent <= 12.9718",
+        "feature": "latest_tax_revenue%",
+        "threshold": 12.97178030014038,
+        "left": {
+          "question": "latest_electric_power_consumption <= 3453.7467041015625",
+          "question_text": "Current Electric Power Consumption <= 3453.7467",
+          "feature": "latest_electric_power_consumption",
+          "threshold": 3453.7467041015625,
+          "left": {
+            "leaf_prediction": 0,
+            "class_counts": [
+              1.0,
+              0.0
+            ],
+            "target_summary": {
+              "n_samples": 58,
+              "target_median": 1022.5232407441167,
+              "target_mean": 277.1770410113115,
+              "target_min": -9099.357320326097,
+              "target_max": 8642.038788412072,
+              "target_position": "high"
+            },
+            "global_target_summary": {
+              "target_name": "gdp_per_capita_growth_2010_2020",
+              "target_median": 279.30909792452803,
+              "target_mean": 802.8084030056102
+            }
+          },
+          "right": {
+            "leaf_prediction": 1,
+            "class_counts": [
+              0.035398230088495575,
+              0.9646017699115044
+            ],
+            "target_summary": {
+              "n_samples": 122,
+              "target_median": 9366.411393063245,
+              "target_mean": 8367.740297033595,
+              "target_min": -3999.647594120863,
+              "target_max": 12930.058344537953,
+              "target_position": "high"
+            },
+            "global_target_summary": {
+              "target_name": "gdp_per_capita_growth_2010_2020",
+              "target_median": 279.30909792452803,
+              "target_mean": 802.8084030056102
+            }
+          }
+        },
+        "right": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            0.94994994994995,
+            0.05005005005005005
+          ],
+          "target_summary": {
+            "n_samples": 1010,
+            "target_median": 1162.8249981527551,
+            "target_mean": 983.4289456527349,
+            "target_min": -19823.19048977214,
+            "target_max": 37309.48804362496,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "gdp_per_capita_growth_2010_2020",
+            "target_median": 279.30909792452803,
+            "target_mean": 802.8084030056102
+          }
+        }
+      }
+    },
+    "right": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        0.973224043715847,
+        0.026775956284153007
+      ],
+      "target_summary": {
+        "n_samples": 5507,
+        "target_median": 168.89459714358236,
+        "target_mean": 85.77255261860194,
+        "target_min": -20705.64967419208,
+        "target_max": 37309.48804362496,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 279.30909792452803,
+        "target_mean": 802.8084030056102
+      }
+    }
+  },
+  "right": {
+    "question": "trend5y_renewvable_energy_consumption% <= -0.04700000025331974",
+    "question_text": "Average yearly change in Renewvable Energy Consumption Percent over last 5 years <= -0.0470",
+    "feature": "trend5y_renewvable_energy_consumption%",
+    "threshold": -0.04700000025331974,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 29,
+        "target_median": 58.75494979588257,
+        "target_mean": -1552.774634402425,
+        "target_min": -13201.652487326392,
+        "target_max": 1456.4463243573437,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 279.30909792452803,
+        "target_mean": 802.8084030056102
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0867579908675799,
+        0.91324200913242
+      ],
+      "target_summary": {
+        "n_samples": 212,
+        "target_median": 7798.721869260564,
+        "target_mean": 7806.370304383752,
+        "target_min": -13201.652487326392,
+        "target_max": 14037.308574492446,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 279.30909792452803,
+        "target_mean": 802.8084030056102
+      }
+    }
+  }
+}

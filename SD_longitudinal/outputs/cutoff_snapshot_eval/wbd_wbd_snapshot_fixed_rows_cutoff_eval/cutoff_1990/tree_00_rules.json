@@ -1,0 +1,55 @@
+[
+  {
+    "leaf_id": 9,
+    "prediction": 1,
+    "n_samples": 11,
+    "rule": [
+      "Volatility of Rural Population over last 20 years <= 6879.5842",
+      "Trade In Services Percent 5 years ago <= 46.8064"
+    ],
+    "target_summary": {
+      "n_samples": 11,
+      "target_median": 8083.820660007979,
+      "target_mean": 7768.583214699759,
+      "target_min": -11030.651669529725,
+      "target_max": 20756.642008861003,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 6,
+    "prediction": 1,
+    "n_samples": 5,
+    "rule": [
+      "Volatility of Rural Population over last 20 years > 6879.5842",
+      "Volatility of Trade In Services Percent over last 3 years <= 0.2528",
+      "Average yearly change in Death Rate over last 20 years > -0.1947"
+    ],
+    "target_summary": {
+      "n_samples": 7,
+      "target_median": 5177.020279850854,
+      "target_mean": 6675.454400157308,
+      "target_min": 618.0518921535622,
+      "target_max": 14877.991174417293,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 8,
+    "prediction": 1,
+    "n_samples": 2,
+    "rule": [
+      "Volatility of Rural Population over last 20 years > 6879.5842",
+      "Volatility of Trade In Services Percent over last 3 years > 0.2528",
+      "Percent change in Life Expectancy At Birth over last 30 years > 0.9155"
+    ],
+    "target_summary": {
+      "n_samples": 1,
+      "target_median": 5858.245610496122,
+      "target_mean": 5858.245610496122,
+      "target_min": 5858.245610496122,
+      "target_max": 5858.245610496122,
+      "target_position": "high"
+    }
+  }
+]

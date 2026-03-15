@@ -1,0 +1,98 @@
+{
+  "question": "lag7y_death_rate <= 11.459956645965576",
+  "question_text": "Death Rate 7 years ago <= 11.4600",
+  "feature": "lag7y_death_rate",
+  "threshold": 11.459956645965576,
+  "left": {
+    "question": "trend3y_individuals_using_internet% <= -1.273042470216751",
+    "question_text": "Average yearly change in Individuals Using Internet Percent over last 3 years <= -1.2730",
+    "feature": "trend3y_individuals_using_internet%",
+    "threshold": -1.273042470216751,
+    "left": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 1,
+        "target_median": 84.4456097560976,
+        "target_mean": 84.4456097560976,
+        "target_min": 84.4456097560976,
+        "target_max": 84.4456097560976,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "label_target_value",
+        "target_median": 71.9036780720405,
+        "target_mean": 71.39925260266641
+      }
+    },
+    "right": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 234,
+        "target_median": 71.9091780720405,
+        "target_mean": 71.82735127193483,
+        "target_min": 58.598,
+        "target_max": 85.4926829268293,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "label_target_value",
+        "target_median": 71.9036780720405,
+        "target_mean": 71.39925260266641
+      }
+    }
+  },
+  "right": {
+    "question": "vol3y_access_to_electricity% <= 0.4208938181400299",
+    "question_text": "Volatility of Access To Electricity Percent over last 3 years <= 0.4209",
+    "feature": "vol3y_access_to_electricity%",
+    "threshold": 0.4208938181400299,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 16,
+        "target_median": 72.77236585365856,
+        "target_mean": 71.73585670731708,
+        "target_min": 55.28,
+        "target_max": 76.7414634146342,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "label_target_value",
+        "target_median": 71.9036780720405,
+        "target_mean": 71.39925260266641
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 7,
+        "target_median": 53.895,
+        "target_mean": 54.4553795402877,
+        "target_min": 52.525,
+        "target_max": 57.066,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "label_target_value",
+        "target_median": 71.9036780720405,
+        "target_mean": 71.39925260266641
+      }
+    }
+  }
+}

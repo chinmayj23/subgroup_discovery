@@ -1,0 +1,19 @@
+{
+  "leaf_prediction": 0,
+  "class_counts": [
+    1.0
+  ],
+  "target_summary": {
+    "n_samples": 6658,
+    "target_median": 68.419,
+    "target_mean": 65.996544359547,
+    "target_min": 11.995,
+    "target_max": 85.4926829268293,
+    "target_position": "low"
+  },
+  "global_target_summary": {
+    "target_name": "label_target_value",
+    "target_median": 68.419,
+    "target_mean": 65.996544359547
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "question": "lag10y_birth_rate <= 25.27999973297119",
+  "question_text": "Birth Rate 10 years ago <= 25.2800",
+  "feature": "lag10y_birth_rate",
+  "threshold": 25.27999973297119,
+  "left": {
+    "question": "delta7y_rural_population <= -41027.0",
+    "question_text": "Change in Rural Population over last 7 years <= -41027.0000",
+    "feature": "delta7y_rural_population",
+    "threshold": -41027.0,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 13,
+        "target_median": 611.6961783874794,
+        "target_mean": -1486.2807243768464,
+        "target_min": -19823.19048977214,
+        "target_max": 5177.020279850854,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 229.21304591827823,
+        "target_mean": 871.6728224519821
+      }
+    },
+    "right": {
+      "question": "delta5y_GDP_current_US <= 2721070317568.0",
+      "question_text": "Change in Gdp Current Us over last 5 years <= 2721070317568.0000",
+      "feature": "delta5y_GDP_current_US",
+      "threshold": 2721070317568.0,
+      "left": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.0,
+          1.0
+        ],
+        "target_summary": {
+          "n_samples": 12,
+          "target_median": 11148.234868800599,
+          "target_mean": 12409.074732047835,
+          "target_min": -3999.647594120863,
+          "target_max": 37309.48804362496,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 229.21304591827823,
+          "target_mean": 871.6728224519821
+        }
+      },
+      "right": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          1.0,
+          0.0
+        ],
+        "target_summary": {
+          "n_samples": 1,
+          "target_median": 3313.7873844228525,
+          "target_mean": 3313.7873844228525,
+          "target_min": 3313.7873844228525,
+          "target_max": 3313.7873844228525,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 229.21304591827823,
+          "target_mean": 871.6728224519821
+        }
+      }
+    }
+  },
+  "right": {
+    "question": "trend5y_military_expenditure% <= 0.2857215702533722",
+    "question_text": "Average yearly change in Military Expenditure Percent over last 5 years <= 0.2857",
+    "feature": "trend5y_military_expenditure%",
+    "threshold": 0.2857215702533722,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 105,
+        "target_median": 164.4701115555887,
+        "target_mean": -384.0429997392426,
+        "target_min": -20705.64967419208,
+        "target_max": 4224.039903231252,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 229.21304591827823,
+        "target_mean": 871.6728224519821
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 3,
+        "target_median": 8642.038788412072,
+        "target_mean": 8075.8794763627475,
+        "target_min": 2005.4133626329804,
+        "target_max": 13580.186278043187,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 229.21304591827823,
+        "target_mean": 871.6728224519821
+      }
+    }
+  }
+}

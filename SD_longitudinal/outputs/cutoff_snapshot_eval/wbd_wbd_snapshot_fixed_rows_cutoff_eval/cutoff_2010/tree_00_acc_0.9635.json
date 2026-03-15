@@ -1,0 +1,124 @@
+{
+  "question": "pct_change20y_individuals_using_internet% <= 57994999808.0",
+  "question_text": "Percent change in Individuals Using Internet Percent over last 20 years <= 57994999808.0000",
+  "feature": "pct_change20y_individuals_using_internet%",
+  "threshold": 57994999808.0,
+  "left": {
+    "question": "vol15y_research_and_development_expenditure% <= 0.36192306876182556",
+    "question_text": "Volatility of Research And Development Expenditure Percent over last 15 years <= 0.3619",
+    "feature": "vol15y_research_and_development_expenditure%",
+    "threshold": 0.36192306876182556,
+    "left": {
+      "question": "trend3y_individuals_using_internet% <= -0.6367599070072174",
+      "question_text": "Average yearly change in Individuals Using Internet Percent over last 3 years <= -0.6368",
+      "feature": "trend3y_individuals_using_internet%",
+      "threshold": -0.6367599070072174,
+      "left": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.0,
+          1.0
+        ],
+        "target_summary": {
+          "n_samples": 1,
+          "target_median": 14877.991174417293,
+          "target_mean": 14877.991174417293,
+          "target_min": 14877.991174417293,
+          "target_max": 14877.991174417293,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 200.7433676720625,
+          "target_mean": 914.3711887841935
+        }
+      },
+      "right": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          1.0,
+          0.0
+        ],
+        "target_summary": {
+          "n_samples": 120,
+          "target_median": 168.43431444949198,
+          "target_mean": -62.08544729433582,
+          "target_min": -19823.19048977214,
+          "target_max": 5177.020279850854,
+          "target_position": "low"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 200.7433676720625,
+          "target_mean": 914.3711887841935
+        }
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 3,
+        "target_median": 8642.038788412072,
+        "target_mean": 9360.156892317127,
+        "target_min": 5858.245610496122,
+        "target_max": 13580.186278043187,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 200.7433676720625,
+        "target_mean": 914.3711887841935
+      }
+    }
+  },
+  "right": {
+    "question": "pct_change7y_agricultural_land% <= -0.11496778205037117",
+    "question_text": "Percent change in Agricultural Land Percent over last 7 years <= -0.1150",
+    "feature": "pct_change7y_agricultural_land%",
+    "threshold": -0.11496778205037117,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 3,
+        "target_median": 2126.036131869456,
+        "target_mean": -996.004391995506,
+        "target_min": -11030.651669529725,
+        "target_max": 5916.602361673751,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 200.7433676720625,
+        "target_mean": 914.3711887841935
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 10,
+        "target_median": 12370.928612934724,
+        "target_mean": 9274.865786337263,
+        "target_min": -20705.64967419208,
+        "target_max": 37309.48804362496,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 200.7433676720625,
+        "target_mean": 914.3711887841935
+      }
+    }
+  }
+}

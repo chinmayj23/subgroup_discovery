@@ -1,0 +1,35 @@
+[
+  {
+    "leaf_id": 4,
+    "prediction": 1,
+    "n_samples": 11,
+    "rule": [
+      "Volatility of Population Density over last 3 years <= 6.9401",
+      "Volatility of Research And Development Expenditure Percent over last 3 years > 0.0522"
+    ],
+    "target_summary": {
+      "n_samples": 15,
+      "target_median": 4808.4726432139505,
+      "target_mean": 6307.048667938479,
+      "target_min": -14914.868611676058,
+      "target_max": 37309.48804362496,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 2,
+    "prediction": 1,
+    "n_samples": 11,
+    "rule": [
+      "Volatility of Population Density over last 3 years > 6.9401"
+    ],
+    "target_summary": {
+      "n_samples": 8,
+      "target_median": 6857.6621154671575,
+      "target_mean": 8231.379409189221,
+      "target_min": 58.75494979588257,
+      "target_max": 20756.642008861003,
+      "target_position": "high"
+    }
+  }
+]

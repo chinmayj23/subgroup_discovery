@@ -1,0 +1,228 @@
+{
+  "question": "latest_rural_population <= 34647.5",
+  "question_text": "Current Rural Population <= 34647.5000",
+  "feature": "latest_rural_population",
+  "threshold": 34647.5,
+  "left": {
+    "question": "pct_change5y_population_density <= 0.22464027255773544",
+    "question_text": "Percent change in Population Density over last 5 years <= 0.2246",
+    "feature": "pct_change5y_population_density",
+    "threshold": 0.22464027255773544,
+    "left": {
+      "question": "delta7y_GDP_current_US <= 53266110.0",
+      "question_text": "Change in Gdp Current Us over last 7 years <= 53266110.0000",
+      "feature": "delta7y_GDP_current_US",
+      "threshold": 53266110.0,
+      "left": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          1.0,
+          0.0
+        ],
+        "target_summary": {
+          "n_samples": 13,
+          "target_median": 2126.036131869456,
+          "target_mean": 2126.036131869456,
+          "target_min": 2126.036131869456,
+          "target_max": 2126.036131869456,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 227.18243125152048,
+          "target_mean": 985.9229802685803
+        }
+      },
+      "right": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.072,
+          0.928
+        ],
+        "target_summary": {
+          "n_samples": 122,
+          "target_median": 14037.308574492446,
+          "target_mean": 10205.940394336518,
+          "target_min": -20705.64967419208,
+          "target_max": 20756.642008861003,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 227.18243125152048,
+          "target_mean": 985.9229802685803
+        }
+      }
+    },
+    "right": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 13,
+        "target_median": -11030.651669529725,
+        "target_mean": -14483.982456189335,
+        "target_min": -20705.64967419208,
+        "target_max": 2126.036131869456,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 227.18243125152048,
+        "target_mean": 985.9229802685803
+      }
+    }
+  },
+  "right": {
+    "question": "latest_birth_rate <= 31.23550033569336",
+    "question_text": "Current Birth Rate <= 31.2355",
+    "feature": "latest_birth_rate",
+    "threshold": 31.23550033569336,
+    "left": {
+      "question": "latest_military_expenditure% <= 7.284904718399048",
+      "question_text": "Current Military Expenditure Percent <= 7.2849",
+      "feature": "latest_military_expenditure%",
+      "threshold": 7.284904718399048,
+      "left": {
+        "question": "pct_change7y_life_expectancy_at_birth <= 0.09766478836536407",
+        "question_text": "Percent change in Life Expectancy At Birth over last 7 years <= 0.0977",
+        "feature": "pct_change7y_life_expectancy_at_birth",
+        "threshold": 0.09766478836536407,
+        "left": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            0.8450450450450451,
+            0.15495495495495495
+          ],
+          "target_summary": {
+            "n_samples": 587,
+            "target_median": 1162.8249981527551,
+            "target_mean": 1797.1639199991484,
+            "target_min": -19823.19048977214,
+            "target_max": 37309.48804362496,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "gdp_per_capita_growth_2010_2020",
+            "target_median": 227.18243125152048,
+            "target_mean": 985.9229802685803
+          }
+        },
+        "right": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.0,
+            1.0
+          ],
+          "target_summary": {
+            "n_samples": 11,
+            "target_median": 5858.245610496122,
+            "target_mean": 6617.461931745926,
+            "target_min": 5858.245610496122,
+            "target_max": 8642.038788412072,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "gdp_per_capita_growth_2010_2020",
+            "target_median": 227.18243125152048,
+            "target_mean": 985.9229802685803
+          }
+        }
+      },
+      "right": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.0,
+          1.0
+        ],
+        "target_summary": {
+          "n_samples": 21,
+          "target_median": 14877.991174417293,
+          "target_mean": 14259.988842810579,
+          "target_min": 13580.186278043187,
+          "target_max": 14877.991174417293,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 227.18243125152048,
+          "target_mean": 985.9229802685803
+        }
+      }
+    },
+    "right": {
+      "question": "latest_avg_precipitation <= 2927.0",
+      "question_text": "Current Avg Precipitation <= 2927.0000",
+      "feature": "latest_avg_precipitation",
+      "threshold": 2927.0,
+      "left": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          0.9929214929214929,
+          0.007078507078507079
+        ],
+        "target_summary": {
+          "n_samples": 1555,
+          "target_median": 155.3166804308762,
+          "target_mean": -154.42304161049157,
+          "target_min": -14914.868611676058,
+          "target_max": 8642.038788412072,
+          "target_position": "low"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 227.18243125152048,
+          "target_mean": 985.9229802685803
+        }
+      },
+      "right": {
+        "question": "latest_avg_precipitation <= 2978.0",
+        "question_text": "Current Avg Precipitation <= 2978.0000",
+        "feature": "latest_avg_precipitation",
+        "threshold": 2978.0,
+        "left": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.0,
+            1.0
+          ],
+          "target_summary": {
+            "n_samples": 17,
+            "target_median": 5168.7748878200655,
+            "target_mean": 5168.7748878200655,
+            "target_min": 5168.7748878200655,
+            "target_max": 5168.7748878200655,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "gdp_per_capita_growth_2010_2020",
+            "target_median": 227.18243125152048,
+            "target_mean": 985.9229802685803
+          }
+        },
+        "right": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            1.0,
+            0.0
+          ],
+          "target_summary": {
+            "n_samples": 52,
+            "target_median": 560.4642338424308,
+            "target_mean": -39.57675859761322,
+            "target_min": -1088.468896773894,
+            "target_max": 566.8441275838247,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "gdp_per_capita_growth_2010_2020",
+            "target_median": 227.18243125152048,
+            "target_mean": 985.9229802685803
+          }
+        }
+      }
+    }
+  }
+}

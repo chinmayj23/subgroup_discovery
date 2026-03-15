@@ -1,0 +1,23 @@
+{
+  "cutoff_year": 1980,
+  "rows": 183,
+  "countries": 183,
+  "interesting": 20,
+  "non_interesting": 163,
+  "label_countries_total": 183,
+  "split_train_countries_total": 137,
+  "split_test_countries_total": 46,
+  "train_rows": 137,
+  "test_rows": 46,
+  "train_coverage": 1.0,
+  "test_coverage": 1.0,
+  "train_positive": 15,
+  "test_positive": 5,
+  "train_negative": 122,
+  "test_negative": 41,
+  "train_accuracy": 0.9635036496350365,
+  "test_accuracy": 0.8695652173913043,
+  "baseline_test_accuracy": 0.8913043478260869,
+  "label_threshold": 5167.602712941455,
+  "strict_country_split": true
+}

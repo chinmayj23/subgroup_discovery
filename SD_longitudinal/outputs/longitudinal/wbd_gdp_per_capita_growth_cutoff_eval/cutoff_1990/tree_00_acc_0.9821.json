@@ -1,0 +1,176 @@
+{
+  "question": "vol10y_rural_population <= 1105.5257568359375",
+  "question_text": "Volatility of Rural Population over last 10 years <= 1105.5258",
+  "feature": "vol10y_rural_population",
+  "threshold": 1105.5257568359375,
+  "left": {
+    "question": "vol5y_birth_rate <= 0.5695575475692749",
+    "question_text": "Volatility of Birth Rate over last 5 years <= 0.5696",
+    "feature": "vol5y_birth_rate",
+    "threshold": 0.5695575475692749,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 3,
+        "target_median": 1189.8601422019606,
+        "target_mean": -680.6898860224002,
+        "target_min": -11030.651669529725,
+        "target_max": 7798.721869260564,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 229.21304591827823,
+        "target_mean": 677.6131330019506
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 5,
+        "target_median": 14037.308574492446,
+        "target_mean": 12772.190112543656,
+        "target_min": 5916.602361673751,
+        "target_max": 23820.359442367917,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 229.21304591827823,
+        "target_mean": 677.6131330019506
+      }
+    }
+  },
+  "right": {
+    "question": "delta5y_electric_power_consumption <= 1002.6090087890625",
+    "question_text": "Change in Electric Power Consumption over last 5 years <= 1002.6090",
+    "feature": "delta5y_electric_power_consumption",
+    "threshold": 1002.6090087890625,
+    "left": {
+      "question": "vol7y_tax_revenue% <= 0.18736496567726135",
+      "question_text": "Volatility of Tax Revenue Percent over last 7 years <= 0.1874",
+      "feature": "vol7y_tax_revenue%",
+      "threshold": 0.18736496567726135,
+      "left": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.0,
+          1.0
+        ],
+        "target_summary": {
+          "n_samples": 1,
+          "target_median": 5177.020279850854,
+          "target_mean": 5177.020279850854,
+          "target_min": 5177.020279850854,
+          "target_max": 5177.020279850854,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 229.21304591827823,
+          "target_mean": 677.6131330019506
+        }
+      },
+      "right": {
+        "question": "trend7y_military_expenditure% <= 0.840181902050972",
+        "question_text": "Average yearly change in Military Expenditure Percent over last 7 years <= 0.8402",
+        "feature": "trend7y_military_expenditure%",
+        "threshold": 0.840181902050972,
+        "left": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            1.0,
+            0.0
+          ],
+          "target_summary": {
+            "n_samples": 152,
+            "target_median": 190.7436488206818,
+            "target_mean": 58.96331440223433,
+            "target_min": -20705.64967419208,
+            "target_max": 37309.48804362496,
+            "target_position": "low"
+          },
+          "global_target_summary": {
+            "target_name": "gdp_per_capita_growth_2010_2020",
+            "target_median": 229.21304591827823,
+            "target_mean": 677.6131330019506
+          }
+        },
+        "right": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.0,
+            1.0
+          ],
+          "target_summary": {
+            "n_samples": 1,
+            "target_median": 13580.186278043187,
+            "target_mean": 13580.186278043187,
+            "target_min": 13580.186278043187,
+            "target_max": 13580.186278043187,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "gdp_per_capita_growth_2010_2020",
+            "target_median": 229.21304591827823,
+            "target_mean": 677.6131330019506
+          }
+        }
+      }
+    },
+    "right": {
+      "question": "lag7y_agricultural_land% <= 7.954823017120361",
+      "question_text": "Agricultural Land Percent 7 years ago <= 7.9548",
+      "feature": "lag7y_agricultural_land%",
+      "threshold": 7.954823017120361,
+      "left": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          1.0,
+          0.0
+        ],
+        "target_summary": {
+          "n_samples": 2,
+          "target_median": -9457.25810289846,
+          "target_mean": -9457.25810289846,
+          "target_min": -14914.868611676058,
+          "target_max": -3999.647594120863,
+          "target_position": "low"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 229.21304591827823,
+          "target_mean": 677.6131330019506
+        }
+      },
+      "right": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.0,
+          1.0
+        ],
+        "target_summary": {
+          "n_samples": 4,
+          "target_median": 10786.048566475012,
+          "target_mean": 10803.752824609976,
+          "target_min": 8083.820660007979,
+          "target_max": 13559.093505481895,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 229.21304591827823,
+          "target_mean": 677.6131330019506
+        }
+      }
+    }
+  }
+}

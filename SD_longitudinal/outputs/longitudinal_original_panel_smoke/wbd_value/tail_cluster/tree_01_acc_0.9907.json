@@ -1,0 +1,124 @@
+{
+  "question": "latest_death_rate <= 24.503000259399414",
+  "question_text": "Current Death Rate <= 24.5030",
+  "feature": "latest_death_rate",
+  "threshold": 24.503000259399414,
+  "left": {
+    "question": "lag5y_population_density <= 6441.714111328125",
+    "question_text": "Population Density 5 years ago <= 6441.7141",
+    "feature": "lag5y_population_density",
+    "threshold": 6441.714111328125,
+    "left": {
+      "question": "lag10y_individuals_using_internet% <= 85.11151504516602",
+      "question_text": "Individuals Using Internet Percent 10 years ago <= 85.1115",
+      "feature": "lag10y_individuals_using_internet%",
+      "threshold": 85.11151504516602,
+      "left": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          0.9943129418997848,
+          0.005687058100215186
+        ],
+        "target_summary": {
+          "n_samples": 6535,
+          "target_median": 68.438,
+          "target_mean": 66.17139040896122,
+          "target_min": 38.994,
+          "target_max": 84.4456097560976,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "label_target_value",
+          "target_median": 68.419,
+          "target_mean": 65.996544359547
+        }
+      },
+      "right": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.2727272727272727,
+          0.7272727272727273
+        ],
+        "target_summary": {
+          "n_samples": 20,
+          "target_median": 82.62439024390245,
+          "target_mean": 82.28753658536587,
+          "target_min": 79.28,
+          "target_max": 83.8512195121951,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "label_target_value",
+          "target_median": 68.419,
+          "target_mean": 65.996544359547
+        }
+      }
+    },
+    "right": {
+      "question": "lag7y_individuals_using_internet% <= 19.390235424041748",
+      "question_text": "Individuals Using Internet Percent 7 years ago <= 19.3902",
+      "feature": "lag7y_individuals_using_internet%",
+      "threshold": 19.390235424041748,
+      "left": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          1.0,
+          0.0
+        ],
+        "target_summary": {
+          "n_samples": 19,
+          "target_median": 77.035,
+          "target_mean": 76.75131578947367,
+          "target_min": 69.582,
+          "target_max": 82.543,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "label_target_value",
+          "target_median": 68.419,
+          "target_mean": 65.996544359547
+        }
+      },
+      "right": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.0,
+          1.0
+        ],
+        "target_summary": {
+          "n_samples": 19,
+          "target_median": 83.727,
+          "target_mean": 83.89152246469834,
+          "target_min": 82.2463414634147,
+          "target_max": 85.4926829268293,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "label_target_value",
+          "target_median": 68.419,
+          "target_mean": 65.996544359547
+        }
+      }
+    }
+  },
+  "right": {
+    "leaf_prediction": 1,
+    "class_counts": [
+      0.10344827586206896,
+      0.896551724137931
+    ],
+    "target_summary": {
+      "n_samples": 65,
+      "target_median": 37.105,
+      "target_mean": 35.03063638101394,
+      "target_min": 11.995,
+      "target_max": 41.542,
+      "target_position": "low"
+    },
+    "global_target_summary": {
+      "target_name": "label_target_value",
+      "target_median": 68.419,
+      "target_mean": 65.996544359547
+    }
+  }
+}

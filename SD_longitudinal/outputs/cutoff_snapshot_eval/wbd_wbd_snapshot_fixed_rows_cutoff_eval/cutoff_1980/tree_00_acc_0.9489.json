@@ -1,0 +1,124 @@
+{
+  "question": "lag7y_birth_rate <= 28.55699920654297",
+  "question_text": "Birth Rate 7 years ago <= 28.5570",
+  "feature": "lag7y_birth_rate",
+  "threshold": 28.55699920654297,
+  "left": {
+    "question": "lag15y_birth_rate <= 21.699999809265137",
+    "question_text": "Birth Rate 15 years ago <= 21.7000",
+    "feature": "lag15y_birth_rate",
+    "threshold": 21.699999809265137,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 16,
+        "target_median": 614.8740352705208,
+        "target_mean": -488.476493444251,
+        "target_min": -19823.19048977214,
+        "target_max": 14877.991174417293,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 200.7433676720625,
+        "target_mean": 914.3711887841935
+      }
+    },
+    "right": {
+      "question": "trend10y_death_rate <= -0.006151452660560608",
+      "question_text": "Average yearly change in Death Rate over last 10 years <= -0.0062",
+      "feature": "trend10y_death_rate",
+      "threshold": -0.006151452660560608,
+      "left": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.05,
+          0.95
+        ],
+        "target_summary": {
+          "n_samples": 14,
+          "target_median": 8362.929724210026,
+          "target_mean": 9529.866222077064,
+          "target_min": -3048.389646067164,
+          "target_max": 37309.48804362496,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 200.7433676720625,
+          "target_mean": 914.3711887841935
+        }
+      },
+      "right": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          0.75,
+          0.25
+        ],
+        "target_summary": {
+          "n_samples": 4,
+          "target_median": 2460.615053847294,
+          "target_mean": 3527.7359078800937,
+          "target_min": 1390.9916545652231,
+          "target_max": 7798.721869260564,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 200.7433676720625,
+          "target_mean": 914.3711887841935
+        }
+      }
+    }
+  },
+  "right": {
+    "question": "vol5y_rural_population <= 99.68763732910156",
+    "question_text": "Volatility of Rural Population over last 5 years <= 99.6876",
+    "feature": "vol5y_rural_population",
+    "threshold": 99.68763732910156,
+    "left": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 2,
+        "target_median": 13336.622185267377,
+        "target_mean": 13336.622185267377,
+        "target_min": 5916.602361673751,
+        "target_max": 20756.642008861003,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 200.7433676720625,
+        "target_mean": 914.3711887841935
+      }
+    },
+    "right": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 101,
+        "target_median": 134.81529233379945,
+        "target_mean": -407.1073104216981,
+        "target_min": -20705.64967419208,
+        "target_max": 5168.7748878200655,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 200.7433676720625,
+        "target_mean": 914.3711887841935
+      }
+    }
+  }
+}

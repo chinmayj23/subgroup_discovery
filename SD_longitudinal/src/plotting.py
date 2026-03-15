@@ -2,6 +2,7 @@
 from typing import Dict, List, Optional
 
 import json
+import re
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -110,6 +111,91 @@ def save_forest_accuracy_plot(
     plt.close(fig)
 
 
+def save_cutoff_accuracy_plot(
+    results_df: pd.DataFrame,
+    output_base: Path,
+    title: str = "Test Accuracy By Cut-Off Year",
+) -> None:
+    required = {"cutoff_year", "test_accuracy"}
+    if results_df.empty or not required.issubset(results_df.columns):
+        return
+
+    df = results_df.sort_values("cutoff_year")
+    fig = plt.figure(figsize=(10, 6))
+    plt.plot(
+        df["cutoff_year"],
+        df["test_accuracy"],
+        marker="o",
+        linewidth=2.0,
+        color="tab:blue",
+        label="Test accuracy",
+    )
+    if "train_accuracy" in df.columns:
+        plt.plot(
+            df["cutoff_year"],
+            df["train_accuracy"],
+            marker="s",
+            linewidth=1.6,
+            linestyle="--",
+            color="tab:orange",
+            label="Train accuracy",
+        )
+    plt.xlabel("Cut-Off Year", fontsize=12)
+    plt.ylabel("Accuracy", fontsize=12)
+    plt.title(title, fontsize=14)
+    plt.ylim(0.0, 1.0)
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    plt.tight_layout()
+
+    _save_multi(fig, output_base)
+    plt.close(fig)
+
+
+def _rewrite_tree_plot_labels(
+    artists,
+    tree: DecisionTreeClassifier,
+    feature_names: List[str],
+    leaf_stats: Optional[Dict[int, dict]] = None,
+) -> None:
+    tree_ = tree.tree_
+    valid_node_ids = set(range(tree_.node_count))
+
+    for artist in artists:
+        text = artist.get_text().strip()
+        if text in {"True", "False"}:
+            artist.set_text("")
+            continue
+
+        match = re.match(r"#(\d+)", text)
+        if not match:
+            continue
+        node_id = int(match.group(1))
+        if node_id not in valid_node_ids:
+            continue
+
+        is_leaf = (
+            tree_.children_left[node_id] == -1
+            and tree_.children_right[node_id] == -1
+        )
+        if is_leaf:
+            value = tree_.value[node_id][0]
+            class_index = int(np.argmax(value))
+            pred = int(tree.classes_[class_index])
+            if leaf_stats and node_id in leaf_stats:
+                mean_val = leaf_stats[node_id].get("target_mean")
+                if mean_val is not None and np.isfinite(mean_val):
+                    artist.set_text(f"mean={float(mean_val):.4g}\npred={pred}")
+                    continue
+            artist.set_text(f"pred={pred}")
+            continue
+
+        feat_idx = int(tree_.feature[node_id])
+        feat_name = feature_names[feat_idx] if 0 <= feat_idx < len(feature_names) else f"f{feat_idx}"
+        thresh = float(tree_.threshold[node_id])
+        artist.set_text(f"{feat_name} <= {thresh:.4g}")
+
+
 def save_forest_tree_artifacts(
     trees: List[DecisionTreeClassifier],
     X: np.ndarray,
@@ -177,14 +263,18 @@ def save_forest_tree_artifacts(
         rules_path.write_text(json.dumps(rules, indent=2), encoding="utf-8")
 
         fig = plt.figure(figsize=(14, 7))
-        plot_tree(
+        artists = plot_tree(
             tree,
             feature_names=feature_names,
             class_names=["not interesting", "interesting"],
             filled=True,
             rounded=True,
             impurity=False,
+            proportion=False,
+            label="none",
+            node_ids=True,
         )
+        _rewrite_tree_plot_labels(artists, tree, feature_names, leaf_stats=leaf_stats)
         plt.title(f"Tree {idx}")
         plt.tight_layout()
         _save_multi(fig, out_dir / f"tree_{idx:02d}_acc_{acc:.4f}")

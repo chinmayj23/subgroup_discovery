@@ -1,0 +1,27 @@
+{
+  "growth_start_year": 2010,
+  "growth_end_year": 2020,
+  "interesting_quantile": 0.9,
+  "threshold": 5167.602712941455,
+  "n_countries": 253,
+  "n_interesting": 26,
+  "n_non_interesting": 227,
+  "split_pool_type": "available_all_cutoffs",
+  "split_pool_countries": 183,
+  "split_pool_interesting": 20,
+  "split_pool_non_interesting": 163,
+  "cutoff_years": [
+    1980,
+    1990,
+    2000,
+    2010
+  ],
+  "split_seed": 42,
+  "test_size": 0.25,
+  "strict_country_split": true,
+  "snapshot_constant_rows": true,
+  "min_train_rows": 30,
+  "min_test_rows": 20,
+  "min_train_positives": 2,
+  "min_test_positives": 2
+}

@@ -1,0 +1,62 @@
+{
+  "datasets": [
+    {
+      "name": "wbd",
+      "path": "wbd/world_bank_development_indicators.csv",
+      "id_col": "country",
+      "date_col": "date",
+      "gdp_col": "GDP_current_US",
+      "population_col": "population",
+      "feature_target_col": "gdp_per_capita",
+      "growth_start_year": 2010,
+      "growth_end_year": 2020,
+      "interesting_quantile": 0.9,
+      "cutoff_years": [1980, 1990, 2000, 2010],
+      "eval_name": "wbd_snapshot_fixed_rows_cutoff_eval",
+      "enabled": true,
+      "split_seed": 42,
+      "test_size": 0.25,
+      "split_country_pool": "available_all_cutoffs",
+      "snapshot_constant_rows": true,
+      "max_missing_frac": 0.95,
+      "impute_missing": true,
+      "enforce_min_history": false,
+      "min_history": 0,
+      "label_window": 5,
+      "include_target_features": false,
+      "expand_features_with_cutoff": true,
+      "question_pack": {
+        "lags": [5, 7, 10, 15, 20, 30, 40],
+        "windows": [3, 5, 7, 10, 15, 20, 30, 40],
+        "include_pct_change": true,
+        "include_volatility": true,
+        "indicator_exclude": []
+      },
+      "forest_overrides": {
+        "n_seeds": 500,
+        "accuracy_quantile": 0.99,
+        "min_trees": 1,
+        "max_trees": 10,
+        "min_questions": 2,
+        "max_questions": 10,
+        "max_depth": 3,
+        "vote_rule": "any",
+        "eval_mode": "holdout",
+        "test_size": 0.2,
+        "n_jobs": 1
+      }
+    }
+  ],
+  "forest": {
+    "n_seeds": 500,
+    "accuracy_quantile": 0.99,
+    "min_trees": 1,
+    "max_trees": 10,
+    "min_questions": 2,
+    "max_questions": 10,
+    "test_size": 0.2,
+    "vote_rule": "any",
+    "eval_mode": "train",
+    "n_jobs": 1
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "question": "latest_birth_rate <= 20.49241828918457",
+  "question_text": "Current Birth Rate <= 20.4924",
+  "feature": "latest_birth_rate",
+  "threshold": 20.49241828918457,
+  "left": {
+    "question": "vol7y_birth_rate <= 0.3658321648836136",
+    "question_text": "Volatility of Birth Rate over last 7 years <= 0.3658",
+    "feature": "vol7y_birth_rate",
+    "threshold": 0.3658321648836136,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 9,
+        "target_median": 1162.8249981527551,
+        "target_mean": 770.150722302727,
+        "target_min": -4112.725832450797,
+        "target_max": 4808.4726432139505,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 227.18243125152048,
+        "target_mean": 776.1200897031763
+      }
+    },
+    "right": {
+      "question": "pct_change10y_GDP_current_US <= 0.8616656064987183",
+      "question_text": "Percent change in Gdp Current Us over last 10 years <= 0.8617",
+      "feature": "pct_change10y_GDP_current_US",
+      "threshold": 0.8616656064987183,
+      "left": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          1.0,
+          0.0
+        ],
+        "target_summary": {
+          "n_samples": 5,
+          "target_median": -31.1403113437118,
+          "target_mean": -4288.994578101547,
+          "target_min": -19823.19048977214,
+          "target_max": 4224.039903231252,
+          "target_position": "low"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 227.18243125152048,
+          "target_mean": 776.1200897031763
+        }
+      },
+      "right": {
+        "question": "pct_change5y_GDP_current_US <= 1.8824938535690308",
+        "question_text": "Percent change in Gdp Current Us over last 5 years <= 1.8825",
+        "feature": "pct_change5y_GDP_current_US",
+        "threshold": 1.8824938535690308,
+        "left": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.0,
+            1.0
+          ],
+          "target_summary": {
+            "n_samples": 16,
+            "target_median": 8362.929724210026,
+            "target_mean": 10594.203827321617,
+            "target_min": 385.9859454072648,
+            "target_max": 37309.48804362496,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "gdp_per_capita_growth_2010_2020",
+            "target_median": 227.18243125152048,
+            "target_mean": 776.1200897031763
+          }
+        },
+        "right": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            1.0,
+            0.0
+          ],
+          "target_summary": {
+            "n_samples": 2,
+            "target_median": -7289.4179503337255,
+            "target_mean": -7289.4179503337255,
+            "target_min": -11030.651669529725,
+            "target_max": -3548.184231137726,
+            "target_position": "low"
+          },
+          "global_target_summary": {
+            "target_name": "gdp_per_capita_growth_2010_2020",
+            "target_median": 227.18243125152048,
+            "target_mean": 776.1200897031763
+          }
+        }
+      }
+    }
+  },
+  "right": {
+    "leaf_prediction": 0,
+    "class_counts": [
+      1.0,
+      0.0
+    ],
+    "target_summary": {
+      "n_samples": 101,
+      "target_median": 155.3166804308762,
+      "target_mean": -368.22610907101785,
+      "target_min": -20705.64967419208,
+      "target_max": 4032.0126885857635,
+      "target_position": "low"
+    },
+    "global_target_summary": {
+      "target_name": "gdp_per_capita_growth_2010_2020",
+      "target_median": 227.18243125152048,
+      "target_mean": 776.1200897031763
+    }
+  }
+}

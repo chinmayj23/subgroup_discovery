@@ -1,0 +1,128 @@
+{
+  "data": {
+    "name": "world_bank_indicators",
+    "path": "wbd/world_bank_development_indicators.csv",
+    "id_col": "country",
+    "date_col": "date"
+  },
+  "output_dir": "Interpretable_SD/outputs/world_bank_fast_debug",
+  "comparison_table": {
+    "enabled": true,
+    "table_name": "comparison_fast_debug"
+  },
+  "defaults": {
+    "feature_engineering": {
+      "lags": [1, 3, 5],
+      "windows": [3, 5],
+      "label_window": 3,
+      "min_history": 0,
+      "panel_stride": 2,
+      "include_pct_change": true,
+      "include_volatility": false,
+      "enforce_min_history": false
+    },
+    "segmentation": {
+      "target_aggregation": "mean",
+      "min_interesting_run_length": 1
+    },
+    "split": {
+      "test_size": 0.25,
+      "seed": 42
+    },
+    "rf_rule_module": {
+      "n_seeds": 80,
+      "accuracy_quantile": 0.95,
+      "min_trees": 1,
+      "max_trees": 6,
+      "min_questions": 2,
+      "max_questions": 7,
+      "max_depth": 3,
+      "vote_rule": "any",
+      "eval_mode": "holdout",
+      "test_size": 0.2,
+      "n_jobs": 1,
+      "max_missing_frac": 0.95,
+      "impute_missing": true
+    },
+    "baselines": {
+      "sysurv_style": {
+        "enabled": true,
+        "n_estimators": 120,
+        "learning_rate": 0.05,
+        "max_depth": 3,
+        "risk_quantile": 0.8,
+        "namer_max_depth": 3,
+        "namer_min_samples_leaf": 20,
+        "seed": 42
+      },
+      "tree_paper_style": {
+        "enabled": true,
+        "max_depth": 4,
+        "min_samples_leaf": 20,
+        "seed": 42
+      }
+    }
+  },
+  "experiments": [
+    {
+      "name": "life_expectancy_spectrum",
+      "enabled": true,
+      "target": {
+        "mode": "column",
+        "column": "life_expectancy_at_birth"
+      },
+      "segmentation": {
+        "target_aggregation": "mean",
+        "min_interesting_run_length": 1
+      },
+      "interestingness": {
+        "methods": ["tail_cluster", "timetribes_windowed"],
+        "tail_cluster": {
+          "high_value_quantile": 0.95,
+          "two_tailed": true
+        },
+        "timetribes_windowed": {
+          "n_seeds": 120,
+          "beta": 0.5,
+          "lambd_div": 2.0,
+          "top_percentile": 0.02,
+          "max_overlap": 0.95,
+          "min_subgroup_size": 25,
+          "max_subgroup_frac": 0.9,
+          "progress_every": 30
+        }
+      }
+    },
+    {
+      "name": "gdp_per_capita_variable_windows",
+      "enabled": true,
+      "target": {
+        "mode": "ratio",
+        "numerator": "GDP_current_US",
+        "denominator": "population",
+        "output_col": "gdp_per_capita"
+      },
+      "segmentation": {
+        "target_aggregation": "trend",
+        "min_interesting_run_length": 1
+      },
+      "interestingness": {
+        "methods": ["tail_cluster", "timetribes_windowed"],
+        "tail_cluster": {
+          "high_value_quantile": 0.95,
+          "two_tailed": false
+        },
+        "timetribes_windowed": {
+          "n_seeds": 140,
+          "beta": 0.5,
+          "lambd_div": 2.0,
+          "top_percentile": 0.02,
+          "max_overlap": 0.95,
+          "min_subgroup_size": 25,
+          "max_subgroup_frac": 0.9,
+          "progress_every": 35
+        }
+      }
+    }
+  ]
+}

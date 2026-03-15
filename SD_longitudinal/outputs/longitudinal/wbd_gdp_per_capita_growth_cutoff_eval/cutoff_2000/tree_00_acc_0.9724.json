@@ -1,0 +1,176 @@
+{
+  "question": "latest_intentional_homicides <= 1.067056119441986",
+  "question_text": "Current Intentional Homicides <= 1.0671",
+  "feature": "latest_intentional_homicides",
+  "threshold": 1.067056119441986,
+  "left": {
+    "question": "latest_individuals_using_internet% <= 8.988693952560425",
+    "question_text": "Current Individuals Using Internet Percent <= 8.9887",
+    "feature": "latest_individuals_using_internet%",
+    "threshold": 8.988693952560425,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 4,
+        "target_median": 995.5176077700814,
+        "target_mean": -4068.8753257224616,
+        "target_min": -20705.64967419208,
+        "target_max": 2439.1131557620683,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 376.8907041944019,
+        "target_mean": 789.6013889599801
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 10,
+        "target_median": 9004.225090737658,
+        "target_mean": 11227.456882030263,
+        "target_min": -14194.834176205673,
+        "target_max": 37309.48804362496,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 376.8907041944019,
+        "target_mean": 789.6013889599801
+      }
+    }
+  },
+  "right": {
+    "question": "latest_research_and_development_expenditure% <= 2.365724802017212",
+    "question_text": "Current Research And Development Expenditure Percent <= 2.3657",
+    "feature": "latest_research_and_development_expenditure%",
+    "threshold": 2.365724802017212,
+    "left": {
+      "question": "vol5y_expense% <= 4.826112985610962",
+      "question_text": "Volatility of Expense Percent over last 5 years <= 4.8261",
+      "feature": "vol5y_expense%",
+      "threshold": 4.826112985610962,
+      "left": {
+        "question": "pct_change10y_individuals_using_internet% <= 27150561280.0",
+        "question_text": "Percent change in Individuals Using Internet Percent over last 10 years <= 27150561280.0000",
+        "feature": "pct_change10y_individuals_using_internet%",
+        "threshold": 27150561280.0,
+        "left": {
+          "question": "delta5y_intentional_homicides <= -6.539114475250244",
+          "question_text": "Change in Intentional Homicides over last 5 years <= -6.5391",
+          "feature": "delta5y_intentional_homicides",
+          "threshold": -6.539114475250244,
+          "left": {
+            "leaf_prediction": 1,
+            "class_counts": [
+              0.0,
+              1.0
+            ],
+            "target_summary": {
+              "n_samples": 3,
+              "target_median": 1757.3396646806063,
+              "target_mean": 3877.985991465479,
+              "target_min": 944.4192387182898,
+              "target_max": 8932.19907099754,
+              "target_position": "high"
+            },
+            "global_target_summary": {
+              "target_name": "gdp_per_capita_growth_2010_2020",
+              "target_median": 376.8907041944019,
+              "target_mean": 789.6013889599801
+            }
+          },
+          "right": {
+            "leaf_prediction": 0,
+            "class_counts": [
+              1.0,
+              0.0
+            ],
+            "target_summary": {
+              "n_samples": 158,
+              "target_median": 182.40914442547347,
+              "target_mean": -170.55638094712822,
+              "target_min": -19823.19048977214,
+              "target_max": 8905.4369444177,
+              "target_position": "low"
+            },
+            "global_target_summary": {
+              "target_name": "gdp_per_capita_growth_2010_2020",
+              "target_median": 376.8907041944019,
+              "target_mean": 789.6013889599801
+            }
+          }
+        },
+        "right": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.0,
+            1.0
+          ],
+          "target_summary": {
+            "n_samples": 2,
+            "target_median": 11075.560913030338,
+            "target_mean": 11075.560913030338,
+            "target_min": 8083.820660007979,
+            "target_max": 14067.301166052697,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "gdp_per_capita_growth_2010_2020",
+            "target_median": 376.8907041944019,
+            "target_mean": 789.6013889599801
+          }
+        }
+      },
+      "right": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.0,
+          1.0
+        ],
+        "target_summary": {
+          "n_samples": 1,
+          "target_median": 8394.34737110075,
+          "target_mean": 8394.34737110075,
+          "target_min": 8394.34737110075,
+          "target_max": 8394.34737110075,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 376.8907041944019,
+          "target_mean": 789.6013889599801
+        }
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 3,
+        "target_median": 12930.058344537953,
+        "target_mean": 10562.421634143999,
+        "target_min": 5177.020279850854,
+        "target_max": 13580.186278043187,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 376.8907041944019,
+        "target_mean": 789.6013889599801
+      }
+    }
+  }
+}

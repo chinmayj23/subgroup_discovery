@@ -1,0 +1,97 @@
+[
+  {
+    "leaf_id": 18,
+    "prediction": 1,
+    "n_samples": 117,
+    "rule": [
+      "Current Rural Population <= 34782.5000",
+      "Current Population Density <= 512.2309",
+      "Current Population Density <= 37.6360",
+      "Current Death Rate > 5.9995"
+    ],
+    "target_summary": {
+      "n_samples": 138,
+      "target_median": 14067.301166052697,
+      "target_mean": 13375.680851078952,
+      "target_min": -20705.64967419208,
+      "target_max": 15611.345175564129,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 4,
+    "prediction": 1,
+    "n_samples": 183,
+    "rule": [
+      "Current Rural Population <= 34782.5000",
+      "Current Population Density > 512.2309"
+    ],
+    "target_summary": {
+      "n_samples": 182,
+      "target_median": 10918.015221876505,
+      "target_mean": 11914.645416545573,
+      "target_min": 5916.602361673751,
+      "target_max": 20756.642008861003,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 16,
+    "prediction": 1,
+    "n_samples": 101,
+    "rule": [
+      "Current Rural Population > 34782.5000",
+      "Current Electric Power Consumption > 2745.7993",
+      "Current Tax Revenue Percent <= 12.9855",
+      "Current Rural Population > 7802794.5000"
+    ],
+    "target_summary": {
+      "n_samples": 91,
+      "target_median": 8642.038788412072,
+      "target_mean": 9244.358185915882,
+      "target_min": -4927.390729381623,
+      "target_max": 14877.991174417293,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 14,
+    "prediction": 1,
+    "n_samples": 99,
+    "rule": [
+      "Current Rural Population > 34782.5000",
+      "Current Electric Power Consumption > 2745.7993",
+      "Current Tax Revenue Percent > 12.9855",
+      "Population 10 years ago <= 3866731.5000",
+      "Agricultural Land Percent 5 years ago > 20.9130"
+    ],
+    "target_summary": {
+      "n_samples": 83,
+      "target_median": 13580.186278043187,
+      "target_mean": 19954.17122594156,
+      "target_min": 3137.90517640038,
+      "target_max": 37309.48804362496,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 19,
+    "prediction": 1,
+    "n_samples": 19,
+    "rule": [
+      "Current Rural Population > 34782.5000",
+      "Current Electric Power Consumption > 2745.7993",
+      "Current Tax Revenue Percent > 12.9855",
+      "Population 10 years ago > 3866731.5000",
+      "Current Rural Population <= 677862.5000"
+    ],
+    "target_summary": {
+      "n_samples": 18,
+      "target_median": 8083.820660007979,
+      "target_mean": 4805.122694534372,
+      "target_min": -14914.868611676058,
+      "target_max": 13580.186278043187,
+      "target_position": "high"
+    }
+  }
+]

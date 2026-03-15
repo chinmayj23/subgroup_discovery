@@ -9,7 +9,7 @@
       "target_modes": ["value","delta"],
       "label_window": 5,
       "min_history": 10,
-      "mode": "panel",
+      "mode": "snapshot",
       "panel_stride": 1,
       "max_missing_frac": 0.6,
       "impute_missing": true,

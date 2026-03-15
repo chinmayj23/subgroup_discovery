@@ -1,0 +1,150 @@
+{
+  "question": "pct_change7y_death_rate <= 0.6755779087543488",
+  "question_text": "Percent change in Death Rate over last 7 years <= 0.6756",
+  "feature": "pct_change7y_death_rate",
+  "threshold": 0.6755779087543488,
+  "left": {
+    "question": "trend7y_death_rate <= -0.39564284682273865",
+    "question_text": "Average yearly change in Death Rate over last 7 years <= -0.3956",
+    "feature": "trend7y_death_rate",
+    "threshold": -0.39564284682273865,
+    "left": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 2,
+        "target_median": 4.378,
+        "target_mean": 4.378,
+        "target_min": 2.685999999999993,
+        "target_max": 6.070000000000007,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "label_target_delta5",
+        "target_median": -0.27439024390244526,
+        "target_mean": -0.5725113029435548
+      }
+    },
+    "right": {
+      "question": "vol7y_population_density <= 0.04542333818972111",
+      "question_text": "Volatility of Population Density over last 7 years <= 0.0454",
+      "feature": "vol7y_population_density",
+      "threshold": 0.04542333818972111,
+      "left": {
+        "question": "vol5y_control_of_corruption_estimate <= 0.07272208109498024",
+        "question_text": "Volatility of Control Of Corruption Estimate over last 5 years <= 0.0727",
+        "feature": "vol5y_control_of_corruption_estimate",
+        "threshold": 0.07272208109498024,
+        "left": {
+          "leaf_prediction": 0,
+          "class_counts": [
+            1.0,
+            0.0
+          ],
+          "target_summary": {
+            "n_samples": 2,
+            "target_median": -1.483780487804843,
+            "target_mean": -1.483780487804843,
+            "target_min": -2.289999999999992,
+            "target_max": -0.6775609756096941,
+            "target_position": "low"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_delta5",
+            "target_median": -0.27439024390244526,
+            "target_mean": -0.5725113029435548
+          }
+        },
+        "right": {
+          "leaf_prediction": 1,
+          "class_counts": [
+            0.0,
+            1.0
+          ],
+          "target_summary": {
+            "n_samples": 1,
+            "target_median": 2.1956341463413906,
+            "target_mean": 2.1956341463413906,
+            "target_min": 2.1956341463413906,
+            "target_max": 2.1956341463413906,
+            "target_position": "high"
+          },
+          "global_target_summary": {
+            "target_name": "label_target_delta5",
+            "target_median": -0.27439024390244526,
+            "target_mean": -0.5725113029435548
+          }
+        }
+      },
+      "right": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          1.0,
+          0.0
+        ],
+        "target_summary": {
+          "n_samples": 247,
+          "target_median": -0.20000000000000284,
+          "target_mean": -0.5528461106484569,
+          "target_min": -4.323,
+          "target_max": 2.143902439024302,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "label_target_delta5",
+          "target_median": -0.27439024390244526,
+          "target_mean": -0.5725113029435548
+        }
+      }
+    }
+  },
+  "right": {
+    "question": "pct_change5y_regulatory_quality_std <= 0.05148260109126568",
+    "question_text": "Percent change in Regulatory Quality Std over last 5 years <= 0.0515",
+    "feature": "pct_change5y_regulatory_quality_std",
+    "threshold": 0.05148260109126568,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 3,
+        "target_median": -1.0279999999999916,
+        "target_mean": -1.5516666666666623,
+        "target_min": -3.0019999999999953,
+        "target_max": -0.625,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "label_target_delta5",
+        "target_median": -0.27439024390244526,
+        "target_mean": -0.5725113029435548
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 3,
+        "target_median": -4.650999999999996,
+        "target_mean": -4.8279999999999985,
+        "target_min": -5.375,
+        "target_max": -4.457999999999998,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "label_target_delta5",
+        "target_median": -0.27439024390244526,
+        "target_mean": -0.5725113029435548
+      }
+    }
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "question": "vol3y_government_expenditure_on_education% <= 0.14352306723594666",
+  "question_text": "Volatility of Government Expenditure On Education Percent over last 3 years <= 0.1435",
+  "feature": "vol3y_government_expenditure_on_education%",
+  "threshold": 0.14352306723594666,
+  "left": {
+    "question": "pct_change5y_population <= 0.06162187270820141",
+    "question_text": "Percent change in Population over last 5 years <= 0.0616",
+    "feature": "pct_change5y_population",
+    "threshold": 0.06162187270820141,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 3,
+        "target_median": -2393.114517878137,
+        "target_mean": -1811.589660935584,
+        "target_min": -4927.390729381623,
+        "target_max": 1885.7362644530076,
+        "target_position": "low"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 200.7433676720625,
+        "target_mean": 914.3711887841935
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.0,
+        1.0
+      ],
+      "target_summary": {
+        "n_samples": 5,
+        "target_median": 5168.7748878200655,
+        "target_mean": 9825.4151754613,
+        "target_min": 310.71760521827275,
+        "target_max": 37309.48804362496,
+        "target_position": "high"
+      },
+      "global_target_summary": {
+        "target_name": "gdp_per_capita_growth_2010_2020",
+        "target_median": 200.7433676720625,
+        "target_mean": 914.3711887841935
+      }
+    }
+  },
+  "right": {
+    "question": "delta5y_expense% <= 1.3814942240715027",
+    "question_text": "Change in Expense Percent over last 5 years <= 1.3815",
+    "feature": "delta5y_expense%",
+    "threshold": 1.3814942240715027,
+    "left": {
+      "question": "delta7y_life_expectancy_at_birth <= 3.787012219429016",
+      "question_text": "Change in Life Expectancy At Birth over last 7 years <= 3.7870",
+      "feature": "delta7y_life_expectancy_at_birth",
+      "threshold": 3.787012219429016,
+      "left": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.0,
+          1.0
+        ],
+        "target_summary": {
+          "n_samples": 10,
+          "target_median": 6487.871074555709,
+          "target_mean": 7025.830278630773,
+          "target_min": -2306.4963039123977,
+          "target_max": 15611.345175564129,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 200.7433676720625,
+          "target_mean": 914.3711887841935
+        }
+      },
+      "right": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          1.0,
+          0.0
+        ],
+        "target_summary": {
+          "n_samples": 3,
+          "target_median": 409.19167630512675,
+          "target_mean": -833.9292411049222,
+          "target_min": -3712.1544729580955,
+          "target_max": 801.1750733382023,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 200.7433676720625,
+          "target_mean": 914.3711887841935
+        }
+      }
+    },
+    "right": {
+      "question": "vol15y_population <= 2140.2667846679688",
+      "question_text": "Volatility of Population over last 15 years <= 2140.2668",
+      "feature": "vol15y_population",
+      "threshold": 2140.2667846679688,
+      "left": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.0,
+          1.0
+        ],
+        "target_summary": {
+          "n_samples": 2,
+          "target_median": 9991.951763863224,
+          "target_mean": 9991.951763863224,
+          "target_min": 5916.602361673751,
+          "target_max": 14067.301166052697,
+          "target_position": "high"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 200.7433676720625,
+          "target_mean": 914.3711887841935
+        }
+      },
+      "right": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          1.0,
+          0.0
+        ],
+        "target_summary": {
+          "n_samples": 114,
+          "target_median": 145.4200882155967,
+          "target_mean": -54.06905808583055,
+          "target_min": -20705.64967419208,
+          "target_max": 20756.642008861003,
+          "target_position": "low"
+        },
+        "global_target_summary": {
+          "target_name": "gdp_per_capita_growth_2010_2020",
+          "target_median": 200.7433676720625,
+          "target_mean": 914.3711887841935
+        }
+      }
+    }
+  }
+}

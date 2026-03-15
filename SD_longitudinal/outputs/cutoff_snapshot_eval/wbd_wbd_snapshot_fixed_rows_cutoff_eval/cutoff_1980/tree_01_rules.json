@@ -1,0 +1,54 @@
+[
+  {
+    "leaf_id": 1,
+    "prediction": 1,
+    "n_samples": 5,
+    "rule": [
+      "Volatility of Population Density over last 5 years <= 0.0326"
+    ],
+    "target_summary": {
+      "n_samples": 3,
+      "target_median": 10704.548651377001,
+      "target_mean": 11466.571495649703,
+      "target_min": 8083.820660007979,
+      "target_max": 15611.345175564129,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 8,
+    "prediction": 1,
+    "n_samples": 4,
+    "rule": [
+      "Volatility of Population Density over last 5 years > 0.0326",
+      "Volatility of Government Expenditure On Education Percent over last 3 years <= 0.1369",
+      "Change in Life Expectancy At Birth over last 7 years > 1.8079"
+    ],
+    "target_summary": {
+      "n_samples": 6,
+      "target_median": 395.2836676826767,
+      "target_mean": 749.5137644036303,
+      "target_min": -4927.390729381623,
+      "target_max": 5858.245610496122,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 6,
+    "prediction": 1,
+    "n_samples": 6,
+    "rule": [
+      "Volatility of Population Density over last 5 years > 0.0326",
+      "Volatility of Government Expenditure On Education Percent over last 3 years > 0.1369",
+      "Average yearly change in Death Rate over last 3 years > 0.1833"
+    ],
+    "target_summary": {
+      "n_samples": 9,
+      "target_median": 2795.193975825132,
+      "target_mean": 5119.62802227055,
+      "target_min": -179.0889891671104,
+      "target_max": 14067.301166052697,
+      "target_position": "high"
+    }
+  }
+]

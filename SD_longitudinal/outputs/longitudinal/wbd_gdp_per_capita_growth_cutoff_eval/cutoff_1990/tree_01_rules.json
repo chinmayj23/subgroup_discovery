@@ -1,0 +1,121 @@
+[
+  {
+    "leaf_id": 6,
+    "prediction": 1,
+    "n_samples": 186,
+    "rule": [
+      "Current Rural Population <= 34529.5000",
+      "Percent change in Population Density over last 5 years <= 0.1768",
+      "Percent change in Population over last 7 years > -0.0014"
+    ],
+    "target_summary": {
+      "n_samples": 186,
+      "target_median": 14037.308574492446,
+      "target_mean": 11220.284675754578,
+      "target_min": -20705.64967419208,
+      "target_max": 20756.642008861003,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 9,
+    "prediction": 1,
+    "n_samples": 38,
+    "rule": [
+      "Current Rural Population > 34529.5000",
+      "Current Birth Rate <= 26.6193",
+      "Current Tax Revenue Percent <= 11.9702"
+    ],
+    "target_summary": {
+      "n_samples": 38,
+      "target_median": 5177.020279850854,
+      "target_mean": 7986.406833549632,
+      "target_min": -14914.868611676058,
+      "target_max": 14877.991174417293,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 20,
+    "prediction": 1,
+    "n_samples": 23,
+    "rule": [
+      "Current Rural Population > 34529.5000",
+      "Current Birth Rate <= 26.6193",
+      "Current Tax Revenue Percent > 11.9702",
+      "Current Military Expenditure Percent <= 7.7352",
+      "Change in Agricultural Land Percent over last 5 years <= 0.5359",
+      "Change in Population Density over last 10 years > 53.3503"
+    ],
+    "target_summary": {
+      "n_samples": 20,
+      "target_median": 8642.038788412072,
+      "target_mean": 6907.613323010153,
+      "target_min": 1010.6664526286722,
+      "target_max": 8642.038788412072,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 15,
+    "prediction": 1,
+    "n_samples": 44,
+    "rule": [
+      "Current Rural Population > 34529.5000",
+      "Current Birth Rate <= 26.6193",
+      "Current Tax Revenue Percent > 11.9702",
+      "Current Military Expenditure Percent <= 7.7352",
+      "Change in Agricultural Land Percent over last 5 years > 0.5359",
+      "Current Population <= 6033325.5000"
+    ],
+    "target_summary": {
+      "n_samples": 32,
+      "target_median": 8083.820660007979,
+      "target_mean": 18569.31497301333,
+      "target_min": -2617.259567931964,
+      "target_max": 37309.48804362496,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 17,
+    "prediction": 1,
+    "n_samples": 21,
+    "rule": [
+      "Current Rural Population > 34529.5000",
+      "Current Birth Rate <= 26.6193",
+      "Current Tax Revenue Percent > 11.9702",
+      "Current Military Expenditure Percent <= 7.7352",
+      "Change in Agricultural Land Percent over last 5 years > 0.5359",
+      "Current Population > 6033325.5000",
+      "Avg Precipitation 10 years ago <= 648.5000"
+    ],
+    "target_summary": {
+      "n_samples": 20,
+      "target_median": 5858.245610496122,
+      "target_mean": 4937.692273296406,
+      "target_min": -278.77663750197826,
+      "target_max": 5858.245610496122,
+      "target_position": "high"
+    }
+  },
+  {
+    "leaf_id": 12,
+    "prediction": 1,
+    "n_samples": 21,
+    "rule": [
+      "Current Rural Population > 34529.5000",
+      "Current Birth Rate <= 26.6193",
+      "Current Tax Revenue Percent > 11.9702",
+      "Current Military Expenditure Percent > 7.7352"
+    ],
+    "target_summary": {
+      "n_samples": 21,
+      "target_median": 13580.186278043187,
+      "target_mean": 11938.339535651172,
+      "target_min": -20705.64967419208,
+      "target_max": 14877.991174417293,
+      "target_position": "high"
+    }
+  }
+]
