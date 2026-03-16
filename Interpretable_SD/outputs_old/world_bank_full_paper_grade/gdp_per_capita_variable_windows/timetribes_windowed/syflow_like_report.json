@@ -1,0 +1,275 @@
+{
+  "method": "timetribes_windowed",
+  "n_samples": 814,
+  "n_interesting": 302,
+  "interestingness_metrics": {
+    "support": 0.10387937566297924,
+    "n_total": 13198,
+    "n_interesting": 1371,
+    "mean_all": 8562.710789947887,
+    "mean_interesting": 22089.605689060994,
+    "mean_shift": 13526.894899113107,
+    "kl_divergence": 2.0597848435990898,
+    "n_rows": 13198,
+    "n_interesting_rows": 1371,
+    "n_segments": 814,
+    "n_interesting_segments": 302,
+    "segment_support": 0.371007371007371
+  },
+  "rule_module_metrics": {
+    "metrics": {
+      "train": {
+        "accuracy": 0.8384,
+        "balanced_accuracy": 0.7901800327332242,
+        "precision": 0.958904109589041,
+        "recall": 0.5957446808510638,
+        "f1": 0.7349081364829396,
+        "roc_auc": 0.7901800327332242,
+        "n_rows": 625,
+        "n_positive": 235
+      },
+      "test": {
+        "accuracy": 0.8783068783068783,
+        "balanced_accuracy": 0.8350868607780768,
+        "precision": 0.9583333333333334,
+        "recall": 0.6865671641791045,
+        "f1": 0.8,
+        "roc_auc": 0.8350868607780768,
+        "n_rows": 189,
+        "n_positive": 67
+      }
+    },
+    "n_trees": 1,
+    "n_rules": 2,
+    "best_seed": 539
+  },
+  "baselines": {
+    "sysurv_style": {
+      "metrics": {
+        "train": {
+          "accuracy": 0.824,
+          "balanced_accuracy": 0.7659574468085106,
+          "precision": 1.0,
+          "recall": 0.5319148936170213,
+          "f1": 0.6944444444444444,
+          "roc_auc": 0.9996181123840698
+        },
+        "test": {
+          "accuracy": 0.7777777777777778,
+          "balanced_accuracy": 0.6899314900905309,
+          "precision": 0.9629629629629629,
+          "recall": 0.3880597014925373,
+          "f1": 0.5531914893617021,
+          "roc_auc": 0.9678248103743576
+        },
+        "threshold_mode": "quantile",
+        "risk_threshold_quantile": 0.8,
+        "risk_threshold": 0.8283971922353404
+      },
+      "n_rules": 2
+    },
+    "tree_paper_style": {
+      "metrics": {
+        "train": {
+          "accuracy": 0.896,
+          "balanced_accuracy": 0.8684669939989089,
+          "precision": 0.956989247311828,
+          "recall": 0.7574468085106383,
+          "f1": 0.8456057007125891,
+          "roc_auc": 0.9563338788870703
+        },
+        "test": {
+          "accuracy": 0.9259259259259259,
+          "balanced_accuracy": 0.9056153657939809,
+          "precision": 0.9491525423728814,
+          "recall": 0.835820895522388,
+          "f1": 0.8888888888888888,
+          "roc_auc": 0.9606679716173232
+        },
+        "selection": {
+          "val_accuracy": 0.888,
+          "ccp_alpha": 0.00171269,
+          "n_nodes": 13
+        }
+      },
+      "n_rules": 5
+    }
+  },
+  "subgroup_preview": [
+    {
+      "segment_id": "Liechtenstein__seg03__1986_1987__I",
+      "segment_start_year": 1986,
+      "segment_end_year": 1987,
+      "segment_length": 2,
+      "segment_target_score": 9530.919367198316
+    },
+    {
+      "segment_id": "Kuwait__seg11__2004_2005__I",
+      "segment_start_year": 2004,
+      "segment_end_year": 2005,
+      "segment_length": 2,
+      "segment_target_score": 8543.59488679946
+    },
+    {
+      "segment_id": "Brunei Darussalam__seg01__1978_1980__I",
+      "segment_start_year": 1978,
+      "segment_end_year": 1980,
+      "segment_length": 3,
+      "segment_target_score": 7603.698616693004
+    },
+    {
+      "segment_id": "Andorra__seg05__2002_2004__I",
+      "segment_start_year": 2002,
+      "segment_end_year": 2004,
+      "segment_length": 3,
+      "segment_target_score": 6422.904087595909
+    },
+    {
+      "segment_id": "Saudi Arabia__seg13__2021_2022__I",
+      "segment_start_year": 2021,
+      "segment_end_year": 2022,
+      "segment_length": 2,
+      "segment_target_score": 6132.26515625992
+    },
+    {
+      "segment_id": "Macao SAR, China__seg05__2005_2007__I",
+      "segment_start_year": 2005,
+      "segment_end_year": 2007,
+      "segment_length": 3,
+      "segment_target_score": 5448.140061547827
+    },
+    {
+      "segment_id": "Saudi Arabia__seg01__1979_1980__I",
+      "segment_start_year": 1979,
+      "segment_end_year": 1980,
+      "segment_length": 2,
+      "segment_target_score": 4622.956401228505
+    },
+    {
+      "segment_id": "Isle of Man__seg02__2002_2005__I",
+      "segment_start_year": 2002,
+      "segment_end_year": 2005,
+      "segment_length": 4,
+      "segment_target_score": 4318.08742574161
+    },
+    {
+      "segment_id": "Australia__seg03__2003_2006__I",
+      "segment_start_year": 2003,
+      "segment_end_year": 2006,
+      "segment_length": 4,
+      "segment_target_score": 4292.524434885145
+    },
+    {
+      "segment_id": "United Arab Emirates__seg06__2009_2010__I",
+      "segment_start_year": 2009,
+      "segment_end_year": 2010,
+      "segment_length": 2,
+      "segment_target_score": 3669.6722031650206
+    },
+    {
+      "segment_id": "Finland__seg05__1985_1986__I",
+      "segment_start_year": 1985,
+      "segment_end_year": 1986,
+      "segment_length": 2,
+      "segment_target_score": 3552.9408321378814
+    },
+    {
+      "segment_id": "Luxembourg__seg05__1988_1991__I",
+      "segment_start_year": 1988,
+      "segment_end_year": 1991,
+      "segment_length": 4,
+      "segment_target_score": 3509.327840344516
+    },
+    {
+      "segment_id": "Belgium__seg07__2002_2006__I",
+      "segment_start_year": 2002,
+      "segment_end_year": 2006,
+      "segment_length": 5,
+      "segment_target_score": 3424.728849701427
+    },
+    {
+      "segment_id": "Singapore__seg07__2003_2006__I",
+      "segment_start_year": 2003,
+      "segment_end_year": 2006,
+      "segment_length": 4,
+      "segment_target_score": 3346.022939336212
+    },
+    {
+      "segment_id": "Austria__seg01__1986_1987__I",
+      "segment_start_year": 1986,
+      "segment_end_year": 1987,
+      "segment_length": 2,
+      "segment_target_score": 3309.6968613705612
+    },
+    {
+      "segment_id": "Bahrain__seg07__2021_2022__I",
+      "segment_start_year": 2021,
+      "segment_end_year": 2022,
+      "segment_length": 2,
+      "segment_target_score": 3296.921634794762
+    },
+    {
+      "segment_id": "Monaco__seg02__1975_1978__I",
+      "segment_start_year": 1975,
+      "segment_end_year": 1978,
+      "segment_length": 4,
+      "segment_target_score": 3262.3159462626086
+    },
+    {
+      "segment_id": "Slovenia__seg03__2002_2003__I",
+      "segment_start_year": 2002,
+      "segment_end_year": 2003,
+      "segment_length": 2,
+      "segment_target_score": 3071.88158362174
+    },
+    {
+      "segment_id": "France__seg09__2002_2006__I",
+      "segment_start_year": 2002,
+      "segment_end_year": 2006,
+      "segment_length": 5,
+      "segment_target_score": 3045.4857051451
+    },
+    {
+      "segment_id": "Cyprus__seg05__2002_2003__I",
+      "segment_start_year": 2002,
+      "segment_end_year": 2003,
+      "segment_length": 2,
+      "segment_target_score": 2914.9723176594907
+    },
+    {
+      "segment_id": "Euro area__seg03__2003_2007__I",
+      "segment_start_year": 2003,
+      "segment_end_year": 2007,
+      "segment_length": 5,
+      "segment_target_score": 2862.753674309238
+    },
+    {
+      "segment_id": "Faroe Islands__seg07__2001_2005__I",
+      "segment_start_year": 2001,
+      "segment_end_year": 2005,
+      "segment_length": 5,
+      "segment_target_score": 2837.6823869524587
+    },
+    {
+      "segment_id": "Germany__seg07__2002_2006__I",
+      "segment_start_year": 2002,
+      "segment_end_year": 2006,
+      "segment_length": 5,
+      "segment_target_score": 2789.153683544606
+    },
+    {
+      "segment_id": "Russian Federation__seg07__2021_2022__I",
+      "segment_start_year": 2021,
+      "segment_end_year": 2022,
+      "segment_length": 2,
+      "segment_target_score": 2788.284963896338
+    },
+    {
+      "segment_id": "France__seg03__1986_1987__I",
+      "segment_start_year": 1986,
+      "segment_end_year": 1987,
+      "segment_length": 2,
+      "segment_target_score": 2774.065198401422
+    }
+  ]
+}

@@ -7,6 +7,12 @@ from matplotlib.patches import Rectangle
 from sklearn.tree import DecisionTreeClassifier
 
 
+def _format_span_label(start_year: int, end_year: int) -> str:
+    if int(start_year) == int(end_year):
+        return f"{int(start_year)}"
+    return f"{int(start_year)}-{int(end_year)}"
+
+
 def compute_leaf_target_stats(
     tree: DecisionTreeClassifier,
     X: np.ndarray,
@@ -53,6 +59,24 @@ def compute_leaf_target_stats(
                         "span_end_year_max": int(np.max(ends)),
                     }
                 )
+        if start_arr is not None and end_arr is not None:
+            starts = start_arr[leaf_ids == leaf_id]
+            ends = end_arr[leaf_ids == leaf_id]
+            valid = np.isfinite(starts) & np.isfinite(ends)
+            if np.any(valid):
+                pair_counts: Dict[tuple[int, int], int] = {}
+                for s, e in zip(starts[valid].astype(int), ends[valid].astype(int)):
+                    pair_counts[(int(s), int(e))] = pair_counts.get((int(s), int(e)), 0) + 1
+                ordered_pairs = sorted(
+                    pair_counts.items(),
+                    key=lambda kv: (-kv[1], kv[0][0], kv[0][1]),
+                )
+                top_pairs = ordered_pairs[:3]
+                span_labels = [_format_span_label(s, e) for (s, e), _ in top_pairs]
+                if len(ordered_pairs) > 3:
+                    span_labels.append("...")
+                out[int(leaf_id)]["span_ranges_display"] = span_labels
+                out[int(leaf_id)]["n_distinct_span_ranges"] = int(len(ordered_pairs))
         if length_arr is not None:
             lengths = length_arr[leaf_ids == leaf_id]
             lengths = lengths[np.isfinite(lengths)]
@@ -138,19 +162,20 @@ def save_constant_box_tree_plot(
     tree: DecisionTreeClassifier,
     feature_names: List[str],
     output_base: Path,
-    title: str,
+    title: Optional[str] = None,
     leaf_stats: Optional[Dict[int, dict]] = None,
     positive_class: int = 1,
     positive_label: str = "interesting",
     negative_label: str = "not interesting",
     figsize=(16, 9),
     box_width: float = 0.17,
-    box_height: float = 0.09,
+    box_height: float = 0.125,
 ) -> None:
     tree_ = tree.tree_
     positions = _compute_node_positions(tree)
     if not positions:
         return
+    node_ids = sorted(positions.keys())
 
     xs = [v[0] for v in positions.values()]
     ys = [v[1] for v in positions.values()]
@@ -170,20 +195,20 @@ def save_constant_box_tree_plot(
         return x, y
 
     # edges first
-    for node_id in range(tree_.node_count):
+    for node_id in node_ids:
         left = tree_.children_left[node_id]
         right = tree_.children_right[node_id]
-        if left != -1:
+        if left != -1 and left in positions:
             x0, y0 = norm_xy(node_id)
             x1, y1 = norm_xy(left)
             ax.plot([x0, x1], [y0 - box_height / 2, y1 + box_height / 2], color="#777777", lw=1.2, transform=ax.transAxes)
-        if right != -1:
+        if right != -1 and right in positions:
             x0, y0 = norm_xy(node_id)
             x1, y1 = norm_xy(right)
             ax.plot([x0, x1], [y0 - box_height / 2, y1 + box_height / 2], color="#777777", lw=1.2, transform=ax.transAxes)
 
     # nodes
-    for node_id in range(tree_.node_count):
+    for node_id in node_ids:
         left = tree_.children_left[node_id]
         right = tree_.children_right[node_id]
         is_leaf = left == -1 and right == -1
@@ -196,7 +221,10 @@ def save_constant_box_tree_plot(
             if pred == positive_class:
                 fill = "#ffe6b3"
                 if leaf_stats and node_id in leaf_stats and leaf_stats[node_id].get("target_mean") is not None:
-                    text = f"{positive_label}\nmean={float(leaf_stats[node_id]['target_mean']):.4g}"
+                    text_lines = [positive_label, f"mean={float(leaf_stats[node_id]['target_mean']):.4g}"]
+                    span_labels = leaf_stats[node_id].get("span_ranges_display", [])
+                    text_lines.extend(span_labels)
+                    text = "\n".join(text_lines)
                 else:
                     text = positive_label
             else:
@@ -226,11 +254,12 @@ def save_constant_box_tree_plot(
             transform=ax.transAxes,
             ha="center",
             va="center",
-            fontsize=8.5,
+            fontsize=7.5,
             clip_on=True,
         )
 
-    plt.title(title)
+    if title:
+        plt.title(title)
     plt.tight_layout()
     output_base.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output_base.with_suffix(".png"), dpi=260, bbox_inches="tight")

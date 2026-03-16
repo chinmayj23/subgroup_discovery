@@ -1,0 +1,6 @@
+Method: tree_paper_style
+Tree-paper-style baseline: single pruned decision tree chosen by validation accuracy and compactness over segment-level samples.
+
+Natural-language rules:
+1. IF pct_change7y__year > 0.0035 AND latest_death_rate <= 21.7820 AND _segment_idx > 0.5000, THEN interesting (mean target=59.9; spans=1982-1985, 1994, 2007-2009; avg span length=8.17).
+2. IF pct_change7y__year > 0.0035 AND latest_death_rate > 21.7820, THEN interesting (mean target=38.89; spans=1960-1966, 1960, 1960-1961; avg span length=10.43).

@@ -1,0 +1,93 @@
+{
+  "question": "_segment_idx <= 0.5",
+  "question_text": "_segment_idx <= 0.5000",
+  "feature": "_segment_idx",
+  "threshold": 0.5,
+  "left": {
+    "leaf_prediction": 0,
+    "class_counts": [
+      0.9949494949494949,
+      0.005050505050505051
+    ],
+    "target_summary": {
+      "n_samples": 196,
+      "target_mean": 334.15523251755764,
+      "target_median": 148.801679240519,
+      "span_start_year_median": 1966,
+      "span_start_year_min": 1960,
+      "span_start_year_max": 2011,
+      "span_end_year_median": 2022,
+      "span_end_year_min": 1986,
+      "span_end_year_max": 2022,
+      "span_ranges_display": [
+        "1960-2022",
+        "1965-2022",
+        "1990-2022",
+        "..."
+      ],
+      "n_distinct_span_ranges": 57,
+      "span_length_mean": 47.8469387755102,
+      "span_length_median": 53.0
+    }
+  },
+  "right": {
+    "question": "vol10y_government_health_expenditure% <= 0.4794701188802719",
+    "question_text": "vol10y_government_health_expenditure% <= 0.4795",
+    "feature": "vol10y_government_health_expenditure%",
+    "threshold": 0.4794701188802719,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        1.0,
+        0.0
+      ],
+      "target_summary": {
+        "n_samples": 6,
+        "target_mean": 828.4389566040604,
+        "target_median": 130.77678190313964,
+        "span_start_year_median": 2012,
+        "span_start_year_min": 2009,
+        "span_start_year_max": 2019,
+        "span_end_year_median": 2016,
+        "span_end_year_min": 2010,
+        "span_end_year_max": 2020,
+        "span_ranges_display": [
+          "2009-2010",
+          "2012-2020",
+          "2011",
+          "..."
+        ],
+        "n_distinct_span_ranges": 4,
+        "span_length_mean": 4.166666666666667,
+        "span_length_median": 2.0
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.13333333333333333,
+        0.8666666666666667
+      ],
+      "target_summary": {
+        "n_samples": 32,
+        "target_mean": 1636.1976548620964,
+        "target_median": 331.88744547314826,
+        "span_start_year_median": 2011,
+        "span_start_year_min": 1987,
+        "span_start_year_max": 2022,
+        "span_end_year_median": 2021,
+        "span_end_year_min": 2008,
+        "span_end_year_max": 2022,
+        "span_ranges_display": [
+          "2008",
+          "2021-2022",
+          "2014-2022",
+          "..."
+        ],
+        "n_distinct_span_ranges": 26,
+        "span_length_mean": 8.03125,
+        "span_length_median": 4.5
+      }
+    }
+  }
+}

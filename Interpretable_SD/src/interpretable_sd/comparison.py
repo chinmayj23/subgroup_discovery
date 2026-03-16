@@ -38,6 +38,7 @@ def _collect_method_rows(
     experiment_name: str,
     method_name: str,
     method_dir: Path,
+    include_baselines: bool = False,
 ) -> List[Dict]:
     rows: List[Dict] = []
 
@@ -81,7 +82,7 @@ def _collect_method_rows(
         _add_metric_block(rf_row, "test", _safe_get(rf, ["metrics", "test"], {}) or {})
         rows.append(rf_row)
 
-    if baseline_path.exists():
+    if include_baselines and baseline_path.exists():
         baselines = load_json(str(baseline_path))
         for baseline_name, payload in baselines.items():
             b_row = dict(common)
@@ -105,7 +106,11 @@ def _collect_method_rows(
     return rows
 
 
-def generate_comparison_tables(output_dir: str, table_name: str = "comparison") -> Dict[str, str]:
+def generate_comparison_tables(
+    output_dir: str,
+    table_name: str = "comparison",
+    include_baselines: bool = False,
+) -> Dict[str, str]:
     out_root = Path(output_dir)
     if not out_root.exists():
         parent = out_root.parent
@@ -130,7 +135,14 @@ def generate_comparison_tables(output_dir: str, table_name: str = "comparison") 
         for method_dir in sorted([p for p in exp_dir.iterdir() if p.is_dir()]):
             if method_dir.name in {"baselines", "rf_rule_module", "trees"}:
                 continue
-            all_rows.extend(_collect_method_rows(exp_name, method_dir.name, method_dir))
+            all_rows.extend(
+                _collect_method_rows(
+                    exp_name,
+                    method_dir.name,
+                    method_dir,
+                    include_baselines=include_baselines,
+                )
+            )
 
     if not all_rows:
         raise RuntimeError("No method output folders with metrics found.")

@@ -1,0 +1,89 @@
+[
+  {
+    "leaf_id": 5,
+    "prediction": 1,
+    "n_samples": 26,
+    "rule": [
+      "latest_death_rate <= 23.3385",
+      "lag7y_logistic_performance_index > 3.6086"
+    ],
+    "target_summary": {
+      "n_samples": 26,
+      "target_mean": 81.4281960688248,
+      "target_median": 81.85808028455284,
+      "span_start_year_median": 2012,
+      "span_start_year_min": 1960,
+      "span_start_year_max": 2021,
+      "span_end_year_median": 2021,
+      "span_end_year_min": 2014,
+      "span_end_year_max": 2021,
+      "span_ranges_display": [
+        "2014-2021",
+        "1960-2021",
+        "2008-2021",
+        "..."
+      ],
+      "n_distinct_span_ranges": 18,
+      "span_length_mean": 13.346153846153847,
+      "span_length_median": 10.0
+    }
+  },
+  {
+    "leaf_id": 7,
+    "prediction": 1,
+    "n_samples": 15,
+    "rule": [
+      "latest_death_rate > 23.3385",
+      "delta7y_death_rate <= -0.3910"
+    ],
+    "target_summary": {
+      "n_samples": 15,
+      "target_mean": 37.65980921878887,
+      "target_median": 38.2384,
+      "span_start_year_median": 1960,
+      "span_start_year_min": 1960,
+      "span_start_year_max": 1971,
+      "span_end_year_median": 1971,
+      "span_end_year_min": 1969,
+      "span_end_year_max": 1988,
+      "span_ranges_display": [
+        "1960-1969",
+        "1960-1970",
+        "1960-1973",
+        "..."
+      ],
+      "n_distinct_span_ranges": 10,
+      "span_length_mean": 12.333333333333334,
+      "span_length_median": 11.0
+    }
+  },
+  {
+    "leaf_id": 8,
+    "prediction": 1,
+    "n_samples": 19,
+    "rule": [
+      "latest_death_rate > 23.3385",
+      "delta7y_death_rate > -0.3910"
+    ],
+    "target_summary": {
+      "n_samples": 19,
+      "target_mean": 36.92946553884712,
+      "target_median": 37.4705,
+      "span_start_year_median": 1966,
+      "span_start_year_min": 1960,
+      "span_start_year_max": 1993,
+      "span_end_year_median": 1971,
+      "span_end_year_min": 1960,
+      "span_end_year_max": 1993,
+      "span_ranges_display": [
+        "1960",
+        "1960-1961",
+        "1960-1962",
+        "..."
+      ],
+      "n_distinct_span_ranges": 17,
+      "span_length_mean": 3.3157894736842106,
+      "span_length_median": 2.0
+    }
+  }
+]

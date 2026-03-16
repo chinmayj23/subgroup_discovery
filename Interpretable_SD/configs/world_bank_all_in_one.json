@@ -78,17 +78,17 @@
       "interestingness": {
         "methods": ["tail_cluster", "timetribes_windowed"],
         "tail_cluster": {
-          "high_value_quantile": 0.95,
+          "high_value_quantile": 0.975,
           "two_tailed": true
         },
         "timetribes_windowed": {
           "n_seeds": 400,
           "beta": 0.5,
-          "lambd_div": 2.0,
-          "top_percentile": 0.01,
+          "lambd_div": 0.0,
+          "top_percentile": 0.0006,
           "max_overlap": 0.95,
-          "min_subgroup_size": 25,
-          "max_subgroup_frac": 0.9,
+          "min_subgroup_size": null,
+          "max_subgroup_frac": 0.15,
           "progress_every": 100
         }
       }
@@ -109,17 +109,17 @@
       "interestingness": {
         "methods": ["tail_cluster", "timetribes_windowed"],
         "tail_cluster": {
-          "high_value_quantile": 0.95,
+          "high_value_quantile": 0.975,
           "two_tailed": false
         },
         "timetribes_windowed": {
           "n_seeds": 500,
           "beta": 0.5,
-          "lambd_div": 2.0,
-          "top_percentile": 0.01,
+          "lambd_div": 0.0,
+          "top_percentile": 0.0005,
           "max_overlap": 0.95,
-          "min_subgroup_size": 25,
-          "max_subgroup_frac": 0.9,
+          "min_subgroup_size": null,
+          "max_subgroup_frac": 0.15,
           "progress_every": 100
         }
       }

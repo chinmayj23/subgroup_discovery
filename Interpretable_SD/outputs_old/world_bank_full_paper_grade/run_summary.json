@@ -1,0 +1,16 @@
+{
+  "experiments": [
+    {
+      "experiment": "life_expectancy_spectrum",
+      "target_col": "life_expectancy_at_birth",
+      "n_rows": 15866,
+      "elapsed_sec": 2344.2246234000195
+    },
+    {
+      "experiment": "gdp_per_capita_variable_windows",
+      "target_col": "gdp_per_capita",
+      "n_rows": 13198,
+      "elapsed_sec": 1614.4426729999832
+    }
+  ]
+}

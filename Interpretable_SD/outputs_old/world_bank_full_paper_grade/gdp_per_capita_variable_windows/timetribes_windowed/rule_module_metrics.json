@@ -1,0 +1,27 @@
+{
+  "metrics": {
+    "train": {
+      "accuracy": 0.8384,
+      "balanced_accuracy": 0.7901800327332242,
+      "precision": 0.958904109589041,
+      "recall": 0.5957446808510638,
+      "f1": 0.7349081364829396,
+      "roc_auc": 0.7901800327332242,
+      "n_rows": 625,
+      "n_positive": 235
+    },
+    "test": {
+      "accuracy": 0.8783068783068783,
+      "balanced_accuracy": 0.8350868607780768,
+      "precision": 0.9583333333333334,
+      "recall": 0.6865671641791045,
+      "f1": 0.8,
+      "roc_auc": 0.8350868607780768,
+      "n_rows": 189,
+      "n_positive": 67
+    }
+  },
+  "n_trees": 1,
+  "n_rules": 2,
+  "best_seed": 539
+}

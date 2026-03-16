@@ -1,0 +1,14 @@
+{
+  "support": 0.02500378845279588,
+  "n_total": 13198,
+  "n_interesting": 330,
+  "mean_all": 8562.710789947887,
+  "mean_interesting": 85712.22188350897,
+  "mean_shift": 77149.51109356109,
+  "kl_divergence": 3.655015266620063,
+  "n_rows": 13198,
+  "n_interesting_rows": 330,
+  "n_segments": 319,
+  "n_interesting_segments": 41,
+  "segment_support": 0.12852664576802508
+}

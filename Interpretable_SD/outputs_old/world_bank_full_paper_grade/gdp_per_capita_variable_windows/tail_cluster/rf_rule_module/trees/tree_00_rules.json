@@ -1,0 +1,31 @@
+[
+  {
+    "leaf_id": 4,
+    "prediction": 1,
+    "n_samples": 30,
+    "rule": [
+      "_segment_idx > 0.5000",
+      "vol10y_government_health_expenditure% > 0.4795"
+    ],
+    "target_summary": {
+      "n_samples": 32,
+      "target_mean": 1636.1976548620964,
+      "target_median": 331.88744547314826,
+      "span_start_year_median": 2011,
+      "span_start_year_min": 1987,
+      "span_start_year_max": 2022,
+      "span_end_year_median": 2021,
+      "span_end_year_min": 2008,
+      "span_end_year_max": 2022,
+      "span_ranges_display": [
+        "2008",
+        "2021-2022",
+        "2014-2022",
+        "..."
+      ],
+      "n_distinct_span_ranges": 26,
+      "span_length_mean": 8.03125,
+      "span_length_median": 4.5
+    }
+  }
+]

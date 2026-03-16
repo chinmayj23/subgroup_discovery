@@ -1,0 +1,93 @@
+{
+  "question": "latest_death_rate <= 22.46500015258789",
+  "question_text": "latest_death_rate <= 22.4650",
+  "feature": "latest_death_rate",
+  "threshold": 22.46500015258789,
+  "left": {
+    "question": "lag7y_logistic_performance_index <= 3.6086474657058716",
+    "question_text": "lag7y_logistic_performance_index <= 3.6086",
+    "feature": "lag7y_logistic_performance_index",
+    "threshold": 3.6086474657058716,
+    "left": {
+      "leaf_prediction": 0,
+      "class_counts": [
+        0.90234375,
+        0.09765625
+      ],
+      "target_summary": {
+        "n_samples": 251,
+        "target_mean": 67.52914291021727,
+        "target_median": 69.08376760239301,
+        "span_start_year_median": 1960,
+        "span_start_year_min": 1960,
+        "span_start_year_max": 2021,
+        "span_end_year_median": 2021,
+        "span_end_year_min": 1961,
+        "span_end_year_max": 2021,
+        "span_ranges_display": [
+          "1960-2021",
+          "1960-2013",
+          "1960-2007",
+          "..."
+        ],
+        "n_distinct_span_ranges": 90,
+        "span_length_mean": 44.68127490039841,
+        "span_length_median": 61.0
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.08,
+        0.92
+      ],
+      "target_summary": {
+        "n_samples": 26,
+        "target_mean": 81.4281960688248,
+        "target_median": 81.85808028455284,
+        "span_start_year_median": 2012,
+        "span_start_year_min": 1960,
+        "span_start_year_max": 2021,
+        "span_end_year_median": 2021,
+        "span_end_year_min": 2014,
+        "span_end_year_max": 2021,
+        "span_ranges_display": [
+          "2014-2021",
+          "1960-2021",
+          "2008-2021",
+          "..."
+        ],
+        "n_distinct_span_ranges": 18,
+        "span_length_mean": 13.346153846153847,
+        "span_length_median": 10.0
+      }
+    }
+  },
+  "right": {
+    "leaf_prediction": 1,
+    "class_counts": [
+      0.07692307692307693,
+      0.9230769230769231
+    ],
+    "target_summary": {
+      "n_samples": 43,
+      "target_mean": 37.624598811374234,
+      "target_median": 38.2384,
+      "span_start_year_median": 1960,
+      "span_start_year_min": 1960,
+      "span_start_year_max": 1993,
+      "span_end_year_median": 1971,
+      "span_end_year_min": 1960,
+      "span_end_year_max": 1993,
+      "span_ranges_display": [
+        "1960",
+        "1960-1969",
+        "1960-1970",
+        "..."
+      ],
+      "n_distinct_span_ranges": 33,
+      "span_length_mean": 6.837209302325581,
+      "span_length_median": 3.0
+    }
+  }
+}

@@ -38,6 +38,7 @@ def _prepare_rule_matrices(
     id_col: str,
     date_col: str,
     target_col: str,
+    raw_target_col: str,
     split_cfg: Dict,
     feature_cfg: Dict,
 ):
@@ -51,6 +52,7 @@ def _prepare_rule_matrices(
 
     non_feature_cols = {
         "sample_id",
+        "_segment_idx",
         "segment_id",
         "segment_start_date",
         "segment_end_date",
@@ -68,12 +70,20 @@ def _prepare_rule_matrices(
         "_year",
         date_col,
     }
+    target_feature_cols = [
+        c
+        for c in labeled_df.columns
+        if c == f"latest_{raw_target_col}"
+        or c.endswith(f"_{raw_target_col}")
+    ]
     X, y, feature_names, target_values, row_ids, meta_df = prepare_xy_with_ids(
         labeled_df,
         id_col=id_col,
         target_col=target_col,
         label_col=LABEL_COLUMN,
-        exclude_columns=[c for c in non_feature_cols if c in labeled_df.columns],
+        exclude_columns=[
+            c for c in list(non_feature_cols) + target_feature_cols if c in labeled_df.columns
+        ],
         exclude_prefixes=["label_target_", "window_", "segment_"],
         meta_columns=[
             "segment_id",
@@ -208,7 +218,7 @@ def _run_one_interestingness_method(
         target_col,
         LABEL_COLUMN,
         out_dir / "interestingness_kde",
-        title=f"{method_name}: target distribution (original vs interesting vs non-interesting)",
+        title=None,
     )
     print(f"  [Method] {method_name} saved interestingness KDE plot.")
 
@@ -217,6 +227,7 @@ def _run_one_interestingness_method(
         id_col=id_col,
         date_col=date_col,
         target_col="segment_target_score",
+        raw_target_col=target_col,
         split_cfg=split_cfg,
         feature_cfg=rf_cfg,
     )

@@ -79,7 +79,7 @@ def _save_tree_bundle(
             tree,
             feature_names,
             out_dir / f"tree_{idx:02d}_acc_{acc:.4f}",
-            title=f"Beautified Rule Tree {idx} | train acc={acc:.3f}",
+            title=None,
             leaf_stats=leaf_stats,
             positive_class=1,
             positive_label="interesting",

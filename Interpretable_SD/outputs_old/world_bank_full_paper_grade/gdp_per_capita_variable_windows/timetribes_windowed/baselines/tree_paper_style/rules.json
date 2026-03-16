@@ -1,0 +1,159 @@
+[
+  {
+    "leaf_id": 4,
+    "prediction": 1,
+    "n_samples": 69,
+    "rule": [
+      "_segment_idx > 0.5000",
+      "_segment_idx <= 1.5000",
+      "vol3y_life_expectancy_at_birth <= 0.5605"
+    ],
+    "target_summary": {
+      "n_samples": 69,
+      "target_mean": 867.1667548892168,
+      "target_median": 602.0079926423059,
+      "span_start_year_median": 1992,
+      "span_start_year_min": 1974,
+      "span_start_year_max": 2022,
+      "span_end_year_median": 1996,
+      "span_end_year_min": 1977,
+      "span_end_year_max": 2022,
+      "span_ranges_display": [
+        "1979-1980",
+        "1986-1989",
+        "1978-1985",
+        "..."
+      ],
+      "n_distinct_span_ranges": 59,
+      "span_length_mean": 4.434782608695652,
+      "span_length_median": 3.0
+    }
+  },
+  {
+    "leaf_id": 5,
+    "prediction": 1,
+    "n_samples": 12,
+    "rule": [
+      "_segment_idx > 0.5000",
+      "_segment_idx <= 1.5000",
+      "vol3y_life_expectancy_at_birth > 0.5605"
+    ],
+    "target_summary": {
+      "n_samples": 12,
+      "target_mean": 668.3694156381323,
+      "target_median": 371.0250890272991,
+      "span_start_year_median": 2006,
+      "span_start_year_min": 1979,
+      "span_start_year_max": 2013,
+      "span_end_year_median": 2008,
+      "span_end_year_min": 1980,
+      "span_end_year_max": 2021,
+      "span_ranges_display": [
+        "2007-2020",
+        "2008",
+        "1979-1980",
+        "..."
+      ],
+      "n_distinct_span_ranges": 10,
+      "span_length_mean": 6.416666666666667,
+      "span_length_median": 4.0
+    }
+  },
+  {
+    "leaf_id": 10,
+    "prediction": 1,
+    "n_samples": 12,
+    "rule": [
+      "_segment_idx > 0.5000",
+      "_segment_idx > 1.5000",
+      "_segment_idx > 2.5000",
+      "_segment_idx <= 3.5000",
+      "delta5y_GDP_current_US <= -11552388.0000"
+    ],
+    "target_summary": {
+      "n_samples": 12,
+      "target_mean": 58.83011995530544,
+      "target_median": 0.0,
+      "span_start_year_median": 2008,
+      "span_start_year_min": 1981,
+      "span_start_year_max": 2022,
+      "span_end_year_median": 2012,
+      "span_end_year_min": 1985,
+      "span_end_year_max": 2022,
+      "span_ranges_display": [
+        "1981-1985",
+        "1985",
+        "1986-1989",
+        "..."
+      ],
+      "n_distinct_span_ranges": 11,
+      "span_length_mean": 3.75,
+      "span_length_median": 3.0
+    }
+  },
+  {
+    "leaf_id": 11,
+    "prediction": 1,
+    "n_samples": 53,
+    "rule": [
+      "_segment_idx > 0.5000",
+      "_segment_idx > 1.5000",
+      "_segment_idx > 2.5000",
+      "_segment_idx <= 3.5000",
+      "delta5y_GDP_current_US > -11552388.0000"
+    ],
+    "target_summary": {
+      "n_samples": 53,
+      "target_mean": 615.5192995535695,
+      "target_median": 385.7860389990751,
+      "span_start_year_median": 1998,
+      "span_start_year_min": 1980,
+      "span_start_year_max": 2022,
+      "span_end_year_median": 2003,
+      "span_end_year_min": 1982,
+      "span_end_year_max": 2022,
+      "span_ranges_display": [
+        "1986",
+        "1990-2002",
+        "1993",
+        "..."
+      ],
+      "n_distinct_span_ranges": 44,
+      "span_length_mean": 5.7924528301886795,
+      "span_length_median": 4.0
+    }
+  },
+  {
+    "leaf_id": 15,
+    "prediction": 1,
+    "n_samples": 40,
+    "rule": [
+      "_segment_idx > 0.5000",
+      "_segment_idx > 1.5000",
+      "_segment_idx > 2.5000",
+      "_segment_idx > 3.5000",
+      "_segment_idx > 4.5000",
+      "_segment_idx <= 5.5000"
+    ],
+    "target_summary": {
+      "n_samples": 40,
+      "target_mean": 743.1129714035676,
+      "target_median": 288.4421485203957,
+      "span_start_year_median": 2005,
+      "span_start_year_min": 1985,
+      "span_start_year_max": 2022,
+      "span_end_year_median": 2008,
+      "span_end_year_min": 1986,
+      "span_end_year_max": 2022,
+      "span_ranges_display": [
+        "2021-2022",
+        "2000",
+        "2005-2007",
+        "..."
+      ],
+      "n_distinct_span_ranges": 33,
+      "span_length_mean": 4.675,
+      "span_length_median": 2.0
+    }
+  }
+]

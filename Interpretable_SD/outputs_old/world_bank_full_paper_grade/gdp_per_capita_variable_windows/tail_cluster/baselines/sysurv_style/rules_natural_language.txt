@@ -1,0 +1,5 @@
+Method: sysurv_style
+Sysurv-style baseline: a non-linear risk scorer first detects high-risk segments; a shallow naming tree then explains when those interesting spans occur.
+
+Natural-language rules:
+1. IF _segment_idx <= 1.5000, THEN interesting (mean target=448.2; spans=1960-2022, 1965-2022, 1990-2022; avg span length=44.77).

@@ -1,0 +1,9 @@
+Method: tree_paper_style
+Tree-paper-style baseline: single pruned decision tree chosen by validation accuracy and compactness over segment-level samples.
+
+Natural-language rules:
+1. IF _segment_idx > 0.5000 AND _segment_idx <= 1.5000 AND vol3y_life_expectancy_at_birth <= 0.5605, THEN interesting (mean target=867.2; spans=1979-1980, 1986-1989, 1978-1985; avg span length=4.43).
+2. IF _segment_idx > 0.5000 AND _segment_idx <= 1.5000 AND vol3y_life_expectancy_at_birth > 0.5605, THEN interesting (mean target=668.4; spans=2007-2020, 2008, 1979-1980; avg span length=6.42).
+3. IF _segment_idx > 0.5000 AND _segment_idx > 1.5000 AND _segment_idx > 2.5000 AND _segment_idx <= 3.5000 AND delta5y_GDP_current_US <= -11552388.0000, THEN interesting (mean target=58.83; spans=1981-1985, 1985, 1986-1989; avg span length=3.75).
+4. IF _segment_idx > 0.5000 AND _segment_idx > 1.5000 AND _segment_idx > 2.5000 AND _segment_idx <= 3.5000 AND delta5y_GDP_current_US > -11552388.0000, THEN interesting (mean target=615.5; spans=1986, 1990-2002, 1993; avg span length=5.79).
+5. IF _segment_idx > 0.5000 AND _segment_idx > 1.5000 AND _segment_idx > 2.5000 AND _segment_idx > 3.5000 AND _segment_idx > 4.5000 AND _segment_idx <= 5.5000, THEN interesting (mean target=743.1; spans=2021-2022, 2000, 2005-2007; avg span length=4.67).

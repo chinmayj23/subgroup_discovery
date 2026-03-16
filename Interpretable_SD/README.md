@@ -6,7 +6,9 @@ Interpretable subgroup discovery for longitudinal data.
 
 Longitudinal data describe the same subject repeatedly over time. Examples include countries observed across years, patients followed through clinical visits, households revisited in panel surveys, or firms tracked through financial reports.
 
-This setting is different from ordinary static classification. In a static dataset, the natural question is whether a subject belongs to an interesting subgroup. In a longitudinal dataset, that is often too coarse. A subject may be ordinary for most of the observation period and become unusual only during a specific interval. For many scientific, policy, and monitoring tasks, that interval is the real object of interest.
+This setting is different from ordinary static classification. In a static dataset, the natural question is whether a subject belongs to an interesting subgroup. In a longitudinal dataset, that question is often too coarse. A subject may look ordinary for most of the observation period and become unusual only during a short interval. For many scientific, policy, and monitoring tasks, that interval is the real object of interest.
+
+That is the practical motivation for this repository. Analysts often do not only want to know which subjects are unusual. They want to know when the unusual behavior starts, how long it lasts, and whether it can be described in a form that another researcher, policymaker, or domain expert can read without reverse-engineering a complex model.
 
 This repository studies the following problem:
 
@@ -14,7 +16,7 @@ This repository studies the following problem:
 2. convert those observations into meaningful subject-level spans,
 3. explain those spans with compact, human-readable rules.
 
-The goal is therefore not only prediction. The goal is a complete interpretable subgroup discovery workflow for longitudinal data.
+The goal is therefore not only prediction. The goal is a complete interpretable subgroup discovery workflow for longitudinal data: first identify unusual target behavior, then organize it into meaningful spans, and finally explain those spans with compact rules.
 
 ## Method Overview
 
@@ -22,9 +24,11 @@ The pipeline has two modules and one linking step.
 
 1. **Interestingness module**
    Assign row-level interesting or non-interesting labels from the target variable alone.
-2. **Span construction**
+2. **Temporal feature processing**
+   Compute subject-time covariates from the longitudinal history.
+3. **Span construction**
    Merge consecutive rows with the same label within each subject into one longitudinal span.
-3. **Rule-learning module**
+4. **Rule-learning module**
    Learn interpretable rules that explain why a span is interesting.
 
 This separation is important. Interestingness is defined from the target distribution. Explanation is learned afterwards from temporal covariates. The pipeline is therefore designed to recover meaningful longitudinal subgroups first, and only then explain them.
@@ -35,8 +39,8 @@ For each experiment, the workflow is:
 
 1. load a longitudinal dataset with subject id, time variable, target, and covariates,
 2. apply an interestingness method to the raw subject-time target values,
-3. group consecutive equal labels within each subject into spans,
-4. compute temporal covariates from the longitudinal history,
+3. compute temporal covariates on the original subject-time panel,
+4. group consecutive equal labels within each subject into spans,
 5. split subjects into train and test sets,
 6. fit interpretable rule models on the span rows,
 7. report subgroup-quality metrics, predictive metrics, trees, and natural-language rules.
@@ -53,9 +57,9 @@ It is useful when the subgroup of interest is expected to be rare and extreme.
 
 ### TimeTribes
 
-TimeTribes is also target-only, but it is not restricted to simple tails. It searches for target ranges that are distributionally distinct, using bootstrap candidate generation, divergence-based scoring, and overlap control.
+TimeTribes is also target-only, but it is not restricted to simple tails. It searches for target ranges that are distributionally distinct, using bootstrap candidate generation, divergence-based scoring, and overlap control. In the current implementation, candidate intervals are drawn both from bootstrap clustering and from small bootstrap quantile windows. This does not change the objective; it only gives the selection stage a healthier set of target-only candidates when one-dimensional clustering alone is too brittle.
 
-It is useful when the interesting subgroup is unusual in distributional shape rather than only in absolute magnitude.
+It is useful when the interesting subgroup is unusual in distributional shape rather than only in absolute magnitude. In the supplied configurations, no minimum subgroup size is imposed, while a moderate upper subgroup-fraction cap prevents the method from declaring nearly the whole dataset interesting.
 
 ## Span Construction
 
@@ -68,9 +72,9 @@ For each subject:
 3. merge consecutive rows with the same label,
 4. store one span row with start time, end time, span length, and target summaries.
 
-This gives a more natural unit for longitudinal subgroup discovery than isolated rows or a fixed window chosen in advance.
+This gives a more natural unit for longitudinal subgroup discovery than isolated rows or a fixed window chosen in advance. If a subject has only one interesting year, that year is kept and becomes a one-year interesting span. If several interesting years are consecutive, they are grouped into one longer interesting span. The implementation assumes one row per `(subject, time)` pair; if that is violated, the code raises an error rather than silently building ambiguous spans.
 
-## Rule-learning Methods
+## Rule-learning Method
 
 ### RF Rule Learner
 
@@ -83,19 +87,7 @@ It uses the temporal covariates on the span rows and performs a multi-seed searc
 3. natural-language rules,
 4. accuracy-versus-questions plots.
 
-The leaves report whether a span is interesting, the mean target value of positive leaves, and typical time spans captured by the leaf.
-
-### Sysurv-style Baseline
-
-This baseline adapts the idea of a nonlinear scorer followed by a shallow explanatory tree to the present fixed-label span-classification setting.
-
-The adaptation is necessary because the original survival setting predicts time-to-event, whereas the present task predicts interesting versus non-interesting spans.
-
-### Tree-paper-style Baseline
-
-This baseline uses a single decision tree with pruning-path selection. It is included to test whether a single compact tree is sufficient once interesting spans have already been defined.
-
-This is also an adaptation to the present fixed-label span-classification task. The original tree-based survival setting is not used directly here.
+The leaves report whether a span is interesting, the mean target value of positive leaves, and the span years captured by the leaf.
 
 ## Temporal Features
 
@@ -108,7 +100,9 @@ The temporal feature engineering is shared across methods. It uses the same long
 5. `trend*k_*`
 6. `vol*k_*`
 
-These features are computed from the longitudinal history and aligned to the span rows used by the rule-learning stage.
+These features are computed from the longitudinal history on the original subject-time panel and are then aligned to the span rows used by the rule-learning stage.
+
+For each span, the attached temporal covariates come from the final row of that span, while the span metadata separately record the start year, end year, length, and span-level target summaries. In the rule-learning stage, temporal features derived from the target variable itself are excluded from prediction; the rules are learned from the other longitudinal covariates.
 
 ## Evaluation
 
@@ -170,7 +164,8 @@ Tree plots are intentionally simplified:
 
 1. internal nodes show only the question,
 2. leaves show whether the span is interesting,
-3. positive leaves also show mean target value.
+3. positive leaves also show mean target value,
+4. positive leaves list the year spans observed in that leaf, with multiple spans shown when present.
 
 Representative `TimeTribes + RF` tree:
 
@@ -182,13 +177,13 @@ Rules are exported in directly readable form. A positive rule reports:
 
 1. the covariate conditions,
 2. the mean target value of the leaf,
-3. the typical years covered by the interesting spans in that leaf,
+3. the year spans covered by the interesting segments in that leaf,
 4. the average span length.
 
 A typical rule has the form:
 
 ```text
-IF <conditions>, THEN interesting (mean target=..., typical span=YYYY-YYYY, avg span length=...).
+IF <conditions>, THEN interesting (mean target=..., spans=YYYY-YYYY, YYYY-YYYY, avg span length=...).
 ```
 
 ## Code Structure
@@ -205,9 +200,7 @@ The main files are:
    TimeTribes interestingness method.
 5. `Interpretable_SD/src/interpretable_sd/rules/rf_module.py`
    RF rule learner.
-6. `Interpretable_SD/src/interpretable_sd/baselines/`
-   Comparable baseline methods.
-7. `Interpretable_SD/src/interpretable_sd/comparison.py`
+6. `Interpretable_SD/src/interpretable_sd/comparison.py`
    Comparison-table generation.
 
 ## Running The Code
@@ -244,8 +237,9 @@ The most important configuration blocks are:
 3. `defaults.segmentation`
 4. `defaults.split`
 5. `defaults.rf_rule_module`
-6. `defaults.baselines`
-7. `experiments`
+6. `experiments`
+
+The supplied configurations keep isolated interesting years (`min_interesting_run_length = 1`). For `TimeTribes`, the subgroup-size filters are controlled through `min_subgroup_size` and `max_subgroup_frac`; in the main configs the lower bound is left `null`, while the upper bound is set to a moderate fraction so the interesting subgroup does not collapse to almost the entire dataset.
 
 ## Additional Documentation
 

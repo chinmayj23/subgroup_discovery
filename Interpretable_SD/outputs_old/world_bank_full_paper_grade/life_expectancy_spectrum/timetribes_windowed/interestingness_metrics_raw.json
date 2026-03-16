@@ -1,0 +1,9 @@
+{
+  "support": 0.12870288667591076,
+  "n_total": 15866,
+  "n_interesting": 2042,
+  "mean_all": 64.25419288088393,
+  "mean_interesting": 53.40519627230356,
+  "mean_shift": -10.848996608580372,
+  "kl_divergence": 2.034424731128175
+}

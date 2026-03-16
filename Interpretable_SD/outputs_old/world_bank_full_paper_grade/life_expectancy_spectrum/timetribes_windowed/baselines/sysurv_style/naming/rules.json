@@ -1,0 +1,60 @@
+[
+  {
+    "leaf_id": 6,
+    "prediction": 1,
+    "n_samples": 29,
+    "rule": [
+      "latest_death_rate <= 21.7820",
+      "pct_change10y_GDP_current_US > 1.0433",
+      "vol3y_regulatory_quality_std <= 0.0073"
+    ],
+    "target_summary": {
+      "n_samples": 29,
+      "target_mean": 61.91713572394475,
+      "target_median": 62.185882352941185,
+      "span_start_year_median": 2008,
+      "span_start_year_min": 1960,
+      "span_start_year_max": 2020,
+      "span_end_year_median": 2010,
+      "span_end_year_min": 2008,
+      "span_end_year_max": 2021,
+      "span_ranges_display": [
+        "2005-2010",
+        "2007-2009",
+        "2008",
+        "..."
+      ],
+      "n_distinct_span_ranges": 25,
+      "span_length_mean": 6.448275862068965,
+      "span_length_median": 3.0
+    }
+  },
+  {
+    "leaf_id": 8,
+    "prediction": 1,
+    "n_samples": 44,
+    "rule": [
+      "latest_death_rate > 21.7820"
+    ],
+    "target_summary": {
+      "n_samples": 44,
+      "target_mean": 38.88872445492985,
+      "target_median": 40.03597042005799,
+      "span_start_year_median": 1960,
+      "span_start_year_min": 1960,
+      "span_start_year_max": 1995,
+      "span_end_year_median": 1973,
+      "span_end_year_min": 1960,
+      "span_end_year_max": 1998,
+      "span_ranges_display": [
+        "1960-1966",
+        "1960",
+        "1960-1961",
+        "..."
+      ],
+      "n_distinct_span_ranges": 30,
+      "span_length_mean": 10.431818181818182,
+      "span_length_median": 7.0
+    }
+  }
+]

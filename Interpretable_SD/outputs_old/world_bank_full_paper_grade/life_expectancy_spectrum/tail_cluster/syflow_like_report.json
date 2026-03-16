@@ -1,0 +1,275 @@
+{
+  "method": "tail_cluster",
+  "n_samples": 419,
+  "n_interesting": 112,
+  "interestingness_metrics": {
+    "support": 0.05004411950081936,
+    "n_total": 15866,
+    "n_interesting": 794,
+    "mean_all": 64.25419288088393,
+    "mean_interesting": 59.27697927558968,
+    "mean_shift": -4.977213605294253,
+    "kl_divergence": 2.849582958606486,
+    "n_rows": 15866,
+    "n_interesting_rows": 794,
+    "n_segments": 419,
+    "n_interesting_segments": 112,
+    "segment_support": 0.26730310262529833
+  },
+  "rule_module_metrics": {
+    "metrics": {
+      "train": {
+        "accuracy": 0.884375,
+        "balanced_accuracy": 0.9130064691862445,
+        "precision": 0.7131147540983607,
+        "recall": 0.9775280898876404,
+        "f1": 0.8246445497630331,
+        "roc_auc": 0.9509460576876307,
+        "n_rows": 320,
+        "n_positive": 89
+      },
+      "test": {
+        "accuracy": 0.9292929292929293,
+        "balanced_accuracy": 0.9539473684210527,
+        "precision": 0.7666666666666667,
+        "recall": 1.0,
+        "f1": 0.8679245283018868,
+        "roc_auc": 0.9748283752860413,
+        "n_rows": 99,
+        "n_positive": 23
+      }
+    },
+    "n_trees": 2,
+    "n_rules": 4,
+    "best_seed": 748
+  },
+  "baselines": {
+    "sysurv_style": {
+      "metrics": {
+        "train": {
+          "accuracy": 0.921875,
+          "balanced_accuracy": 0.8595505617977528,
+          "precision": 1.0,
+          "recall": 0.7191011235955056,
+          "f1": 0.8366013071895425,
+          "roc_auc": 1.0
+        },
+        "test": {
+          "accuracy": 0.9292929292929293,
+          "balanced_accuracy": 0.8629862700228832,
+          "precision": 0.9444444444444444,
+          "recall": 0.7391304347826086,
+          "f1": 0.8292682926829268,
+          "roc_auc": 0.9805491990846682
+        },
+        "threshold_mode": "quantile",
+        "risk_threshold_quantile": 0.8,
+        "risk_threshold": 0.8993763588396769
+      },
+      "n_rules": 3
+    },
+    "tree_paper_style": {
+      "metrics": {
+        "train": {
+          "accuracy": 0.90625,
+          "balanced_accuracy": 0.9108906075198211,
+          "precision": 0.780952380952381,
+          "recall": 0.9213483146067416,
+          "f1": 0.845360824742268,
+          "roc_auc": 0.9431635779950386
+        },
+        "test": {
+          "accuracy": 0.9191919191919192,
+          "balanced_accuracy": 0.9018878718535469,
+          "precision": 0.8,
+          "recall": 0.8695652173913043,
+          "f1": 0.8333333333333334,
+          "roc_auc": 0.9373569794050344
+        },
+        "selection": {
+          "val_accuracy": 0.90625,
+          "ccp_alpha": 0.01833767,
+          "n_nodes": 11
+        }
+      },
+      "n_rules": 3
+    }
+  },
+  "subgroup_preview": [
+    {
+      "segment_id": "Hong Kong SAR, China__seg01__2001_2021__I",
+      "segment_start_year": 2001,
+      "segment_end_year": 2021,
+      "segment_length": 21,
+      "segment_target_score": 83.31068524970966
+    },
+    {
+      "segment_id": "Macao SAR, China__seg01__2001_2021__I",
+      "segment_start_year": 2001,
+      "segment_end_year": 2021,
+      "segment_length": 21,
+      "segment_target_score": 83.29557142857145
+    },
+    {
+      "segment_id": "Japan__seg01__2001_2021__I",
+      "segment_start_year": 2001,
+      "segment_end_year": 2021,
+      "segment_length": 21,
+      "segment_target_score": 83.05246225319398
+    },
+    {
+      "segment_id": "Switzerland__seg01__2005_2021__I",
+      "segment_start_year": 2005,
+      "segment_end_year": 2021,
+      "segment_length": 17,
+      "segment_target_score": 82.74705882352943
+    },
+    {
+      "segment_id": "Spain__seg01__2008_2021__I",
+      "segment_start_year": 2008,
+      "segment_end_year": 2021,
+      "segment_length": 14,
+      "segment_target_score": 82.69320557491291
+    },
+    {
+      "segment_id": "Singapore__seg01__2009_2021__I",
+      "segment_start_year": 2009,
+      "segment_end_year": 2021,
+      "segment_length": 13,
+      "segment_target_score": 82.67298311444655
+    },
+    {
+      "segment_id": "Gibraltar__seg07__2011_2012__I",
+      "segment_start_year": 2011,
+      "segment_end_year": 2012,
+      "segment_length": 2,
+      "segment_target_score": 82.6185
+    },
+    {
+      "segment_id": "Korea, Rep.__seg01__2013_2021__I",
+      "segment_start_year": 2013,
+      "segment_end_year": 2021,
+      "segment_length": 9,
+      "segment_target_score": 82.52520325203254
+    },
+    {
+      "segment_id": "Liechtenstein__seg03__2007_2021__I",
+      "segment_start_year": 2007,
+      "segment_end_year": 2021,
+      "segment_length": 15,
+      "segment_target_score": 82.51691056910569
+    },
+    {
+      "segment_id": "Iceland__seg03__2007_2021__I",
+      "segment_start_year": 2007,
+      "segment_end_year": 2021,
+      "segment_length": 15,
+      "segment_target_score": 82.429918699187
+    },
+    {
+      "segment_id": "Italy__seg01__2006_2021__I",
+      "segment_start_year": 2006,
+      "segment_end_year": 2021,
+      "segment_length": 16,
+      "segment_target_score": 82.4157012195122
+    },
+    {
+      "segment_id": "Norway__seg01__2011_2021__I",
+      "segment_start_year": 2011,
+      "segment_end_year": 2021,
+      "segment_length": 11,
+      "segment_target_score": 82.36452328159645
+    },
+    {
+      "segment_id": "Bermuda__seg03__2017_2017__I",
+      "segment_start_year": 2017,
+      "segment_end_year": 2017,
+      "segment_length": 1,
+      "segment_target_score": 82.351
+    },
+    {
+      "segment_id": "Malta__seg03__2013_2021__I",
+      "segment_start_year": 2013,
+      "segment_end_year": 2021,
+      "segment_length": 9,
+      "segment_target_score": 82.3341463414634
+    },
+    {
+      "segment_id": "French Polynesia__seg01__2011_2020__I",
+      "segment_start_year": 2011,
+      "segment_end_year": 2020,
+      "segment_length": 10,
+      "segment_target_score": 82.2875
+    },
+    {
+      "segment_id": "Faroe Islands__seg01__2012_2021__I",
+      "segment_start_year": 2012,
+      "segment_end_year": 2021,
+      "segment_length": 10,
+      "segment_target_score": 82.26414634146343
+    },
+    {
+      "segment_id": "Australia__seg01__2007_2021__I",
+      "segment_start_year": 2007,
+      "segment_end_year": 2021,
+      "segment_length": 15,
+      "segment_target_score": 82.25430894308943
+    },
+    {
+      "segment_id": "Luxembourg__seg01__2012_2021__I",
+      "segment_start_year": 2012,
+      "segment_end_year": 2021,
+      "segment_length": 10,
+      "segment_target_score": 82.23219512195121
+    },
+    {
+      "segment_id": "Sweden__seg01__2009_2021__I",
+      "segment_start_year": 2009,
+      "segment_end_year": 2021,
+      "segment_length": 13,
+      "segment_target_score": 82.2016885553471
+    },
+    {
+      "segment_id": "France__seg01__2008_2021__I",
+      "segment_start_year": 2008,
+      "segment_end_year": 2021,
+      "segment_length": 14,
+      "segment_target_score": 82.19912891986064
+    },
+    {
+      "segment_id": "Cayman Islands__seg00__2010_2010__I",
+      "segment_start_year": 2010,
+      "segment_end_year": 2010,
+      "segment_length": 1,
+      "segment_target_score": 82.190243902439
+    },
+    {
+      "segment_id": "Israel__seg01__2009_2021__I",
+      "segment_start_year": 2009,
+      "segment_end_year": 2021,
+      "segment_length": 13,
+      "segment_target_score": 82.18030018761728
+    },
+    {
+      "segment_id": "Gibraltar__seg11__2016_2020__I",
+      "segment_start_year": 2016,
+      "segment_end_year": 2020,
+      "segment_length": 5,
+      "segment_target_score": 82.04939999999999
+    },
+    {
+      "segment_id": "Ireland__seg01__2014_2021__I",
+      "segment_start_year": 2014,
+      "segment_end_year": 2021,
+      "segment_length": 8,
+      "segment_target_score": 82.02225609756101
+    },
+    {
+      "segment_id": "Belgium__seg05__2021_2021__I",
+      "segment_start_year": 2021,
+      "segment_end_year": 2021,
+      "segment_length": 1,
+      "segment_target_score": 81.890243902439
+    }
+  ]
+}

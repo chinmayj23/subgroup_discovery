@@ -1,0 +1,5 @@
+Method: tree_paper_style
+Tree-paper-style baseline: single pruned decision tree chosen by validation accuracy and compactness over segment-level samples.
+
+Natural-language rules:
+1. IF _segment_idx > 0.5000, THEN interesting (mean target=1509; spans=2008, 2021-2022, 2009-2010; avg span length=7.42).

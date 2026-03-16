@@ -1,0 +1,126 @@
+{
+  "question": "lag10y_access_to_electricity% <= 99.72452163696289",
+  "question_text": "lag10y_access_to_electricity% <= 99.7245",
+  "feature": "lag10y_access_to_electricity%",
+  "threshold": 99.72452163696289,
+  "left": {
+    "leaf_prediction": 0,
+    "class_counts": [
+      1.0,
+      0.0
+    ],
+    "target_summary": {
+      "n_samples": 127,
+      "target_mean": 61.814747405969605,
+      "target_median": 62.084667674051005,
+      "span_start_year_median": 1960,
+      "span_start_year_min": 1960,
+      "span_start_year_max": 2015,
+      "span_end_year_median": 2021,
+      "span_end_year_min": 2015,
+      "span_end_year_max": 2021,
+      "span_ranges_display": [
+        "1960-2021",
+        "1971-2021",
+        "1972-2021",
+        "..."
+      ],
+      "n_distinct_span_ranges": 24,
+      "span_length_mean": 57.968503937007874,
+      "span_length_median": 62.0
+    }
+  },
+  "right": {
+    "question": "latest_death_rate <= 23.4375",
+    "question_text": "latest_death_rate <= 23.4375",
+    "feature": "latest_death_rate",
+    "threshold": 23.4375,
+    "left": {
+      "question": "_segment_idx <= 0.5",
+      "question_text": "_segment_idx <= 0.5000",
+      "feature": "_segment_idx",
+      "threshold": 0.5,
+      "left": {
+        "leaf_prediction": 0,
+        "class_counts": [
+          0.8857142857142857,
+          0.11428571428571428
+        ],
+        "target_summary": {
+          "n_samples": 78,
+          "target_mean": 68.68335815518721,
+          "target_median": 73.13216079069625,
+          "span_start_year_median": 1960,
+          "span_start_year_min": 1960,
+          "span_start_year_max": 2010,
+          "span_end_year_median": 2013,
+          "span_end_year_min": 1960,
+          "span_end_year_max": 2021,
+          "span_ranges_display": [
+            "1960-2021",
+            "1960-2013",
+            "1960",
+            "..."
+          ],
+          "n_distinct_span_ranges": 30,
+          "span_length_mean": 46.88461538461539,
+          "span_length_median": 54.0
+        }
+      },
+      "right": {
+        "leaf_prediction": 1,
+        "class_counts": [
+          0.37209302325581395,
+          0.627906976744186
+        ],
+        "target_summary": {
+          "n_samples": 82,
+          "target_mean": 76.22931557268787,
+          "target_median": 81.32618292682925,
+          "span_start_year_median": 2011,
+          "span_start_year_min": 1961,
+          "span_start_year_max": 2021,
+          "span_end_year_median": 2019,
+          "span_end_year_min": 1963,
+          "span_end_year_max": 2021,
+          "span_ranges_display": [
+            "2007-2021",
+            "2009-2021",
+            "2011-2012",
+            "..."
+          ],
+          "n_distinct_span_ranges": 56,
+          "span_length_mean": 7.195121951219512,
+          "span_length_median": 3.0
+        }
+      }
+    },
+    "right": {
+      "leaf_prediction": 1,
+      "class_counts": [
+        0.02631578947368421,
+        0.9736842105263158
+      ],
+      "target_summary": {
+        "n_samples": 33,
+        "target_mean": 37.15839343999784,
+        "target_median": 37.68367857142857,
+        "span_start_year_median": 1960,
+        "span_start_year_min": 1960,
+        "span_start_year_max": 1993,
+        "span_end_year_median": 1971,
+        "span_end_year_min": 1960,
+        "span_end_year_max": 1993,
+        "span_ranges_display": [
+          "1960-1969",
+          "1960-1970",
+          "1960-1961",
+          "..."
+        ],
+        "n_distinct_span_ranges": 26,
+        "span_length_mean": 7.484848484848484,
+        "span_length_median": 3.0
+      }
+    }
+  }
+}

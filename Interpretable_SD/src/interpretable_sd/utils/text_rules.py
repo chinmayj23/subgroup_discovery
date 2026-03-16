@@ -13,10 +13,16 @@ def _render_rule_summary(target_summary: Dict) -> str:
     if mean_target is not None:
         parts.append(f"mean target={float(mean_target):.4g}")
 
-    span_start = target_summary.get("span_start_year_median")
-    span_end = target_summary.get("span_end_year_median")
-    if span_start is not None and span_end is not None:
-        parts.append(f"typical span={int(span_start)}-{int(span_end)}")
+    span_ranges = target_summary.get("span_ranges_display")
+    if span_ranges:
+        visible_ranges = [str(x) for x in span_ranges if str(x) != "..."]
+        if visible_ranges:
+            parts.append(f"spans={', '.join(visible_ranges)}")
+    else:
+        span_start = target_summary.get("span_start_year_median")
+        span_end = target_summary.get("span_end_year_median")
+        if span_start is not None and span_end is not None:
+            parts.append(f"typical span={int(span_start)}-{int(span_end)}")
 
     span_len = target_summary.get("span_length_mean")
     if span_len is not None:

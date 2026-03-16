@@ -36,7 +36,7 @@
       "max_trees": 12,
       "min_questions": 2,
       "max_questions": 12,
-      "max_depth": 4,
+      "max_depth": 6,
       "vote_rule": "any",
       "eval_mode": "holdout",
       "test_size": 0.2,
@@ -78,18 +78,18 @@
       "interestingness": {
         "methods": ["tail_cluster", "timetribes_windowed"],
         "tail_cluster": {
-          "high_value_quantile": 0.95,
+          "high_value_quantile": 0.975,
           "two_tailed": true
         },
         "timetribes_windowed": {
-          "n_seeds": 1000,
-          "beta": 0.5,
-          "lambd_div": 2.0,
-          "top_percentile": 0.01,
-          "max_overlap": 0.95,
-          "min_subgroup_size": 25,
-          "max_subgroup_frac": 0.9,
-          "progress_every": 100
+          "n_seeds": 500,
+          "beta": 0.3,
+          "lambd_div": 0.0,
+          "top_percentile": 0.0005,
+          "max_overlap": 0.85,
+          "min_subgroup_size": null,
+          "max_subgroup_frac": 0.15,
+          "progress_every": 50
         }
       }
     },
@@ -109,18 +109,18 @@
       "interestingness": {
         "methods": ["tail_cluster", "timetribes_windowed"],
         "tail_cluster": {
-          "high_value_quantile": 0.95,
+          "high_value_quantile": 0.975,
           "two_tailed": false
         },
         "timetribes_windowed": {
-          "n_seeds": 1200,
+          "n_seeds": 500,
           "beta": 0.5,
-          "lambd_div": 2.0,
-          "top_percentile": 0.01,
+          "lambd_div": 0.0,
+          "top_percentile": 0.0005,
           "max_overlap": 0.95,
-          "min_subgroup_size": 25,
-          "max_subgroup_frac": 0.9,
-          "progress_every": 120
+          "min_subgroup_size": null,
+          "max_subgroup_frac": 0.15,
+          "progress_every": 50
         }
       }
     }

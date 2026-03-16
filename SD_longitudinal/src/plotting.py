@@ -19,7 +19,13 @@ def _save_multi(fig, base_path: Path, dpi: int = 300) -> None:
     fig.savefig(base_path.with_suffix(".pdf"), dpi=dpi, bbox_inches="tight")
 
 
-def save_kde_plot(df: pd.DataFrame, target: str, label_column: str, output_base: Path, title: str) -> None:
+def save_kde_plot(
+    df: pd.DataFrame,
+    target: str,
+    label_column: str,
+    output_base: Path,
+    title: Optional[str] = None,
+) -> None:
     if label_column not in df.columns or target not in df.columns:
         return
 
@@ -65,7 +71,8 @@ def save_kde_plot(df: pd.DataFrame, target: str, label_column: str, output_base:
         )
         sns.rugplot(interesting_target, color="red", height=0.03, alpha=0.25)
 
-    plt.title(title)
+    if title:
+        plt.title(title)
     plt.xlabel(target)
     plt.ylabel("Density")
     handles, labels = plt.gca().get_legend_handles_labels()
@@ -81,6 +88,7 @@ def save_forest_accuracy_plot(
     results_df: pd.DataFrame,
     output_base: Path,
     best_row: Optional[pd.Series] = None,
+    title: Optional[str] = None,
 ) -> None:
     fig = plt.figure(figsize=(10, 6))
     plt.scatter(
@@ -102,7 +110,8 @@ def save_forest_accuracy_plot(
         )
     plt.xlabel("Total Number of Questions in Forest", fontsize=12)
     plt.ylabel("Forest Accuracy", fontsize=12)
-    plt.title("Forest Accuracy vs Total Questions", fontsize=14)
+    if title:
+        plt.title(title, fontsize=14)
     plt.grid(True, alpha=0.3)
     plt.legend()
     plt.tight_layout()
@@ -114,7 +123,7 @@ def save_forest_accuracy_plot(
 def save_cutoff_accuracy_plot(
     results_df: pd.DataFrame,
     output_base: Path,
-    title: str = "Test Accuracy By Cut-Off Year",
+    title: Optional[str] = "Test Accuracy By Cut-Off Year",
 ) -> None:
     required = {"cutoff_year", "test_accuracy"}
     if results_df.empty or not required.issubset(results_df.columns):
@@ -142,7 +151,8 @@ def save_cutoff_accuracy_plot(
         )
     plt.xlabel("Cut-Off Year", fontsize=12)
     plt.ylabel("Accuracy", fontsize=12)
-    plt.title(title, fontsize=14)
+    if title:
+        plt.title(title, fontsize=14)
     plt.ylim(0.0, 1.0)
     plt.grid(True, alpha=0.3)
     plt.legend()

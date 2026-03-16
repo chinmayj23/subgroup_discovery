@@ -1,0 +1,198 @@
+{
+  "experiment": "gdp_per_capita_variable_windows",
+  "target_col": "gdp_per_capita",
+  "n_rows": 13198,
+  "elapsed_sec": 1614.4426729999832,
+  "methods": {
+    "tail_cluster": {
+      "interestingness": {
+        "support": 0.02500378845279588,
+        "n_total": 13198,
+        "n_interesting": 330,
+        "mean_all": 8562.710789947887,
+        "mean_interesting": 85712.22188350897,
+        "mean_shift": 77149.51109356109,
+        "kl_divergence": 3.655015266620063,
+        "n_rows": 13198,
+        "n_interesting_rows": 330,
+        "n_segments": 319,
+        "n_interesting_segments": 41,
+        "segment_support": 0.12852664576802508
+      },
+      "rules": {
+        "metrics": {
+          "train": {
+            "accuracy": 0.9658119658119658,
+            "balanced_accuracy": 0.9497226074895978,
+            "precision": 0.8125,
+            "recall": 0.9285714285714286,
+            "f1": 0.8666666666666667,
+            "roc_auc": 0.9497226074895978,
+            "n_rows": 234,
+            "n_positive": 28
+          },
+          "test": {
+            "accuracy": 0.9294117647058824,
+            "balanced_accuracy": 0.8952991452991452,
+            "precision": 0.7333333333333333,
+            "recall": 0.8461538461538461,
+            "f1": 0.7857142857142857,
+            "roc_auc": 0.8952991452991453,
+            "n_rows": 85,
+            "n_positive": 13
+          }
+        },
+        "n_trees": 1,
+        "n_rules": 1,
+        "best_seed": 877
+      },
+      "baselines": {
+        "sysurv_style": {
+          "metrics": {
+            "train": {
+              "accuracy": 0.16666666666666666,
+              "balanced_accuracy": 0.5266990291262136,
+              "precision": 0.12556053811659193,
+              "recall": 1.0,
+              "f1": 0.22310756972111553,
+              "roc_auc": 1.0
+            },
+            "test": {
+              "accuracy": 0.16470588235294117,
+              "balanced_accuracy": 0.47542735042735046,
+              "precision": 0.14634146341463414,
+              "recall": 0.9230769230769231,
+              "f1": 0.25263157894736843,
+              "roc_auc": 0.8942307692307693
+            },
+            "threshold_mode": "quantile",
+            "risk_threshold_quantile": 0.8,
+            "risk_threshold": 1.4738625743641747e-05
+          },
+          "n_rules": 1
+        },
+        "tree_paper_style": {
+          "metrics": {
+            "train": {
+              "accuracy": 0.9487179487179487,
+              "balanced_accuracy": 0.9554438280166435,
+              "precision": 0.7105263157894737,
+              "recall": 0.9642857142857143,
+              "f1": 0.8181818181818182,
+              "roc_auc": 0.9554438280166436
+            },
+            "test": {
+              "accuracy": 0.9294117647058824,
+              "balanced_accuracy": 0.9583333333333333,
+              "precision": 0.6842105263157895,
+              "recall": 1.0,
+              "f1": 0.8125,
+              "roc_auc": 0.9583333333333333
+            },
+            "selection": {
+              "val_accuracy": 0.9787234042553191,
+              "ccp_alpha": 0.12453456,
+              "n_nodes": 3
+            }
+          },
+          "n_rules": 1
+        }
+      }
+    },
+    "timetribes_windowed": {
+      "interestingness": {
+        "support": 0.10387937566297924,
+        "n_total": 13198,
+        "n_interesting": 1371,
+        "mean_all": 8562.710789947887,
+        "mean_interesting": 22089.605689060994,
+        "mean_shift": 13526.894899113107,
+        "kl_divergence": 2.0597848435990898,
+        "n_rows": 13198,
+        "n_interesting_rows": 1371,
+        "n_segments": 814,
+        "n_interesting_segments": 302,
+        "segment_support": 0.371007371007371
+      },
+      "rules": {
+        "metrics": {
+          "train": {
+            "accuracy": 0.8384,
+            "balanced_accuracy": 0.7901800327332242,
+            "precision": 0.958904109589041,
+            "recall": 0.5957446808510638,
+            "f1": 0.7349081364829396,
+            "roc_auc": 0.7901800327332242,
+            "n_rows": 625,
+            "n_positive": 235
+          },
+          "test": {
+            "accuracy": 0.8783068783068783,
+            "balanced_accuracy": 0.8350868607780768,
+            "precision": 0.9583333333333334,
+            "recall": 0.6865671641791045,
+            "f1": 0.8,
+            "roc_auc": 0.8350868607780768,
+            "n_rows": 189,
+            "n_positive": 67
+          }
+        },
+        "n_trees": 1,
+        "n_rules": 2,
+        "best_seed": 539
+      },
+      "baselines": {
+        "sysurv_style": {
+          "metrics": {
+            "train": {
+              "accuracy": 0.824,
+              "balanced_accuracy": 0.7659574468085106,
+              "precision": 1.0,
+              "recall": 0.5319148936170213,
+              "f1": 0.6944444444444444,
+              "roc_auc": 0.9996181123840698
+            },
+            "test": {
+              "accuracy": 0.7777777777777778,
+              "balanced_accuracy": 0.6899314900905309,
+              "precision": 0.9629629629629629,
+              "recall": 0.3880597014925373,
+              "f1": 0.5531914893617021,
+              "roc_auc": 0.9678248103743576
+            },
+            "threshold_mode": "quantile",
+            "risk_threshold_quantile": 0.8,
+            "risk_threshold": 0.8283971922353404
+          },
+          "n_rules": 2
+        },
+        "tree_paper_style": {
+          "metrics": {
+            "train": {
+              "accuracy": 0.896,
+              "balanced_accuracy": 0.8684669939989089,
+              "precision": 0.956989247311828,
+              "recall": 0.7574468085106383,
+              "f1": 0.8456057007125891,
+              "roc_auc": 0.9563338788870703
+            },
+            "test": {
+              "accuracy": 0.9259259259259259,
+              "balanced_accuracy": 0.9056153657939809,
+              "precision": 0.9491525423728814,
+              "recall": 0.835820895522388,
+              "f1": 0.8888888888888888,
+              "roc_auc": 0.9606679716173232
+            },
+            "selection": {
+              "val_accuracy": 0.888,
+              "ccp_alpha": 0.00171269,
+              "n_nodes": 13
+            }
+          },
+          "n_rules": 5
+        }
+      }
+    }
+  }
+}

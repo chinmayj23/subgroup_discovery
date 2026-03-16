@@ -37,9 +37,9 @@ Per experiment, the pipeline now does:
 
 1. load the dataset and apply the target transform,
 2. drop rows with missing subject, date, or target,
-3. build the panel feature table,
-4. run each interestingness method on raw rows,
-5. post-process the raw row labels into contiguous segments,
+3. run each interestingness method on raw rows,
+4. build the panel feature table on the original subject-time panel,
+5. post-process the raw row labels into contiguous subject-level segments,
 6. build train/test matrices from segment rows,
 7. run the RF rule module,
 8. run the comparable baselines,
@@ -76,6 +76,19 @@ It uses:
 3. overlap control,
 4. subgroup size constraints.
 
+In the current implementation, candidate intervals are generated from two complementary sources:
+
+1. bootstrap clustering intervals,
+2. bootstrap quantile-window intervals.
+
+This is an enrichment step, not a change of objective. The method is still target-only, and the same scoring and overlap-control stage is used afterwards. The enrichment only broadens the candidate pool so that the selection stage is not forced to choose only between singleton-style intervals and near-global intervals when the one-dimensional clustering is unstable.
+
+Operationally:
+
+1. clustering contributes intervals suggested by detached structure in the target,
+2. quantile windows contribute additional local target ranges,
+3. the same scoring stage decides which of those candidates are genuinely interesting.
+
 Again, it does not use covariate feature engineering for the interestingness decision.
 
 ## 5. Segment Construction
@@ -97,6 +110,8 @@ For each subject:
 3. optionally suppress very short positive runs with `min_interesting_run_length`,
 4. assign a segment id every time the label changes,
 5. aggregate each contiguous run into one segment row.
+
+This logic assumes one raw row per `(subject, time)` pair. The code now checks that explicitly and raises an error if duplicate subject-time rows are present, because otherwise the span alignment would be ambiguous.
 
 ### 5.2 Segment metadata
 
@@ -145,7 +160,7 @@ This uses `build_longitudinal_features(...)` to produce row-aligned temporal fea
 
 These features are built in panel mode, so they remain aligned to individual subject-time rows.
 
-After that, the row labels from the interestingness module are merged back onto the feature table and collapsed into segment rows.
+After that, the row labels from the interestingness module are merged back onto the feature table and collapsed into segment rows by contiguous runs within each subject.
 
 Implementation detail:
 
@@ -189,6 +204,7 @@ This stage:
 
 1. removes metadata columns from prediction,
 2. removes target-derived segment fields from prediction,
+3. removes temporal features derived from the target variable itself,
 3. keeps only numeric covariates,
 4. preprocesses missingness using train-only information,
 5. carries segment span metadata forward for reporting.
@@ -199,9 +215,10 @@ The following are explicitly excluded from the predictive feature set:
 2. dates,
 3. `segment_*` metadata,
 4. `label_target_*` helpers,
-5. `window_*` legacy metadata.
+5. temporal features derived from the target variable,
+6. `window_*` legacy metadata.
 
-This is important because segment start/end years are used only for interpretation, not as predictive covariates.
+This is important because segment start/end years are used only for interpretation, not as predictive covariates, and because the rule learner should explain interesting spans using other temporal covariates rather than the target history itself.
 
 ## 9. RF Rule Module
 
@@ -231,11 +248,11 @@ The RF module:
 Leaf summaries now include:
 
 1. mean target value,
-2. typical span start year,
-3. typical span end year,
+2. one or more observed span ranges in that leaf,
+3. median span start and end years,
 4. average span length.
 
-So positive rule text can say not only what covariate pattern is interesting, but also when that interesting span tends to occur.
+So positive rule text and tree leaves can say not only what covariate pattern is interesting, but also which span years are captured by that leaf.
 
 ## 10. Baselines
 
@@ -332,7 +349,7 @@ Important blocks:
 
 `target_aggregation` determines the segment-level target summary used in reporting and leaf summaries.
 
-`min_interesting_run_length` allows slight suppression of isolated positive spikes before segment rows are formed.
+`min_interesting_run_length` allows slight suppression of isolated positive spikes before segment rows are formed. In the main configs it is set to `1`, so isolated interesting years are retained.
 
 ## 13. Run Commands
 

@@ -1,0 +1,30 @@
+[
+  {
+    "leaf_id": 1,
+    "prediction": 1,
+    "n_samples": 214,
+    "rule": [
+      "_segment_idx <= 1.5000"
+    ],
+    "target_summary": {
+      "n_samples": 214,
+      "target_mean": 448.2129958478234,
+      "target_median": 166.00745104018966,
+      "span_start_year_median": 1969,
+      "span_start_year_min": 1960,
+      "span_start_year_max": 2022,
+      "span_end_year_median": 2022,
+      "span_end_year_min": 1986,
+      "span_end_year_max": 2022,
+      "span_ranges_display": [
+        "1960-2022",
+        "1965-2022",
+        "1990-2022",
+        "..."
+      ],
+      "n_distinct_span_ranges": 70,
+      "span_length_mean": 44.76635514018692,
+      "span_length_median": 47.0
+    }
+  }
+]

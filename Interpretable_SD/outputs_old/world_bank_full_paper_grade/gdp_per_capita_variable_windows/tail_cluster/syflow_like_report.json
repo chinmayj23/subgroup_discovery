@@ -1,0 +1,275 @@
+{
+  "method": "tail_cluster",
+  "n_samples": 319,
+  "n_interesting": 41,
+  "interestingness_metrics": {
+    "support": 0.02500378845279588,
+    "n_total": 13198,
+    "n_interesting": 330,
+    "mean_all": 8562.710789947887,
+    "mean_interesting": 85712.22188350897,
+    "mean_shift": 77149.51109356109,
+    "kl_divergence": 3.655015266620063,
+    "n_rows": 13198,
+    "n_interesting_rows": 330,
+    "n_segments": 319,
+    "n_interesting_segments": 41,
+    "segment_support": 0.12852664576802508
+  },
+  "rule_module_metrics": {
+    "metrics": {
+      "train": {
+        "accuracy": 0.9658119658119658,
+        "balanced_accuracy": 0.9497226074895978,
+        "precision": 0.8125,
+        "recall": 0.9285714285714286,
+        "f1": 0.8666666666666667,
+        "roc_auc": 0.9497226074895978,
+        "n_rows": 234,
+        "n_positive": 28
+      },
+      "test": {
+        "accuracy": 0.9294117647058824,
+        "balanced_accuracy": 0.8952991452991452,
+        "precision": 0.7333333333333333,
+        "recall": 0.8461538461538461,
+        "f1": 0.7857142857142857,
+        "roc_auc": 0.8952991452991453,
+        "n_rows": 85,
+        "n_positive": 13
+      }
+    },
+    "n_trees": 1,
+    "n_rules": 1,
+    "best_seed": 877
+  },
+  "baselines": {
+    "sysurv_style": {
+      "metrics": {
+        "train": {
+          "accuracy": 0.16666666666666666,
+          "balanced_accuracy": 0.5266990291262136,
+          "precision": 0.12556053811659193,
+          "recall": 1.0,
+          "f1": 0.22310756972111553,
+          "roc_auc": 1.0
+        },
+        "test": {
+          "accuracy": 0.16470588235294117,
+          "balanced_accuracy": 0.47542735042735046,
+          "precision": 0.14634146341463414,
+          "recall": 0.9230769230769231,
+          "f1": 0.25263157894736843,
+          "roc_auc": 0.8942307692307693
+        },
+        "threshold_mode": "quantile",
+        "risk_threshold_quantile": 0.8,
+        "risk_threshold": 1.4738625743641747e-05
+      },
+      "n_rules": 1
+    },
+    "tree_paper_style": {
+      "metrics": {
+        "train": {
+          "accuracy": 0.9487179487179487,
+          "balanced_accuracy": 0.9554438280166435,
+          "precision": 0.7105263157894737,
+          "recall": 0.9642857142857143,
+          "f1": 0.8181818181818182,
+          "roc_auc": 0.9554438280166436
+        },
+        "test": {
+          "accuracy": 0.9294117647058824,
+          "balanced_accuracy": 0.9583333333333333,
+          "precision": 0.6842105263157895,
+          "recall": 1.0,
+          "f1": 0.8125,
+          "roc_auc": 0.9583333333333333
+        },
+        "selection": {
+          "val_accuracy": 0.9787234042553191,
+          "ccp_alpha": 0.12453456,
+          "n_nodes": 3
+        }
+      },
+      "n_rules": 1
+    }
+  },
+  "subgroup_preview": [
+    {
+      "segment_id": "Qatar__seg03__2021_2022__I",
+      "segment_start_year": 2021,
+      "segment_end_year": 2022,
+      "segment_length": 2,
+      "segment_target_score": 20802.70842305578
+    },
+    {
+      "segment_id": "Ireland__seg03__2014_2022__I",
+      "segment_start_year": 2014,
+      "segment_end_year": 2022,
+      "segment_length": 9,
+      "segment_target_score": 6028.815794000845
+    },
+    {
+      "segment_id": "Monaco__seg01__1987_2022__I",
+      "segment_start_year": 1987,
+      "segment_end_year": 2022,
+      "segment_length": 36,
+      "segment_target_score": 5100.583940853709
+    },
+    {
+      "segment_id": "Liechtenstein__seg01__1992_2021__I",
+      "segment_start_year": 1992,
+      "segment_end_year": 2021,
+      "segment_length": 30,
+      "segment_target_score": 4909.028316909758
+    },
+    {
+      "segment_id": "Faroe Islands__seg01__2013_2014__I",
+      "segment_start_year": 2013,
+      "segment_end_year": 2014,
+      "segment_length": 2,
+      "segment_target_score": 4565.992615186071
+    },
+    {
+      "segment_id": "Australia__seg05__2021_2022__I",
+      "segment_start_year": 2021,
+      "segment_end_year": 2022,
+      "segment_length": 2,
+      "segment_target_score": 4402.600476040097
+    },
+    {
+      "segment_id": "Ireland__seg01__2006_2008__I",
+      "segment_start_year": 2006,
+      "segment_end_year": 2008,
+      "segment_length": 3,
+      "segment_target_score": 3511.9723514948855
+    },
+    {
+      "segment_id": "Luxembourg__seg01__2003_2022__I",
+      "segment_start_year": 2003,
+      "segment_end_year": 2022,
+      "segment_length": 20,
+      "segment_target_score": 3121.9315979891826
+    },
+    {
+      "segment_id": "Norway__seg01__2004_2022__I",
+      "segment_start_year": 2004,
+      "segment_end_year": 2022,
+      "segment_length": 19,
+      "segment_target_score": 2831.1382670768608
+    },
+    {
+      "segment_id": "Bermuda__seg01__1999_2022__I",
+      "segment_start_year": 1999,
+      "segment_end_year": 2022,
+      "segment_length": 24,
+      "segment_target_score": 2805.623083451435
+    },
+    {
+      "segment_id": "United States__seg01__2014_2022__I",
+      "segment_start_year": 2014,
+      "segment_end_year": 2022,
+      "segment_length": 9,
+      "segment_target_score": 2650.7165597872827
+    },
+    {
+      "segment_id": "Singapore__seg01__2011_2022__I",
+      "segment_start_year": 2011,
+      "segment_end_year": 2022,
+      "segment_length": 12,
+      "segment_target_score": 2628.7429123502243
+    },
+    {
+      "segment_id": "North America__seg01__2014_2022__I",
+      "segment_start_year": 2014,
+      "segment_end_year": 2022,
+      "segment_length": 9,
+      "segment_target_score": 2430.815729614781
+    },
+    {
+      "segment_id": "Greenland__seg03__2020_2021__I",
+      "segment_start_year": 2020,
+      "segment_end_year": 2021,
+      "segment_length": 2,
+      "segment_target_score": 2423.2190902954026
+    },
+    {
+      "segment_id": "Macao SAR, China__seg01__2011_2019__I",
+      "segment_start_year": 2011,
+      "segment_end_year": 2019,
+      "segment_length": 9,
+      "segment_target_score": 2308.7841596689314
+    },
+    {
+      "segment_id": "Denmark__seg03__2016_2022__I",
+      "segment_start_year": 2016,
+      "segment_end_year": 2022,
+      "segment_length": 7,
+      "segment_target_score": 2187.6759367346554
+    },
+    {
+      "segment_id": "Switzerland__seg01__2004_2022__I",
+      "segment_start_year": 2004,
+      "segment_end_year": 2022,
+      "segment_length": 19,
+      "segment_target_score": 2144.469364971059
+    },
+    {
+      "segment_id": "Iceland__seg05__2016_2022__I",
+      "segment_start_year": 2016,
+      "segment_end_year": 2022,
+      "segment_length": 7,
+      "segment_target_score": 1913.1420509070667
+    },
+    {
+      "segment_id": "Isle of Man__seg01__2007_2020__I",
+      "segment_start_year": 2007,
+      "segment_end_year": 2020,
+      "segment_length": 14,
+      "segment_target_score": 1881.4174997181858
+    },
+    {
+      "segment_id": "Faroe Islands__seg03__2016_2022__I",
+      "segment_start_year": 2016,
+      "segment_end_year": 2022,
+      "segment_length": 7,
+      "segment_target_score": 1690.8934635714406
+    },
+    {
+      "segment_id": "Channel Islands__seg01__2004_2021__I",
+      "segment_start_year": 2004,
+      "segment_end_year": 2021,
+      "segment_length": 10,
+      "segment_target_score": 1195.584503516625
+    },
+    {
+      "segment_id": "Sweden__seg05__2017_2018__I",
+      "segment_start_year": 2017,
+      "segment_end_year": 2018,
+      "segment_length": 2,
+      "segment_target_score": 797.551656220312
+    },
+    {
+      "segment_id": "Cayman Islands__seg00__2006_2022__I",
+      "segment_start_year": 2006,
+      "segment_end_year": 2022,
+      "segment_length": 17,
+      "segment_target_score": 777.5233317745979
+    },
+    {
+      "segment_id": "Denmark__seg01__2007_2014__I",
+      "segment_start_year": 2007,
+      "segment_end_year": 2014,
+      "segment_length": 8,
+      "segment_target_score": 580.2756807887272
+    },
+    {
+      "segment_id": "Australia__seg03__2017_2019__I",
+      "segment_start_year": 2017,
+      "segment_end_year": 2019,
+      "segment_length": 3,
+      "segment_target_score": 547.5092125526098
+    }
+  ]
+}

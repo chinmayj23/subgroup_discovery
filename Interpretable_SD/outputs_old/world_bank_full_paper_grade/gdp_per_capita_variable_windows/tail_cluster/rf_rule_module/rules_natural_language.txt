@@ -1,0 +1,5 @@
+Method: random_forest_module
+Each sample corresponds to a contiguous same-interestingness segment within a subject; positive rules therefore describe when an interesting span occurs and report its typical years.
+
+Natural-language rules:
+1. IF _segment_idx > 0.5000 AND vol10y_government_health_expenditure% > 0.4795, THEN interesting (mean target=1636; spans=2008, 2021-2022, 2014-2022; avg span length=8.03).

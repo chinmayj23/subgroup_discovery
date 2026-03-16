@@ -1,0 +1,7 @@
+Method: tree_paper_style
+Tree-paper-style baseline: single pruned decision tree chosen by validation accuracy and compactness over segment-level samples.
+
+Natural-language rules:
+1. IF latest_death_rate <= 23.2180 AND lag7y_logistic_performance_index <= 3.6086 AND _segment_idx > 0.5000 AND trend10y_population <= 13357.9004, THEN interesting (mean target=78.68; spans=2011-2012, 2005, 2007-2021; avg span length=4.95).
+2. IF latest_death_rate <= 23.2180 AND lag7y_logistic_performance_index > 3.6086, THEN interesting (mean target=81.43; spans=2014-2021, 1960-2021, 2008-2021; avg span length=13.35).
+3. IF latest_death_rate > 23.2180, THEN interesting (mean target=37.42; spans=1960-1969, 1960-1970, 1960; avg span length=7.16).

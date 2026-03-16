@@ -1,0 +1,52 @@
+{
+  "sysurv_style": {
+    "metrics": {
+      "train": {
+        "accuracy": 0.16666666666666666,
+        "balanced_accuracy": 0.5266990291262136,
+        "precision": 0.12556053811659193,
+        "recall": 1.0,
+        "f1": 0.22310756972111553,
+        "roc_auc": 1.0
+      },
+      "test": {
+        "accuracy": 0.16470588235294117,
+        "balanced_accuracy": 0.47542735042735046,
+        "precision": 0.14634146341463414,
+        "recall": 0.9230769230769231,
+        "f1": 0.25263157894736843,
+        "roc_auc": 0.8942307692307693
+      },
+      "threshold_mode": "quantile",
+      "risk_threshold_quantile": 0.8,
+      "risk_threshold": 1.4738625743641747e-05
+    },
+    "n_rules": 1
+  },
+  "tree_paper_style": {
+    "metrics": {
+      "train": {
+        "accuracy": 0.9487179487179487,
+        "balanced_accuracy": 0.9554438280166435,
+        "precision": 0.7105263157894737,
+        "recall": 0.9642857142857143,
+        "f1": 0.8181818181818182,
+        "roc_auc": 0.9554438280166436
+      },
+      "test": {
+        "accuracy": 0.9294117647058824,
+        "balanced_accuracy": 0.9583333333333333,
+        "precision": 0.6842105263157895,
+        "recall": 1.0,
+        "f1": 0.8125,
+        "roc_auc": 0.9583333333333333
+      },
+      "selection": {
+        "val_accuracy": 0.9787234042553191,
+        "ccp_alpha": 0.12453456,
+        "n_nodes": 3
+      }
+    },
+    "n_rules": 1
+  }
+}

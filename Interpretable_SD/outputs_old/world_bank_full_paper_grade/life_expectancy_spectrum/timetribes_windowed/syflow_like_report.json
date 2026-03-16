@@ -1,0 +1,275 @@
+{
+  "method": "timetribes_windowed",
+  "n_samples": 1116,
+  "n_interesting": 477,
+  "interestingness_metrics": {
+    "support": 0.12870288667591076,
+    "n_total": 15866,
+    "n_interesting": 2042,
+    "mean_all": 64.25419288088393,
+    "mean_interesting": 53.40519627230356,
+    "mean_shift": -10.848996608580372,
+    "kl_divergence": 2.034424731128175,
+    "n_rows": 15866,
+    "n_interesting_rows": 2042,
+    "n_segments": 1116,
+    "n_interesting_segments": 477,
+    "segment_support": 0.4274193548387097
+  },
+  "rule_module_metrics": {
+    "metrics": {
+      "train": {
+        "accuracy": 0.7253948967193196,
+        "balanced_accuracy": 0.7466112956810631,
+        "precision": 0.6244979919678715,
+        "recall": 0.8885714285714286,
+        "f1": 0.7334905660377359,
+        "roc_auc": 0.7466112956810631,
+        "n_rows": 823,
+        "n_positive": 350
+      },
+      "test": {
+        "accuracy": 0.6996587030716723,
+        "balanced_accuracy": 0.7210653638174747,
+        "precision": 0.6054054054054054,
+        "recall": 0.8818897637795275,
+        "f1": 0.717948717948718,
+        "roc_auc": 0.7210653638174748,
+        "n_rows": 293,
+        "n_positive": 127
+      }
+    },
+    "n_trees": 1,
+    "n_rules": 2,
+    "best_seed": 597
+  },
+  "baselines": {
+    "sysurv_style": {
+      "metrics": {
+        "train": {
+          "accuracy": 0.7752126366950183,
+          "balanced_accuracy": 0.7357142857142858,
+          "precision": 1.0,
+          "recall": 0.4714285714285714,
+          "f1": 0.6407766990291263,
+          "roc_auc": 0.9899365750528542
+        },
+        "test": {
+          "accuracy": 0.6757679180887372,
+          "balanced_accuracy": 0.6269092116497486,
+          "precision": 0.9705882352941176,
+          "recall": 0.25984251968503935,
+          "f1": 0.40993788819875776,
+          "roc_auc": 0.8624893273882933
+        },
+        "threshold_mode": "quantile",
+        "risk_threshold_quantile": 0.8,
+        "risk_threshold": 0.7425287726084832
+      },
+      "n_rules": 2
+    },
+    "tree_paper_style": {
+      "metrics": {
+        "train": {
+          "accuracy": 0.7253948967193196,
+          "balanced_accuracy": 0.7466112956810631,
+          "precision": 0.6244979919678715,
+          "recall": 0.8885714285714286,
+          "f1": 0.7334905660377359,
+          "roc_auc": 0.7813168227121715
+        },
+        "test": {
+          "accuracy": 0.6996587030716723,
+          "balanced_accuracy": 0.7210653638174747,
+          "precision": 0.6054054054054054,
+          "recall": 0.8818897637795275,
+          "f1": 0.717948717948718,
+          "roc_auc": 0.769329285646523
+        },
+        "selection": {
+          "val_accuracy": 0.7696969696969697,
+          "ccp_alpha": 0.03119287,
+          "n_nodes": 7
+        }
+      },
+      "n_rules": 2
+    }
+  },
+  "subgroup_preview": [
+    {
+      "segment_id": "Pacific island small states__seg04__2009_2009__I",
+      "segment_start_year": 2009,
+      "segment_end_year": 2009,
+      "segment_length": 1,
+      "segment_target_score": 68.0236126664195
+    },
+    {
+      "segment_id": "Malta__seg01__1961_1961__I",
+      "segment_start_year": 1961,
+      "segment_end_year": 1961,
+      "segment_length": 1,
+      "segment_target_score": 68.0136097560976
+    },
+    {
+      "segment_id": "Hungary__seg00__1960_1960__I",
+      "segment_start_year": 1960,
+      "segment_end_year": 1960,
+      "segment_length": 1,
+      "segment_target_score": 68.0031707317073
+    },
+    {
+      "segment_id": "Tajikistan__seg07__2020_2020__I",
+      "segment_start_year": 2020,
+      "segment_end_year": 2020,
+      "segment_length": 1,
+      "segment_target_score": 67.994
+    },
+    {
+      "segment_id": "Solomon Islands__seg05__2007_2007__I",
+      "segment_start_year": 2007,
+      "segment_end_year": 2007,
+      "segment_length": 1,
+      "segment_target_score": 67.986
+    },
+    {
+      "segment_id": "Turks and Caicos Islands__seg04__1975_1975__I",
+      "segment_start_year": 1975,
+      "segment_end_year": 1975,
+      "segment_length": 1,
+      "segment_target_score": 67.985
+    },
+    {
+      "segment_id": "Seychelles__seg01__1989_1989__I",
+      "segment_start_year": 1989,
+      "segment_end_year": 1989,
+      "segment_length": 1,
+      "segment_target_score": 67.9707317073171
+    },
+    {
+      "segment_id": "Ukraine__seg07__2005_2005__I",
+      "segment_start_year": 2005,
+      "segment_end_year": 2005,
+      "segment_length": 1,
+      "segment_target_score": 67.9568292682927
+    },
+    {
+      "segment_id": "Belize__seg03__1982_1982__I",
+      "segment_start_year": 1982,
+      "segment_end_year": 1982,
+      "segment_length": 1,
+      "segment_target_score": 67.955
+    },
+    {
+      "segment_id": "Costa Rica__seg01__1973_1973__I",
+      "segment_start_year": 1973,
+      "segment_end_year": 1973,
+      "segment_length": 1,
+      "segment_target_score": 67.953
+    },
+    {
+      "segment_id": "West Bank and Gaza__seg00__1990_1990__I",
+      "segment_start_year": 1990,
+      "segment_end_year": 1990,
+      "segment_length": 1,
+      "segment_target_score": 67.934
+    },
+    {
+      "segment_id": "Central Europe and the Baltics__seg00__1960_1960__I",
+      "segment_start_year": 1960,
+      "segment_end_year": 1960,
+      "segment_length": 1,
+      "segment_target_score": 67.9339519629045
+    },
+    {
+      "segment_id": "Estonia__seg01__1993_1993__I",
+      "segment_start_year": 1993,
+      "segment_end_year": 1993,
+      "segment_length": 1,
+      "segment_target_score": 67.909756097561
+    },
+    {
+      "segment_id": "Belarus__seg01__1999_1999__I",
+      "segment_start_year": 1999,
+      "segment_end_year": 1999,
+      "segment_length": 1,
+      "segment_target_score": 67.9073170731707
+    },
+    {
+      "segment_id": "Kyrgyz Republic__seg02__1989_1989__I",
+      "segment_start_year": 1989,
+      "segment_end_year": 1989,
+      "segment_length": 1,
+      "segment_target_score": 67.9073170731707
+    },
+    {
+      "segment_id": "Uruguay__seg00__1960_1962__I",
+      "segment_start_year": 1960,
+      "segment_end_year": 1962,
+      "segment_length": 3,
+      "segment_target_score": 67.887
+    },
+    {
+      "segment_id": "Malta__seg03__1963_1963__I",
+      "segment_start_year": 1963,
+      "segment_end_year": 1963,
+      "segment_length": 1,
+      "segment_target_score": 67.8719512195122
+    },
+    {
+      "segment_id": "Hungary__seg02__1962_1962__I",
+      "segment_start_year": 1962,
+      "segment_end_year": 1962,
+      "segment_length": 1,
+      "segment_target_score": 67.8658536585366
+    },
+    {
+      "segment_id": "Kyrgyz Republic__seg08__2005_2007__I",
+      "segment_start_year": 2005,
+      "segment_end_year": 2007,
+      "segment_length": 3,
+      "segment_target_score": 67.84878048780486
+    },
+    {
+      "segment_id": "Ukraine__seg05__1999_2001__I",
+      "segment_start_year": 1999,
+      "segment_end_year": 2001,
+      "segment_length": 3,
+      "segment_target_score": 67.83121951219512
+    },
+    {
+      "segment_id": "Syrian Arab Republic__seg03__1983_1983__I",
+      "segment_start_year": 1983,
+      "segment_end_year": 1983,
+      "segment_length": 1,
+      "segment_target_score": 67.829
+    },
+    {
+      "segment_id": "Small states__seg04__2021_2021__I",
+      "segment_start_year": 2021,
+      "segment_end_year": 2021,
+      "segment_length": 1,
+      "segment_target_score": 67.8224389438784
+    },
+    {
+      "segment_id": "St. Martin (French part)__seg00__1960_1961__I",
+      "segment_start_year": 1960,
+      "segment_end_year": 1961,
+      "segment_length": 2,
+      "segment_target_score": 67.7845
+    },
+    {
+      "segment_id": "Indonesia__seg07__2005_2006__I",
+      "segment_start_year": 2005,
+      "segment_end_year": 2006,
+      "segment_length": 2,
+      "segment_target_score": 67.7815
+    },
+    {
+      "segment_id": "Portugal__seg03__1973_1974__I",
+      "segment_start_year": 1973,
+      "segment_end_year": 1974,
+      "segment_length": 2,
+      "segment_target_score": 67.7719512195122
+    }
+  ]
+}

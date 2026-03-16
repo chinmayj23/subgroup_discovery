@@ -1,0 +1,6 @@
+Method: random_forest_module
+Each sample corresponds to a contiguous same-interestingness segment within a subject; positive rules therefore describe when an interesting span occurs and report its typical years.
+
+Natural-language rules:
+1. IF _segment_idx > 0.5000 AND _segment_idx <= 1.5000, THEN interesting (mean target=837.7; spans=1979-1980, 1986-1989, 1978-1985; avg span length=4.73).
+2. IF _segment_idx > 0.5000 AND _segment_idx > 1.5000 AND _segment_idx > 2.5000 AND _segment_idx <= 3.5000, THEN interesting (mean target=512.7; spans=1986, 2022, 1981-1985; avg span length=5.42).

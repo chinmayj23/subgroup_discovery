@@ -1,0 +1,61 @@
+[
+  {
+    "leaf_id": 6,
+    "prediction": 1,
+    "n_samples": 442,
+    "rule": [
+      "pct_change5y__year > 0.0025",
+      "latest_death_rate <= 21.7785",
+      "_segment_idx > 0.5000"
+    ],
+    "target_summary": {
+      "n_samples": 454,
+      "target_mean": 59.89924375647155,
+      "target_median": 61.819964566442295,
+      "span_start_year_median": 1982,
+      "span_start_year_min": 1961,
+      "span_start_year_max": 2020,
+      "span_end_year_median": 1992,
+      "span_end_year_min": 1961,
+      "span_end_year_max": 2020,
+      "span_ranges_display": [
+        "1982-1985",
+        "1994",
+        "2007-2009",
+        "..."
+      ],
+      "n_distinct_span_ranges": 330,
+      "span_length_mean": 8.174008810572687,
+      "span_length_median": 4.0
+    }
+  },
+  {
+    "leaf_id": 4,
+    "prediction": 1,
+    "n_samples": 45,
+    "rule": [
+      "pct_change5y__year > 0.0025",
+      "latest_death_rate > 21.7785"
+    ],
+    "target_summary": {
+      "n_samples": 44,
+      "target_mean": 38.88872445492985,
+      "target_median": 40.03597042005799,
+      "span_start_year_median": 1960,
+      "span_start_year_min": 1960,
+      "span_start_year_max": 1995,
+      "span_end_year_median": 1973,
+      "span_end_year_min": 1960,
+      "span_end_year_max": 1998,
+      "span_ranges_display": [
+        "1960-1966",
+        "1960",
+        "1960-1961",
+        "..."
+      ],
+      "n_distinct_span_ranges": 30,
+      "span_length_mean": 10.431818181818182,
+      "span_length_median": 7.0
+    }
+  }
+]

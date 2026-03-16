@@ -1,0 +1,8 @@
+Method: random_forest_module
+Each sample corresponds to a contiguous same-interestingness segment within a subject; positive rules therefore describe when an interesting span occurs and report its typical years.
+
+Natural-language rules:
+1. IF lag10y_access_to_electricity% > 99.7245 AND latest_death_rate <= 23.4375 AND _segment_idx > 0.5000, THEN interesting (mean target=76.23; spans=2007-2021, 2009-2021, 2011-2012; avg span length=7.20).
+2. IF lag10y_access_to_electricity% > 99.7245 AND latest_death_rate > 23.4375, THEN interesting (mean target=37.16; spans=1960-1969, 1960-1970, 1960-1961; avg span length=7.48).
+3. IF latest_death_rate <= 22.4650 AND lag7y_logistic_performance_index > 3.6086, THEN interesting (mean target=81.43; spans=2014-2021, 1960-2021, 2008-2021; avg span length=13.35).
+4. IF latest_death_rate > 22.4650, THEN interesting (mean target=37.62; spans=1960, 1960-1969, 1960-1970; avg span length=6.84).

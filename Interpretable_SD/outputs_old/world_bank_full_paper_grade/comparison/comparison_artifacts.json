@@ -1,0 +1,5 @@
+{
+  "comparison_csv": "Interpretable_SD\\outputs\\world_bank_full_paper_grade\\comparison\\comparison_full_paper_grade.csv",
+  "comparison_md": "Interpretable_SD\\outputs\\world_bank_full_paper_grade\\comparison\\comparison_full_paper_grade.md",
+  "leaderboard_csv": "Interpretable_SD\\outputs\\world_bank_full_paper_grade\\comparison\\comparison_full_paper_grade_leaderboard.csv"
+}

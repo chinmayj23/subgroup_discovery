@@ -1,0 +1,6 @@
+Method: random_forest_module
+Each sample corresponds to a contiguous same-interestingness segment within a subject; positive rules therefore describe when an interesting span occurs and report its typical years.
+
+Natural-language rules:
+1. IF pct_change5y__year > 0.0025 AND latest_death_rate <= 21.7785 AND _segment_idx > 0.5000, THEN interesting (mean target=59.9; spans=1982-1985, 1994, 2007-2009; avg span length=8.17).
+2. IF pct_change5y__year > 0.0025 AND latest_death_rate > 21.7785, THEN interesting (mean target=38.89; spans=1960-1966, 1960, 1960-1961; avg span length=10.43).

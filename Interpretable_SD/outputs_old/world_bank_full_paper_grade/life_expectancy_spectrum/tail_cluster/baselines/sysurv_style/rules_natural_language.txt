@@ -1,0 +1,7 @@
+Method: sysurv_style
+Sysurv-style baseline: a non-linear risk scorer first detects high-risk segments; a shallow naming tree then explains when those interesting spans occur.
+
+Natural-language rules:
+1. IF latest_death_rate <= 23.3385 AND lag7y_logistic_performance_index > 3.6086, THEN interesting (mean target=81.43; spans=2014-2021, 1960-2021, 2008-2021; avg span length=13.35).
+2. IF latest_death_rate > 23.3385 AND delta7y_death_rate <= -0.3910, THEN interesting (mean target=37.66; spans=1960-1969, 1960-1970, 1960-1973; avg span length=12.33).
+3. IF latest_death_rate > 23.3385 AND delta7y_death_rate > -0.3910, THEN interesting (mean target=36.93; spans=1960, 1960-1961, 1960-1962; avg span length=3.32).

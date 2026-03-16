@@ -142,7 +142,7 @@ def run_tree_paper_style_baseline(
         tree,
         feature_names,
         out_dir / "tree",
-        title="Tree-paper-style baseline (single pruned tree)",
+        title=None,
         leaf_stats=leaf_stats,
         positive_class=1,
         positive_label="interesting",

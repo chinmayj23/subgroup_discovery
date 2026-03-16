@@ -1,0 +1,21 @@
+{
+  "train": {
+    "accuracy": 0.16666666666666666,
+    "balanced_accuracy": 0.5266990291262136,
+    "precision": 0.12556053811659193,
+    "recall": 1.0,
+    "f1": 0.22310756972111553,
+    "roc_auc": 1.0
+  },
+  "test": {
+    "accuracy": 0.16470588235294117,
+    "balanced_accuracy": 0.47542735042735046,
+    "precision": 0.14634146341463414,
+    "recall": 0.9230769230769231,
+    "f1": 0.25263157894736843,
+    "roc_auc": 0.8942307692307693
+  },
+  "threshold_mode": "quantile",
+  "risk_threshold_quantile": 0.8,
+  "risk_threshold": 1.4738625743641747e-05
+}

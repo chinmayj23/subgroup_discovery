@@ -240,6 +240,13 @@ def build_interest_segments(
 
     raw["_year"] = extract_year(raw[date_col])
     raw["_time_key"] = normalize_time_key(raw[date_col])
+    raw_dupes = raw.duplicated([id_col, "_time_key"], keep=False)
+    if raw_dupes.any():
+        dup_count = int(raw_dupes.sum())
+        raise ValueError(
+            f"Expected unique subject-time rows for segmentation, found {dup_count} duplicates "
+            f"on ({id_col}, {date_col})."
+        )
     raw = raw.sort_values([id_col, date_col]).reset_index(drop=True)
 
     run_rows: List[pd.DataFrame] = []
@@ -306,6 +313,13 @@ def build_interest_segments(
     panel_aligned = panel_df.copy()
     if "_time_key" not in panel_aligned.columns:
         panel_aligned["_time_key"] = normalize_time_key(panel_aligned[date_col])
+    panel_dupes = panel_aligned.duplicated([id_col, "_time_key"], keep=False)
+    if panel_dupes.any():
+        dup_count = int(panel_dupes.sum())
+        raise ValueError(
+            f"Expected unique subject-time feature rows, found {dup_count} duplicates "
+            f"on ({id_col}, {date_col})."
+        )
     panel_aligned = panel_aligned.merge(
         row_labeled_df[[id_col, "_time_key", LABEL_COLUMN, "_segment_idx"]],
         on=[id_col, "_time_key"],
@@ -414,6 +428,12 @@ def prepare_xy_with_ids(
     if exclude_prefixes:
         pref_cols = drop_by_prefix(feature_df.columns, exclude_prefixes)
         feature_df = feature_df.drop(columns=pref_cols)
+
+    # Internal bookkeeping columns in this project are prefixed with "_".
+    # They should never be eligible as predictive features.
+    internal_cols = [c for c in feature_df.columns if str(c).startswith("_")]
+    if internal_cols:
+        feature_df = feature_df.drop(columns=internal_cols)
 
     X_df = feature_df.select_dtypes(include=[np.number]).copy()
     if X_df.empty:

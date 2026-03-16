@@ -41,7 +41,7 @@ def _save_namer_tree(
         tree,
         feature_names,
         out_dir / "naming_tree",
-        title=f"Sysurv-style naming tree | train acc={acc:.3f}",
+        title=None,
         leaf_stats=leaf_stats,
         positive_class=1,
         positive_label="interesting",
