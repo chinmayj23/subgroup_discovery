@@ -12,23 +12,36 @@ randomized search fits the grouping and its rule together, scored by
 - `run_panels.py` — runs SEAL on the four public panels (World Bank, OWID CO2,
   OWID COVID-19, EPA), writes `outputs/<panel>/membership.csv` and `rules.txt`,
   and renders the rule-card figure `figures/<panel>.pdf`.
-- `baselines.py` — compares SEAL to the Cluster-then-Explain and EMM baselines on
-  the shared objective (coherence `rho`, complexity `c`, cost), and prints the
-  results table.
+- `baselines.py` — compares SEAL to the Cluster-then-Explain, EMM, and
+  predictive-clustering-tree baselines on the shared objective (coherence `rho`,
+  complexity `c`, cost), and prints the results table.
+- `ablation.py` — robustness checks: out-of-sample coherence on a 70/30 split and
+  partition stability across random seeds.
 - `outputs/`, `figures/` — the results and figures reported in the paper.
 
 ## Data
 
-The panels are built from public datasets, expected under `../seal_repo/data/`:
-World Development Indicators, the Our World in Data CO2 and COVID-19 collections,
-and the EPA Air Quality System. The target and its transformations are excluded
-from the descriptors in every panel.
+The four public panels are built from openly available datasets: World
+Development Indicators, the Our World in Data CO2 and COVID-19 collections, and
+the EPA Air Quality System. Place the preprocessed CSVs under `data/`:
+
+```
+data/worldbank/worldbank_preprocessed.csv
+data/co2/co2_preprocessed.csv
+data/co2/owid_co2_data.csv
+data/covid/covid_preprocessed.csv
+data/epa/epa_preprocessed.csv
+```
+
+The target and its transformations are excluded from the descriptors in every
+panel.
 
 ## Reproduce
 
 ```
 python run_panels.py        # fit SEAL on all four panels and render figures
-python baselines.py         # SEAL vs Cluster-then-Explain vs EMM
+python baselines.py         # SEAL vs Cluster-then-Explain, EMM, predictive clustering tree
+python ablation.py          # out-of-sample coherence and seed stability
 ```
 
 Dependencies: numpy, pandas, scipy, scikit-learn, matplotlib. A fixed random seed

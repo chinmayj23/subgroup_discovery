@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 from seal import run_seal
 
 HERE = Path(__file__).resolve().parent
-DATA = HERE.parent / "seal_repo" / "data"
+DATA = HERE / "data"
 OUT = HERE / "outputs"
 FIG = HERE / "figures"
 plt.rcParams.update({"font.size": 10, "axes.titlesize": 11, "axes.labelsize": 10,
