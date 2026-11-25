@@ -1,0 +1,22 @@
+# Proprietary CMIE data and CMIE-specific code/configs (never push)
+cmie_sd_run/
+SEAL/
+seal_modified/
+*.parquet
+*OpenReview*.pdf
+
+# Bulky generated run outputs (kept local only)
+seal_improved_runs/
+seal_pyramid_runs/
+seal_pyramid_norm_runs/
+seal_pyramid_v2_runs/
+distance_compare/
+presentation_kit/
+
+# Misc local-only
+image.png
+SHARED_Code_Tree_Subgroup_Identification*.ipynb
+
+# Python caches
+__pycache__/
+*.pyc
