@@ -18,7 +18,7 @@ import pandas as pd
 from scipy.spatial.distance import pdist, squareform
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 
 from seal import pyramid_features, tree_to_rules
 from run_panels import load, PANELS
@@ -120,6 +120,47 @@ def emm(X, traj, dist, gm, K, max_depth=4, beam=40, n_thr=7):
     return within_ratio(labels, dist, gm), c, len(np.unique(labels))
 
 
+def pct_complexity(tree, feat_names):
+    """Propositions across all leaves except the largest (default), counting
+    same-feature bounds merged to the tightest interval (one-sided -> 1 literal,
+    two-sided -> 2), matching how c is counted for the other methods."""
+    t = tree.tree_
+    leaves = {}
+    def walk(node, conds):
+        if t.children_left[node] == -1:
+            leaves[node] = conds; return
+        f, thr = feat_names[t.feature[node]], float(t.threshold[node])
+        walk(t.children_left[node], conds + [(f, "<=", thr)])
+        walk(t.children_right[node], conds + [(f, ">", thr)])
+    walk(0, [])
+    def lits(conds):
+        b = {}
+        for f, op, thr in conds:
+            lo, hi = b.get(f, (-np.inf, np.inf))
+            b[f] = (max(lo, thr), hi) if op == ">" else (lo, min(hi, thr))
+        return sum((lo > -np.inf) + (hi < np.inf) for lo, hi in b.values())
+    default = max(leaves, key=lambda nd: t.n_node_samples[nd])
+    return sum(lits(c) for nd, c in leaves.items() if nd != default)
+
+
+def predictive_clustering_tree(X, rep, dist, gm):
+    """Single-stage multi-output CART: regress the pyramid representation on the
+    descriptors so leaves minimize within-leaf variance of r_i (equivalently
+    within-leaf pairwise squared distance), then read the leaves as rules. Same
+    depth and leaf-size grid as SEAL; best depth chosen by cost."""
+    N = len(X); Xv = X.to_numpy(); leaf = max(int(0.02 * N), 5)
+    best = None
+    for depth in (1, 2, 3, 4):
+        reg = DecisionTreeRegressor(max_depth=depth, min_samples_leaf=leaf,
+                                    random_state=0).fit(Xv, rep)
+        labels = reg.apply(Xv)
+        rho = within_ratio(labels, dist, gm)
+        c = pct_complexity(reg, list(X.columns))
+        if best is None or rho + LAM * c < best[0]:
+            best = (rho + LAM * c, rho, c, len(np.unique(labels)))
+    return best[1], best[2], best[3]
+
+
 if __name__ == "__main__":
     print(f"{'panel':10s} | {'method':20s} | {'rho':>6s} {'c':>3s} {'cost':>7s} {'grp':>3s}")
     print("-" * 60)
@@ -135,9 +176,11 @@ if __name__ == "__main__":
 
         rho_b, c_b, ng_b = cluster_then_explain(X, dist, gm, rep)
         rho_e, c_e, ng_e = emm(X, traj, dist, gm, K=ng_s - 1)
+        rho_p, c_p, ng_p = predictive_clustering_tree(X, rep, dist, gm)
 
         for name, rho, c, ng in [("SEAL", rho_s, c_s, ng_s),
                                  ("Cluster-then-Explain", rho_b, c_b, ng_b),
-                                 ("EMM", rho_e, c_e, ng_e)]:
+                                 ("EMM", rho_e, c_e, ng_e),
+                                 ("Predictive clustering tree", rho_p, c_p, ng_p)]:
             print(f"{ds:10s} | {name:20s} | {rho:6.3f} {c:3d} {rho + LAM * c:7.3f} {ng:3d}")
         print("-" * 60)

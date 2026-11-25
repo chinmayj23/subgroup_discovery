@@ -1,0 +1,271 @@
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage[varvw]{newtxmath}
+\let\Bbbk\relax
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[numbers]{natbib}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{hyperref}
+\usepackage{url}
+\renewcommand\UrlFont{\color{blue}\rmfamily}
+\urlstyle{rm}
+
+% Tighten whitespace around floats to help the page budget (no content change)
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+
+\begin{document}
+
+\title{\textsc{SEAL}: Interpretable Rules for Groups That Move Together}
+
+\author{First Author\inst{1} \and Second Author\inst{2} \and Third Author\inst{2}}
+\authorrunning{F. Author et al.}
+\institute{Institution 1, City, Country \and Institution 2, City, Country}
+
+\maketitle
+
+\begin{abstract}
+Longitudinal data records how entities evolve over time; a recurring question is which of them follow similar trajectories and what attributes set those groups apart. We introduce \textsc{SEAL}, a method that discovers groups of similar trajectories and, at the same time, describes each group with a compact rule over attributes that are kept separate from the target. A single search weighs how tightly a group's trajectories hold together against how short its rule is, and time-varying attributes enter through their level and their change over the window. On five longitudinal panels spanning household health spending, economic development, carbon emissions, pandemic mortality, and air quality, its rules recover the attributes known to separate the groups, among them income shocks, birth rate, fuel mix, age, and geography. Our code is available at \url{https://anonymous.4open.science/r/SEAL-SD-B7D4/}.
+
+\keywords{Subgroup discovery \and Trajectory clustering \and Interpretability \and Longitudinal data \and Rule learning}
+\end{abstract}
+
+\section{Introduction}
+
+Longitudinal panels are now common across the sciences, economics, and public policy, following family budgets month by month, national emissions year by year, or pandemic mortality week by week. A natural first step is to summarize such a panel by its average trajectory, but that average usually blends several distinct paths. The more useful question is which entities follow each path and what attributes set them apart.
+
+A grouping and a rule together answer this question best: a group named by a rule over ordinary attributes is one a domain expert can recognize, act on, and apply to new entities. A health agency, for one, can then direct support to the households whose share of medical costs is rising and read off what marks them out.
+
+Two established tools each solve half of the problem, on different variables. Trajectory clustering groups entities by the shape of a quantity over time but returns only the cluster each belongs to, leaving open what defines it. Subgroup discovery searches the attributes for a rule marking out an interesting part of a population, but its target is usually a single value, so it speaks to a snapshot rather than a path. Joining the two by hand, clustering then explaining, gives a fragile pipeline that is hard to reproduce.
+
+\subsubsection{Contribution.}
+We propose \textsc{SEAL} (interpretable trajectory \underline{Se}gment\underline{a}tion for \underline{l}ongitudinal data). It groups entities by the level and shape of their target trajectory and describes each group with a compact rule over separate attributes that never include the target, so a rule informs rather than restates. It fits the grouping and the rule in one search, reporting each group with the rule that defines it, and time-varying attributes enter through their value at reference times and their net change, so a rule speaks both to an attribute's level and to how it moved. On the five panels above, its rules line up with established domain accounts.
+
+\section{Problem Setting}
+
+A panel holds $N$ entities indexed by $i \in \{1, \dots, N\}$, each observed on a shared grid of $T$ time points. Entity $i$ carries a target trajectory $\mathbf{y}_i = (y_{i,1}, \dots, y_{i,T}) \in \mathbb{R}^T$ and a descriptor vector $\mathbf{x}_i = (x_{i,1}, \dots, x_{i,d})$ of $d$ numeric or categorical attributes that describe the entity or how it moved over time.
+
+We seek a segmentation that places the entities into a few subgroups $G_1, \dots, G_K$ and gathers the rest into a default group $G_0$, each named by a short rule over the descriptors. A segmentation is good on two counts at once: the trajectories inside a subgroup are similar, and the rule that names it is short. To make the first precise, let $D(i,j)$ be a distance between the trajectories of $i$ and $j$ and $\bar{D}$ the mean over all pairs; a segmentation is coherent when the mean distance within groups is small relative to $\bar{D}$, so each group sits closer together than the panel does on average.
+
+\section{Method}
+\label{sec:method}
+\subsection{Overview}
+
+\textsc{SEAL} is a recipe a domain expert instantiates for the panel. The expert fixes four choices: the target and the rule inputs, which must not be trivially correlated with the target or the rules would restate it; an alignment of every entity onto a shared grid, re-aligned on a subject-specific event or baseline-adjusted where that suits the question better than calendar time and level; a trajectory distance, which sets whether level or only shape matters and how much a timing shift counts; and a rule language of simple, domain-relevant propositions. Given these, \textsc{SEAL} scores a rule set by the coherence of the partition it induces, each entity taking the first rule it satisfies and the rest a default, penalized by the rule set's size, and searches for a low-cost one, returning a shortlist to choose from.
+
+\subsection{Implementation}
+
+\subsubsection{Descriptors.}
+\textsc{SEAL} fits its rules on a numeric descriptor matrix. A static covariate contributes its value, a categorical one an indicator per level, and a time-varying covariate its value at a few reference times with its net change across the window. We keep every entity with enough coverage, interpolate interior gaps linearly, impute missing descriptors by the column median, and fit on the full cohort. To avoid circularity we exclude the target and its transformations: we drop other emission totals and national-accounts aggregates in the CO\textsubscript{2} and World Bank panels, and for a ratio target drop the numerator, keeping the denominator only through summaries of its dynamics, since it alone does not fix the ratio.
+
+\subsubsection{Trajectory distance.}
+We compare two entities by the level and shape of their trajectories under a multi-resolution representation, a pyramid. For each trajectory we record the sum over the whole series, the sums over its two halves, its four quarters, and so on for up to six levels, and stack these into a vector $\mathbf{r}_i$, in the spirit of piecewise aggregate approximation \citep{keogh2001dimensionality}; a series too short for the finest level uses its raw values there instead. The distance is Euclidean on this representation,
+\begin{equation}
+D(i,j) = \lVert \mathbf{r}_i - \mathbf{r}_j \rVert_2 ,
+\end{equation}
+so the coarse levels dominate and a small shift in a peak's position barely moves it. We compute $D$ once per pair and store the mean $\bar{D}$, the scale for the cost.
+
+\subsubsection{Cost.}
+For a rule set $\mathcal{R}$ with induced partition $\mathcal{P}_{\mathcal{R}}$, the within-group ratio averages $D(i,j)$ over pairs that share a group of two or more members, divided by $\bar{D}$,
+\begin{equation}
+\rho(\mathcal{P}_{\mathcal{R}}) = \frac{1}{\bar{D}} \; \operatorname{mean}\{\, D(i,j) \;\mid\; i \text{ and } j \text{ share a group} \,\},
+\end{equation}
+so $\rho < 1$ means grouped entities sit closer than a random pair. With $c(\mathcal{R})$ the number of propositions across all rules but the default, the cost is
+\begin{equation}
+\operatorname{cost}(\mathcal{R}) = \rho(\mathcal{P}_{\mathcal{R}}) + \lambda \, c(\mathcal{R}) ,
+\end{equation}
+and a lower cost is better; $\lambda$ sets how much coherence a unit of description must buy.
+
+\subsubsection{Search.}
+We minimize the cost by randomized search. Each round clusters the trajectory representations with $k$-means or agglomerative clustering, chosen with equal chance, and fits a shallow decision tree \citep{breiman1984cart} on the descriptors to predict the cluster labels. The tree is read as a first-match rule set, its own prediction taken as the segmentation so the groups match the rules exactly. We keep the best rule set over all rounds and rank the strong candidates into a shortlist whose partitions stay far apart under the adjusted Rand index. The cluster count is drawn from $2$ to $8$, the tree depth from $1$ to $4$, and the leaf fraction from $0.02$ to $0.3$; we set $\lambda = 0.005$, run $20{,}000$ rounds, shortlist the top $500$ at an adjusted-Rand cap of $0.8$, and fix the seed.
+
+\section{Results}
+\label{sec:results}
+\textsc{SEAL} is descriptive: it fits the whole panel at once, as subgroup discovery and descriptive clustering do, rather than forecasting unseen entities, and returns each rule as a hypothesis for a domain expert. Section~\ref{sec:robust} confirms its rules still describe held-out entities and stay stable across reruns. We study it on five longitudinal panels (Table~\ref{tab:datasets}), comparing it to three baselines on each.
+
+\begin{table}[t]
+\caption{The five longitudinal panels, where $h$ and $m$ are a household's health spending and income.}
+\label{tab:datasets}
+\centering
+\footnotesize
+\begin{tabular}{@{}lllp{4.2cm}@{}}
+\hline\noalign{\smallskip}
+\textbf{Panel} & \textbf{Entities / window} & \textbf{Target} & \textbf{Descriptors} \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+Health spending & 1{,}742 households, monthly & $\log(1{+}h/m)$ & household composition, head's age and education, insurance, borrowing, income dynamics \\
+Development & 190 countries, 1990--2023 & GDP p.c.\ rel.\ 1990 & birth and death rate, electricity access, internet use, services trade \\
+COVID-19 & 224 countries, 104 weeks & weekly deaths/million & median age, population density, life expectancy, GDP per capita \\
+Emissions & 208 countries, 1990--2022 & CO$_2$ p.c.\ (t) & coal, oil, and gas shares of CO$_2$, GDP per capita, population \\
+Air quality & 526 US sites, 2010--2024 & monthly PM$_{2.5}$ & latitude, longitude, elevation, urbanicity, county emissions, land use \\
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{table}
+
+\subsection{Comparison to Baselines}
+\label{sec:baselines}
+
+All three baselines are scored by the cost of Section~\ref{sec:method}, lower being better. \emph{Cluster-then-Explain} is the two-stage pipeline \textsc{SEAL} replaces: it clusters the trajectory representations with $k$-means, choosing $K$ by silhouette score \citep{rousseeuw1987silhouettes} without the descriptors, then fits the same shallow tree to that fixed clustering, settled before any rule is seen. \emph{Exceptional model mining} (EMM) \citep{leman2008emm,duivesteijn2016emm} takes the opposite route, searching the descriptors directly for subgroups whose mean trajectory departs from the population's; a beam search over conjunctions scores each by its size-weighted squared deviation, keeping as many subgroups as \textsc{SEAL} at the same depth. A \emph{predictive clustering tree} \citep{blockeel1998clustering,zenko2006predictive} is the single-stage middle ground: one multi-output regression tree splits the descriptors to minimize the within-leaf variance of the trajectory representation, and its leaves are read directly as rules, under the same depth and leaf-size grid as \textsc{SEAL}.
+
+\begin{table}[t]
+\caption{\textsc{SEAL} against three baselines across the five panels. $\rho$ is the within-group trajectory distance relative to the panel mean, \emph{grp} the number of groups including the default, $c$ the number of propositions, and the cost is $\rho + \lambda c$ with $\lambda = 0.005$. Lower is better throughout; the best $\rho$ and cost per panel are in bold.}
+\label{tab:baselines}
+\centering
+\footnotesize
+\begin{tabular}{llrrrr}
+\hline\noalign{\smallskip}
+\textbf{Panel} & \textbf{Method} & $\rho$ & \textbf{grp} & $c$ & \textbf{cost} \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+CMIE~\citep{cmie}
+  & \textsc{SEAL} (ours)        & 0.892 & 3  & 5  & \textbf{0.917} \\
+  & Cluster-then-Explain        & 1.000 & 1  & 0  & 1.000 \\
+  & EMM                         & 0.935 & 3  & 8  & 0.975 \\
+  & Predictive clustering tree  & \textbf{0.890} & 4  & 6  & 0.920 \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+World Bank~\citep{worldbankwdi}
+  & \textsc{SEAL} (ours)        & 0.646 & 3  & 5  & 0.671 \\
+  & Cluster-then-Explain        & 1.000 & 1  & 0  & 1.000 \\
+  & EMM                         & 0.744 & 3  & 8  & 0.784 \\
+  & Predictive clustering tree  & \textbf{0.534} & 10 & 26 & \textbf{0.664} \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+CO\textsubscript{2}~\citep{owidco2}
+  & \textsc{SEAL} (ours)        & 0.419 & 5  & 15 & \textbf{0.494} \\
+  & Cluster-then-Explain        & 0.748 & 2  & 4  & 0.768 \\
+  & EMM                         & 0.665 & 5  & 9  & 0.710 \\
+  & Predictive clustering tree  & \textbf{0.415} & 7  & 16 & 0.495 \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+COVID-19~\citep{owidcovid}
+  & \textsc{SEAL} (ours)        & \textbf{0.579} & 6  & 15 & \textbf{0.654} \\
+  & Cluster-then-Explain        & 0.719 & 2  & 13 & 0.784 \\
+  & EMM                         & 0.761 & 6  & 11 & 0.816 \\
+  & Predictive clustering tree  & 0.728 & 8  & 19 & 0.823 \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+EPA~\citep{epaairdata}
+  & \textsc{SEAL} (ours)        & \textbf{0.682} & 5  & 9  & \textbf{0.727} \\
+  & Cluster-then-Explain        & 0.888 & 3  & 6  & 0.918 \\
+  & EMM                         & 0.845 & 3  & 7  & 0.880 \\
+  & Predictive clustering tree  & 0.695 & 12 & 37 & 0.880 \\
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{table}
+
+Across the five panels, \textsc{SEAL} holds the lowest cost on four (Table~\ref{tab:baselines}). The two classical baselines trail. Cluster-then-Explain settles its clustering before any rule is seen, so on CMIE and World Bank the silhouette-optimal split isolates a trajectory that no short rule can name and its tree collapses to one group; EMM rewards a subgroup for departing from the population rather than for holding together, so its $\rho$ stays higher. The predictive clustering tree is the closest competitor, driving the within-group distance down too: it can push $\rho$ a little lower, and on World Bank edges \textsc{SEAL} on cost, but only by enlarging the partition to as many as twelve groups and thirty-seven propositions where \textsc{SEAL} stays at three to six groups and five to fifteen. It reaches the same coherence with a description several times shorter, which is what matters when the rules are meant to be read. Since every method is scored by the cost \textsc{SEAL} optimizes, the table compares coherence at a fixed description length rather than standing as an independent test.
+
+\subsection{Case Studies}
+\label{sec:cases}
+For each panel we report the lowest-cost rule set; the figures give its subgroup trajectories with each rule, example members, and size.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/cmie.pdf}
+\caption{Health spending share of income for the \textsc{SEAL} subgroups (left; subgroup means bold, population mean dashed), with each subgroup's rule and household count (right). The rules describe cohorts and never identify a household.}
+\label{fig:cmie}
+\end{figure}
+
+\subsubsection{Household health spending.}
+The CMIE Consumer Pyramids Household Survey is a privately owned and proprietary monthly panel of Indian households \citep{cmie}; we report only at the cohort level and never identify a household, and the ratio target admits income only through summaries of its dynamics. \textsc{SEAL} returns two subgroups and a default (Fig.~\ref{fig:cmie}). The burden falls on the financially stretched: households that repeatedly absorb income drops and borrow heavily for consumption carry the heaviest and most volatile share, since a shock on a thin buffer turns an unavoidable medical bill into a large part of a shrunken income, while insurance and steady earnings absorb the same cost.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/worldbank.pdf}
+\caption{GDP per capita relative to 1990 for the \textsc{SEAL} subgroups (left; subgroup means bold, population mean dashed), with each subgroup's rule and example countries (right).}
+\label{fig:worldbank}
+\end{figure}
+
+\subsubsection{Economic development.}
+\textsc{SEAL} returns two subgroups and a default (Fig.~\ref{fig:worldbank}). The split tracks the demographic transition crossed with commodity exposure. The catch-up economies, such as China, Vietnam, and Myanmar, pair little early internet use with a birth rate already in decline, which raises the working-age share \citep{bloom1998demographic} and sustains export-led growth, so their output more than triples. The high-fertility economies, such as Equatorial Guinea and Mozambique, rode the 2000s boom but gave the gains back as population growth diluted them, while the rest grow at a steady, middling pace.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/covid.pdf}
+\caption{Weekly deaths per million, aligned at outbreak onset, for the \textsc{SEAL} subgroups (left; subgroup means bold, population mean dashed), with each subgroup's rule and example countries (right).}
+\label{fig:covid}
+\end{figure}
+
+\subsubsection{COVID-19 mortality.}
+\textsc{SEAL} returns five subgroups and a default (Fig.~\ref{fig:covid}). Median age sets the overall level, as fatality rises steeply with age \citep{odriscoll2021age}, and among the older countries life expectancy orders the waves. High-life-expectancy western Europe, such as Italy and Denmark, is hit early and hard, while lower-life-expectancy eastern Europe, such as Latvia and Bulgaria, suffers the latest and highest wave, its shorter life expectancy standing in for heavier illness and weaker health systems. The default is lowest and mixed, holding the youngest countries alongside sparsely populated older ones such as Finland and Norway.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/co2.pdf}
+\caption{CO\textsubscript{2} emissions per capita for the \textsc{SEAL} subgroups (left; subgroup means bold, population mean dashed), with each subgroup's rule and example countries (right).}
+\label{fig:co2}
+\end{figure}
+
+\subsubsection{Carbon emissions.}
+\textsc{SEAL} returns four subgroups and a default (Fig.~\ref{fig:co2}). Income sets the level, as energy use per person grows with it, and the trend follows the fuel mix. The highest emitters are high-income economies with little coal, such as Qatar and Saudi Arabia; high-income coal economies such as the United States and Australia decline as they shift to gas and renewables; and a middle-income group such as China and Iran rises as coal-heavy industrialization takes hold, above a remainder that stays lowest.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/epa.pdf}
+\caption{Monthly PM\textsubscript{2.5} for the \textsc{SEAL} subgroups (left; subgroup means bold, population mean dashed), with each subgroup's rule and example monitoring sites (right).}
+\label{fig:epa}
+\end{figure}
+
+\subsubsection{Air quality.}
+\textsc{SEAL} returns four subgroups and a default (Fig.~\ref{fig:epa}). The splits fall on longitude and latitude, so the groups form geographic bands. The Pacific-coast and interior-western sites, the latter reaching coastal southern California, show sharp particulate spikes around 2020 that coincide with the severe wildfire seasons \citep{burke2023wildfire}, sharper in the interior valleys where smoke mixes with dust under poor dispersion, while a northeastern and northern-tier band runs lower, the Rocky Mountain sites lowest, and the large central and eastern remainder declines steadily under tighter emission controls and coal-plant retirements.
+
+\subsection{Robustness}
+\label{sec:robust}
+Two checks support reading \textsc{SEAL}'s rules as descriptions of the whole panel. On a $70/30$ split of the four public panels, rules learned on the training entities describe the held-out entities with a within-group ratio below one and near the in-sample value on the three larger panels (CO\textsubscript{2} $0.43$ to $0.59$, COVID-19 $0.57$ to $0.72$, EPA $0.70$ to $0.77$), so unseen members stay tighter than a random pair; and the partitions hold when the search is reseeded, at a mean pairwise adjusted Rand index of $0.68$ to $0.80$. World Bank, the smallest at $190$ entities, is the exception on both, as a held-out third leaves too few countries per subgroup to recover it; since \textsc{SEAL} describes the panel at hand rather than predicting, we read this as a limit on small panels, not on the method.
+
+\section{Related Work}
+\label{sec:related}
+
+\subsubsection{Subgroup discovery and exceptional model mining.}
+Subgroup discovery returns interpretable subsets of a population that stand out on a property of interest \citep{atzmueller2015subgroup,herrera2011overview}, from early pattern-mining systems \citep{klosgen1996explora,wrobel1997midos} and exhaustive search \citep{atzmueller2006sdmap} to the unification of contrast-set, emerging-pattern, and subgroup mining as supervised descriptive rule discovery \citep{novak2009supervised}. Exceptional model mining widens the target from a single attribute to a model over several, a subgroup being exceptional when its fitted model differs from the population's \citep{leman2008emm,duivesteijn2016emm}; later work casts the search as continuous optimization \citep{xu2024syflow} and reaches sequential and temporal targets \citep{lemmerich2016transition,hudson2021local,kiefer2022subgroup}, a template a trajectory over a shared grid also fits, as our EMM baseline (Section~\ref{sec:baselines}) does. The two differ in aim: it scores individual, possibly overlapping subgroups by their local departure from the population, whereas \textsc{SEAL} optimizes coherence within one mutually exclusive partition.
+
+\subsubsection{Clustering of longitudinal trajectories.}
+A large literature groups entities by the shape of a quantity over time. Group-based trajectory modeling treats a population as a mixture of latent trajectory classes \citep{nagin2005group,nagin2010group}, growth mixture modeling adds within-class random effects \citep{muthen1999finite}, and distance-based clustering has been packaged for applied use \citep{genolini2010kml,denteuling2023latrend} atop the many shape-based distances of time-series clustering \citep{berndt1994using,aghabozorgi2015timeseries}. These methods return cluster membership: they tell an entity which class it joins but leave open the rule that would let a reader recognize that class from its attributes.
+
+\subsubsection{Interpreting clusters with rules.}
+A recent line describes clusters with axis-aligned trees, from explainable $k$-means \citep{dasgupta2020explainable} to trees fit to explain standard clusterings after the fact \citep{hu2026interpretable}. Nearest to us, predictive clustering trees grow a tree over descriptors that minimizes within-leaf target variance \citep{blockeel1998clustering}, extend to ordered rule lists with a default group \citep{zenko2006predictive}, and have been applied to time-series and longitudinal profiles \citep{dzeroski2007timeseries,slavkov2010finding}, with tree methods for longitudinal responses going back to Segal \cite{segal1992tree} and recursive partitioning for longitudinal subgroups \citep{loh2013regression}. A related line casts descriptive clustering as jointly optimizing target-space compactness and a concise description \citep{dao2018descriptive}. Each grows one greedy tree or solves one static program, whereas \textsc{SEAL} searches over many clusterings and keeps the one whose tree explanation is both faithful and short, so the description enters the objective rather than following it \citep{rudin2019stop}.
+
+\section{Conclusions and Future Work}
+
+\textsc{SEAL} segments a longitudinal panel by the level and shape of its target trajectory and names each group with a short rule over attributes kept separate from the target, fitting both in one search. Across the five panels these rules agree with established domain accounts; they are descriptive, fitted in-sample, and not to be read as causal.
+
+Several questions remain. We have not yet measured recovery of planted groups on synthetic data or sensitivity to $\lambda$. The all-pairs distance grows with the square of the panel size, so larger panels will need a cheaper or approximate distance, and one that aligns shifted events, such as dynamic time warping, would suit targets whose timing varies. A richer rule language could compare arbitrary pairs of time points, where ours tests only the net change across the window.
+
+\begin{credits}
+\subsubsection{\ackname}
+\subsubsection{\discintname}
+The authors have no competing interests to declare that are relevant to the content of this article. We used an AI assistant to help edit the text and the analysis code, and all content was checked and approved by the authors.
+\end{credits}
+
+\clearpage
+\bibliographystyle{splncs04}
+\bibliography{bibliography}
+
+% \clearpage
+% \appendix
+% \section{The \textsc{SEAL} Algorithm}
+
+% \begin{algorithm}
+% \caption{\textsc{SEAL}}
+% \label{alg:seal}
+% \begin{algorithmic}[1]
+% \Require target trajectories $Y$, numeric descriptors $X$, rounds $M$, weight $\lambda$
+% \State $R \gets \operatorname{pyramid}(Y)$;\quad $D \gets$ pairwise Euclidean distances on $R$;\quad $\bar{D} \gets \operatorname{mean}(D)$
+% \State $best \gets \varnothing$;\quad $\mathcal{C} \gets \varnothing$
+% \For{$m = 1$ to $M$}
+%   \State draw a cluster count $k$;\quad $z \gets k\text{-means or agglomerative clustering of } R \text{ into } k \text{ groups}$
+%   \State draw a tree depth, a leaf fraction, and a feature subset
+%   \State fit a decision tree $\mathcal{T}$ on $(X, z)$;\quad $\mathcal{R} \gets \operatorname{rules}(\mathcal{T})$;\quad $\mathcal{P} \gets$ partition of $\mathcal{R}$
+%   \State $\rho \gets \operatorname{mean}\{\, D(i,j) \mid i, j \text{ share a group in } \mathcal{P} \,\} / \bar{D}$
+%   \State $c \gets$ proposition count of $\mathcal{R}$;\quad $\mathit{cost}_m \gets \rho + \lambda \, c$;\quad add $(\mathcal{R}, \mathcal{P}, \mathit{cost}_m)$ to $\mathcal{C}$
+%   \If{$best = \varnothing$ or $\mathit{cost}_m < \mathit{cost}(best)$}
+%     \State $best \gets \mathcal{R}$
+%   \EndIf
+% \EndFor
+% \State sort $\mathcal{C}$ by cost and build a shortlist $\mathcal{S}$, adding each candidate whose adjusted Rand against every member of $\mathcal{S}$ stays below the threshold
+% \State \Return $best$ and the shortlist $\mathcal{S}$
+% \end{algorithmic}
+% \end{algorithm}
+
+\end{document}
