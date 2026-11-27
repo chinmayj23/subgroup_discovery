@@ -10,6 +10,16 @@ its transformations are excluded from the descriptors.
 
 Outputs per panel: outputs/<ds>/membership.csv, outputs/<ds>/rules.txt, and the
 figure figures/<ds>.pdf.
+
+By default each panel renders its lowest-cost rule set. The --rule flag renders a
+chosen rule from the shortlist instead: --rule DS=SUBSTR picks, among the
+shortlisted rule sets whose text contains SUBSTR, the one with the fewest
+propositions (ties broken by cost). The air-quality figure in the paper comes from
+
+    python run_panels.py epa --rule epa=elevation
+
+which selects the three-proposition elevation split. It is one of several
+comparably cheap segmentations, not the lowest-cost one (see the paper's Protocol).
 """
 from __future__ import annotations
 import re
@@ -207,18 +217,53 @@ def render(ds, traj, labels, rules_text):
     plt.close(fig)
 
 
+def pick_rule(res, X, substr):
+    """From the shortlist, the rule set whose text contains `substr` with the
+    fewest propositions (ties broken by cost). Returns (labels, rules_text, cost,
+    n_groups), or None when nothing matches."""
+    needle = substr.lower()
+    hits = [(i, row) for i, row in enumerate(res["diverse"]) if needle in row["rules"].lower()]
+    if not hits:
+        return None
+    i, row = min(hits, key=lambda t: (t[1]["complexity"], t[1]["cost"]))
+    labels = res["diverse_trees"][i].predict(X.to_numpy())
+    return labels, row["rules"], row["cost"], row["n_groups"]
+
+
 if __name__ == "__main__":
-    import sys
-    datasets = sys.argv[1].split(",") if len(sys.argv) > 1 else list(PANELS)
-    for ds in datasets:
+    import argparse
+    ap = argparse.ArgumentParser(description="Run SEAL on the public panels and render the rule-card figures.")
+    ap.add_argument("datasets", nargs="?", default=",".join(PANELS),
+                    help="comma-separated subset of panels (default: all)")
+    ap.add_argument("--rule", action="append", default=[], metavar="DS=SUBSTR",
+                    help="render the simplest shortlisted rule set whose text contains SUBSTR "
+                         "for panel DS instead of the lowest-cost one, e.g. --rule epa=elevation")
+    args = ap.parse_args()
+    overrides = {}
+    for spec in args.rule:
+        ds_key, _, substr = spec.partition("=")
+        overrides[ds_key.strip()] = substr.strip()
+
+    for ds in args.datasets.split(","):
         traj, X = load(ds)
         res = run_seal(traj, X, PARAMS)
-        b = res["best"]
+        if overrides.get(ds):
+            chosen = pick_rule(res, X, overrides[ds])
+            if chosen is None:
+                print(f"[{ds}] no shortlisted rule contains '{overrides[ds]}'; using lowest-cost rule")
+                b = res["best"]
+                labels, rules_text, cost, n_groups = b["labels"], b["rules"], b["cost"], b["n_groups"]
+            else:
+                labels, rules_text, cost, n_groups = chosen
+                print(f"[{ds}] rule override '{overrides[ds]}' -> cost={cost:.4f} groups={n_groups}")
+        else:
+            b = res["best"]
+            labels, rules_text, cost, n_groups = b["labels"], b["rules"], b["cost"], b["n_groups"]
         d = OUT / ds
         d.mkdir(parents=True, exist_ok=True)
-        pd.Series(b["labels"], index=traj.index, name="subgroup").rename_axis("entity")\
+        pd.Series(labels, index=traj.index, name="subgroup").rename_axis("entity")\
             .to_csv(d / "membership.csv")
-        (d / "rules.txt").write_text(b["rules"], encoding="utf-8")
-        render(ds, traj, b["labels"], b["rules"])
+        (d / "rules.txt").write_text(rules_text, encoding="utf-8")
+        render(ds, traj, labels, rules_text)
         print(f"[{ds}] n={len(traj)} T={traj.shape[1]} descriptors={X.shape[1]} "
-              f"cost={b['cost']:.4f} groups={b['n_groups']} -> figures/{ds}.pdf")
+              f"cost={cost:.4f} groups={n_groups} -> figures/{ds}.pdf")
