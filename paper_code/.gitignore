@@ -1,2 +1,6 @@
 __pycache__/
 *.pyc
+
+# CMIE-derived figure — proprietary, kept locally but never committed
+figures_rulecard/cmie.pdf
+figures/cmie.pdf

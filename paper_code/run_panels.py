@@ -13,6 +13,8 @@ figure figures/<ds>.pdf.
 """
 from __future__ import annotations
 import re
+import math
+import textwrap
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -30,10 +32,6 @@ plt.rcParams.update({"font.size": 10, "axes.titlesize": 11, "axes.labelsize": 10
                      "figure.dpi": 150, "savefig.bbox": "tight",
                      "axes.spines.top": False, "axes.spines.right": False, "pdf.fonttype": 42})
 PALETTE = ["#0072B2", "#D55E00", "#009E73", "#CC79A7", "#E69F00", "#56B4E9", "#F0E442"]
-
-_owid = pd.read_csv(DATA / "co2" / "owid_co2_data.csv",
-                    usecols=["iso_code", "country"]).dropna().drop_duplicates("iso_code")
-NAME = dict(zip(_owid["iso_code"], _owid["country"]))
 
 PANELS = {  # ds -> (csv, target, title, ylabel, xlabel)
     "worldbank": ("worldbank/worldbank_preprocessed.csv", "target_gdp",
@@ -105,77 +103,108 @@ def _parse_rules(text):
     return out
 
 
+def _num(x):
+    a = abs(x)
+    if a >= 10:
+        return f"{round(x):d}"
+    return f"{x:.1f}" if a >= 1 else f"{x:.2g}"
+
+
+def _smooth(y, w):
+    if w <= 1:
+        return y
+    k = np.ones(w) / w
+    pad = np.r_[np.repeat(y[0], w // 2), y, np.repeat(y[-1], w - w // 2 - 1)]
+    return np.convolve(pad, k, "valid")
+
+
+def _short_rule(text, width=34, maxlines=2):
+    """One or two compact lines: merge same-feature bounds into an interval
+    (feature in (lo, hi]), round thresholds, keep only the first OR-branch."""
+    if not text:
+        return ""
+    first = text.split("\nor")[0].strip()
+    extra = text.count("\nor")
+    bounds, singles = {}, []
+    for p in (q.strip() for q in re.split(r",\s{1,}", first) if q.strip()):
+        m = re.match(r"^(.*?)\s*(<=|>|=)\s*(-?[\d.]+(?:e[+\-]?\d+)?)$", p)
+        if not m:
+            singles.append(p); continue
+        name, op, val = m.group(1).strip(), m.group(2), float(m.group(3))
+        lo, hi = bounds.get(name, (None, None))
+        bounds[name] = (val, hi) if op == ">" else (lo, val) if op == "<=" else (val, val)
+    parts = []
+    for name, (lo, hi) in bounds.items():
+        if lo is not None and hi is not None and lo != hi:
+            parts.append(f"{name} in ({_num(lo)}, {_num(hi)}]")
+        elif lo is not None:
+            parts.append(f"{name} > {_num(lo)}")
+        elif hi is not None:
+            parts.append(f"{name} ≤ {_num(hi)}")
+        else:
+            parts.append(name)
+    s = ", ".join(parts + singles) + (f"  (+{extra} alt.)" if extra else "")
+    lines = textwrap.wrap(s, width=width)
+    if len(lines) > maxlines:
+        lines = lines[:maxlines]
+        lines[-1] = lines[-1].rstrip(", ") + "…"
+    return "\n".join(lines)
+
+
 def render(ds, traj, labels, rules_text):
+    """Small multiples: one panel per subgroup, shared y-axis, population mean
+    dashed, member spread as a light band (10th-90th percentile), subgroup mean
+    bold, the short rule and the count in each title. Light smoothing for reading."""
     _, _, title, ylabel, xlabel = PANELS[ds]
     lab = pd.Series(labels, index=traj.index).astype(int)
-    sizes = lab.value_counts()
     rules = _parse_rules(rules_text)
+    sizes = lab.value_counts()
     no_rule = [g for g in sizes.index if g not in rules]
     default_id = no_rule[0] if no_rule else int(sizes.idxmax())
     nd = sorted([g for g in sizes.index if g != default_id])
     order = nd + [default_id]
-    ncards = len(order)
     colmap = {g: PALETTE[i % len(PALETTE)] for i, g in enumerate(nd)}
-    colmap[default_id] = "0.55"
-    end = traj[traj.columns[-1]]
+    colmap[default_id] = "#6e6e6e"
 
-    HEADER, RGAP, RLINE, EX, NLINE, GAP, TOP = 0.34, 0.10, 0.205, 0.26, 0.24, 0.26, 0.16
-    cards, rk = [], 0
-    for g in order:
-        if g == default_id:
-            head, rule = "Default", None
-        else:
-            rk += 1
-            head = f"Rule {rk}"
-            pre = "" if rk == 1 else ("not Rule 1,  " if rk == 2 else f"not Rules 1-{rk-1},  ")
-            rule = pre + rules.get(g, "")
-        nrl = (1 + rule.count("\n")) if rule else 0
-        mem = lab[lab == g].index
-        ex = ", ".join(NAME.get(m, str(m)) for m in end[mem].sort_values(ascending=False).index[:5])
-        cards.append(dict(g=g, head=head, rule=rule, nrl=nrl, ex=ex, n=len(mem)))
+    cols = traj.columns.to_numpy()
+    xs = np.arange(len(cols))
+    w = max(1, len(cols) // 16)
+    pop = _smooth(traj.mean(axis=0).to_numpy(), w)
 
-    def ch(c):
-        return HEADER + (RGAP + RLINE * c["nrl"] if c["rule"] else 0.08) + EX + NLINE
-    right_h = TOP + sum(ch(c) for c in cards) + GAP * (ncards - 1) + 0.15
-    fig_h = max(3.0 + 0.62 * ncards, right_h)
-
-    fig = plt.figure(figsize=(11.6, fig_h))
-    gs = fig.add_gridspec(1, 2, width_ratios=[1.45, 1.3], wspace=0.08)
-    ax = fig.add_subplot(gs[0])
-    xs = np.arange(len(traj.columns))
-    ax.plot(xs, traj.mean(axis=0).to_numpy(), "--", color="black", lw=1.5, zorder=6)
-    for g in order:
-        ax.plot(xs, traj.loc[lab[lab == g].index].mean(axis=0).to_numpy(),
-                color=colmap[g], lw=1.4 if g == default_id else 2.2)
-    step = max(1, len(traj.columns) // 6)
-    ax.set_xticks(xs[::step])
-    ax.set_xticklabels([str(traj.columns[i]) for i in range(0, len(traj.columns), step)],
-                       rotation=45, ha="right", fontsize=7.5)
-    ax.set_xlabel(xlabel); ax.set_ylabel(ylabel); ax.set_title(title, fontsize=10)
-
-    rx = fig.add_subplot(gs[1]); rx.axis("off"); rx.set_xlim(0, 1); rx.set_ylim(0, 1)
-    yf = lambda inch: 1.0 - inch / fig_h
-    cur = TOP
-    for i, c in enumerate(cards):
-        col = colmap[c["g"]]
-        if i > 0:
-            rx.plot([0, 1], [yf(cur - 0.10), yf(cur - 0.10)], color="0.88", lw=0.8)
-        rx.plot(0.02, yf(cur + 0.13), "s", color=col, markersize=9, clip_on=False)
-        rx.text(0.08, yf(cur + 0.13), c["head"], fontsize=10, fontweight="bold", color=col, va="center")
-        cur += HEADER
-        if c["rule"]:
-            cur += RGAP
-            rx.text(0.08, yf(cur), c["rule"], fontsize=6.6, va="top", color="0.12",
-                    family="monospace", linespacing=1.3)
-            cur += RLINE * c["nrl"]
-        else:
-            cur += 0.08
-        rx.text(0.08, yf(cur), c["ex"], fontsize=8.0, va="top", color="0.12")
-        cur += EX
-        rx.text(0.08, yf(cur), f"n = {c['n']}", fontsize=8.2, va="top", color=col)
-        cur += NLINE + GAP
+    n = len(order)
+    ncol = min(3, n)
+    nrow = math.ceil(n / ncol)
+    fig, axes = plt.subplots(nrow, ncol, figsize=(3.5 * ncol, 2.7 * nrow),
+                             sharex=True, sharey=True, squeeze=False)
+    axf = axes.ravel()
+    for ax, g in zip(axf, order):
+        col = colmap[g]
+        mem = traj.loc[lab[lab == g].index].to_numpy()
+        lo = _smooth(np.percentile(mem, 10, axis=0), w)
+        hi = _smooth(np.percentile(mem, 90, axis=0), w)
+        gm = _smooth(mem.mean(axis=0), w)
+        ax.fill_between(xs, lo, hi, color=col, alpha=0.16, linewidth=0)
+        ax.plot(xs, pop, "--", color="0.45", lw=1.3, zorder=3)
+        ax.plot(xs, gm, color=col, lw=2.6, zorder=4)
+        is_def = g == default_id
+        head = "Default (no rule)" if is_def else _short_rule(rules.get(g, ""))
+        ax.set_title(f"{head}\n[ n = {len(mem)} ]", fontsize=8.5,
+                     color=col if not is_def else "0.3", loc="left", linespacing=1.35)
+        ax.spines[["top", "right"]].set_visible(False)
+        step = max(1, len(cols) // 5)
+        ax.set_xticks(xs[::step])
+        ax.set_xticklabels([str(cols[i]) for i in range(0, len(cols), step)])
+    for ax in axf[n:]:
+        ax.set_visible(False)
+    for r in range(nrow):
+        axes[r][0].set_ylabel(ylabel, fontsize=10)
+    for c in range(ncol):
+        axes[nrow - 1][c].set_xlabel(xlabel, fontsize=10)
+    fig.suptitle(title, fontsize=12, fontweight="bold", x=0.01, ha="left", y=1.0)
+    fig.tight_layout(rect=(0, 0, 1, 0.98), h_pad=2.4, w_pad=1.2)
     FIG.mkdir(exist_ok=True)
-    fig.savefig(FIG / f"{ds}.pdf"); plt.close(fig)
+    fig.savefig(FIG / f"{ds}.pdf")
+    plt.close(fig)
 
 
 if __name__ == "__main__":

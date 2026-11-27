@@ -1,8 +1,8 @@
 """SEAL: interpretable trajectory segmentation for longitudinal data.
 
 SEAL groups entities by the shape of their target trajectory and describes each
-group with a compact rule over the entity descriptors. A single randomized search
-fits the grouping and its rule together and scores each candidate by
+group with a compact rule over the entity descriptors. It minimizes a single cost
+over rule sets by randomized search, scoring each candidate by
 
     cost = rho + lambda * complexity,
 

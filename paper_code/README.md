@@ -11,12 +11,18 @@ randomized search fits the grouping and its rule together, scored by
   randomized clustering-to-tree search, rule extraction, and the diversity ranking.
 - `run_panels.py` — runs SEAL on the four public panels (World Bank, OWID CO2,
   OWID COVID-19, EPA), writes `outputs/<panel>/membership.csv` and `rules.txt`,
-  and renders the rule-card figure `figures/<panel>.pdf`.
+  and renders the subgroup figure `figures/<panel>.pdf` as small multiples.
 - `baselines.py` — compares SEAL to the Cluster-then-Explain, EMM, and
   predictive-clustering-tree baselines on the shared objective (coherence `rho`,
   complexity `c`, cost), and prints the results table.
+- `sensitivity.py` — traces SEAL's lambda-frontier against the predictive
+  clustering tree at matched rule complexity and writes `figures/frontier.pdf`.
 - `ablation.py` — robustness checks: out-of-sample coherence on a 70/30 split and
   partition stability across random seeds.
+- `run_panels_rulecard.py`, `figures_rulecard/` — the older rule-card figure style,
+  kept as a fallback. Run the script to regenerate those figures into
+  `figures_rulecard/` without touching the current `figures/`. To reinstate the old
+  look in the paper, copy the PDFs from `figures_rulecard/` over the ones in `figures/`.
 - `outputs/`, `figures/` — the results and figures reported in the paper.
 
 ## Data
@@ -28,7 +34,6 @@ the EPA Air Quality System. Place the preprocessed CSVs under `data/`:
 ```
 data/worldbank/worldbank_preprocessed.csv
 data/co2/co2_preprocessed.csv
-data/co2/owid_co2_data.csv
 data/covid/covid_preprocessed.csv
 data/epa/epa_preprocessed.csv
 ```
@@ -41,6 +46,7 @@ panel.
 ```
 python run_panels.py        # fit SEAL on all four panels and render figures
 python baselines.py         # SEAL vs Cluster-then-Explain, EMM, predictive clustering tree
+python sensitivity.py       # lambda-frontier vs PCT at matched rule complexity
 python ablation.py          # out-of-sample coherence and seed stability
 ```
 

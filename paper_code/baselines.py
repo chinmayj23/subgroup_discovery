@@ -1,7 +1,7 @@
 """Compare SEAL to two baselines on the same objective (trajectory coherence rho,
 rule complexity c, combined cost rho + lambda*c) on the four public panels.
 
-  SEAL                 : joint search; read from outputs/<ds>/ produced by run_panels.py.
+  SEAL                 : randomized search over rule sets; read from outputs/<ds>/ by run_panels.py.
   Cluster-then-Explain : k-means on the pyramid representation (K chosen by silhouette),
                          then the same shallow tree on the descriptors to describe it.
   EMM                  : exceptional model mining with a mean-trajectory model; a beam

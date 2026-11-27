@@ -2,6 +2,9 @@
 cmie_sd_run/
 *.parquet
 
+# Local paper build folder (holds the CMIE figure and the local-only .tex assets)
+/figures/
+
 # Local datasets (supplied by the user) and caches
 data/
 __pycache__/
